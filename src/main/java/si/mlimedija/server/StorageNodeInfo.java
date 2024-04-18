@@ -1,19 +1,21 @@
 package si.mlimedija.server;
 
-import java.util.List;
+import java.util.HashSet;
 
 // this class is used to hold information about individual node
 public class StorageNodeInfo {
     private int nodeId;
     private String nodeIpAddress;
-    private List<String> keys;
+    private int nodePort;
+    private HashSet<String> keys;
     private boolean isHealthy;
     private int mapSize;
     private int cpuUtilization;
 
-    public StorageNodeInfo(int nodeId, String nodeIpAddress, List<String> keys, boolean isHealthy, int mapSize, int cpuUtilization) {
+    public StorageNodeInfo(int nodeId, String nodeIpAddress, int nodePort, HashSet<String> keys, boolean isHealthy, int mapSize, int cpuUtilization) {
         this.nodeId = nodeId;
         this.nodeIpAddress = nodeIpAddress;
+        this.nodePort = nodePort;
         this.keys = keys;
         this.isHealthy = isHealthy;
         this.mapSize = mapSize;
@@ -36,12 +38,29 @@ public class StorageNodeInfo {
         this.nodeIpAddress = nodeIpAddress;
     }
 
-    public List<String> getKeys() {
+    public int getNodePort() {
+        return nodePort;
+    }
+
+    public void setNodePort(int nodePort) {
+        this.nodePort = nodePort;
+    }
+
+    public HashSet<String> getKeys() {
         return keys;
     }
 
-    public void setKeys(List<String> keys) {
+    public void setKeys(HashSet<String> keys) {
         this.keys = keys;
+    }
+
+    public void putKey(String key) {
+        this.keys.add(key);
+    }
+
+    @Override
+    public String toString() {
+        return "keys=" + keys;
     }
 
     public boolean isHealthy() {
