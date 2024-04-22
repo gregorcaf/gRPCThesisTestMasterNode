@@ -4,6 +4,12 @@ import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import si.mlimedija.service.MasterService;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,17 +30,39 @@ public class MasterMain {
 
         MasterService masterService = new MasterService(storageNodeRegistry);
 
+        HealthChecker healthChecker = new HealthChecker(storageNodeRegistry);
+
         Server server = ServerBuilder.forPort(9090).addService(masterService).build();
 
         logger.info("Starting gRPC server");
 
         server.start();
 
-        logger.info("Server started at localhost:" + server.getPort());
+        logger.info("Server started at " + getIPAddress() + ":" + server.getPort());
 
         // iterates through IP addresses and initialized nodes in the list
         storageNodeRegistry.initStorageNodes();
 
+        // periodical health checks - every 5 seconds
+        ScheduledExecutorService executor = Executors.newScheduledThreadPool(5);
+        executor.scheduleAtFixedRate(() -> {
+            try {
+                healthChecker.updateAllNodeInfo();
+            } catch (Exception e) {
+                logger.error("Error during health check: " + e.getMessage());
+            }
+        }, 0, 5, TimeUnit.SECONDS);
+
         server.awaitTermination();
+    }
+
+    public static String getIPAddress() {
+        try {
+            InetAddress address = InetAddress.getLocalHost();
+            return address.getHostAddress();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+            return null; // Handle the error gracefully
+        }
     }
 }

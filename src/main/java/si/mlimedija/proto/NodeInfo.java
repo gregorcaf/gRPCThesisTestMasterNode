@@ -33,14 +33,14 @@ public final class NodeInfo {
       descriptor;
   static {
     String[] descriptorData = {
-      "\n\016NodeInfo.proto\"8\n\017NodeInfoRequest\022\016\n\006n" +
-      "odeId\030\001 \001(\005\022\025\n\rnodeIpAddress\030\002 \001(\t\"\214\001\n\020N" +
-      "odeInfoResponse\022\016\n\006nodeId\030\001 \001(\005\022\025\n\rnodeI" +
-      "pAddress\030\002 \001(\t\022\021\n\tisHealthy\030\003 \001(\010\022\017\n\007map" +
-      "Size\030\004 \001(\005\022\024\n\014responseCode\030\005 \001(\005\022\027\n\017resp" +
-      "onseMessage\030\006 \001(\t2>\n\010nodeInfo\0222\n\013getNode" +
-      "Info\022\020.NodeInfoRequest\032\021.NodeInfoRespons" +
-      "eB\026\n\022si.mlimedija.protoP\001b\006proto3"
+      "\n\016NodeInfo.proto\"J\n\017NodeInfoRequest\022\016\n\006n" +
+      "odeId\030\001 \001(\005\022\025\n\rnodeIpAddress\030\002 \001(\t\022\020\n\010no" +
+      "dePort\030\003 \001(\005\"u\n\020NodeInfoResponse\022\016\n\006node" +
+      "Id\030\001 \001(\005\022\021\n\tisHealthy\030\002 \001(\010\022\017\n\007mapSize\030\003" +
+      " \001(\005\022\024\n\014responseCode\030\004 \001(\005\022\027\n\017responseMe" +
+      "ssage\030\005 \001(\t2>\n\010nodeInfo\0222\n\013getNodeInfo\022\020" +
+      ".NodeInfoRequest\032\021.NodeInfoResponseB\026\n\022s" +
+      "i.mlimedija.protoP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -59,13 +59,13 @@ public final class NodeInfo {
     internal_static_NodeInfoRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_NodeInfoRequest_descriptor,
-        new String[] { "NodeId", "NodeIpAddress", });
+        new String[] { "NodeId", "NodeIpAddress", "NodePort", });
     internal_static_NodeInfoResponse_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_NodeInfoResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_NodeInfoResponse_descriptor,
-        new String[] { "NodeId", "NodeIpAddress", "IsHealthy", "MapSize", "ResponseCode", "ResponseMessage", });
+        new String[] { "NodeId", "IsHealthy", "MapSize", "ResponseCode", "ResponseMessage", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

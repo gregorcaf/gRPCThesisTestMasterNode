@@ -13,36 +13,26 @@ public interface NodeInfoResponseOrBuilder extends
   int getNodeId();
 
   /**
-   * <code>string nodeIpAddress = 2;</code>
-   */
-  String getNodeIpAddress();
-  /**
-   * <code>string nodeIpAddress = 2;</code>
-   */
-  com.google.protobuf.ByteString
-      getNodeIpAddressBytes();
-
-  /**
-   * <code>bool isHealthy = 3;</code>
+   * <code>bool isHealthy = 2;</code>
    */
   boolean getIsHealthy();
 
   /**
-   * <code>int32 mapSize = 4;</code>
+   * <code>int32 mapSize = 3;</code>
    */
   int getMapSize();
 
   /**
-   * <code>int32 responseCode = 5;</code>
+   * <code>int32 responseCode = 4;</code>
    */
   int getResponseCode();
 
   /**
-   * <code>string responseMessage = 6;</code>
+   * <code>string responseMessage = 5;</code>
    */
   String getResponseMessage();
   /**
-   * <code>string responseMessage = 6;</code>
+   * <code>string responseMessage = 5;</code>
    */
   com.google.protobuf.ByteString
       getResponseMessageBytes();

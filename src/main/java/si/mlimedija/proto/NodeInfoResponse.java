@@ -21,7 +21,6 @@ private static final long serialVersionUID = 0L;
   }
   private NodeInfoResponse() {
     nodeId_ = 0;
-    nodeIpAddress_ = "";
     isHealthy_ = false;
     mapSize_ = 0;
     responseCode_ = 0;
@@ -57,28 +56,22 @@ private static final long serialVersionUID = 0L;
             nodeId_ = input.readInt32();
             break;
           }
-          case 18: {
-            String s = input.readStringRequireUtf8();
-
-            nodeIpAddress_ = s;
-            break;
-          }
-          case 24: {
+          case 16: {
 
             isHealthy_ = input.readBool();
             break;
           }
-          case 32: {
+          case 24: {
 
             mapSize_ = input.readInt32();
             break;
           }
-          case 40: {
+          case 32: {
 
             responseCode_ = input.readInt32();
             break;
           }
-          case 50: {
+          case 42: {
             String s = input.readStringRequireUtf8();
 
             responseMessage_ = s;
@@ -125,71 +118,37 @@ private static final long serialVersionUID = 0L;
     return nodeId_;
   }
 
-  public static final int NODEIPADDRESS_FIELD_NUMBER = 2;
-  private volatile Object nodeIpAddress_;
-  /**
-   * <code>string nodeIpAddress = 2;</code>
-   */
-  public String getNodeIpAddress() {
-    Object ref = nodeIpAddress_;
-    if (ref instanceof String) {
-      return (String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      String s = bs.toStringUtf8();
-      nodeIpAddress_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string nodeIpAddress = 2;</code>
-   */
-  public com.google.protobuf.ByteString
-      getNodeIpAddressBytes() {
-    Object ref = nodeIpAddress_;
-    if (ref instanceof String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (String) ref);
-      nodeIpAddress_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int ISHEALTHY_FIELD_NUMBER = 3;
+  public static final int ISHEALTHY_FIELD_NUMBER = 2;
   private boolean isHealthy_;
   /**
-   * <code>bool isHealthy = 3;</code>
+   * <code>bool isHealthy = 2;</code>
    */
   public boolean getIsHealthy() {
     return isHealthy_;
   }
 
-  public static final int MAPSIZE_FIELD_NUMBER = 4;
+  public static final int MAPSIZE_FIELD_NUMBER = 3;
   private int mapSize_;
   /**
-   * <code>int32 mapSize = 4;</code>
+   * <code>int32 mapSize = 3;</code>
    */
   public int getMapSize() {
     return mapSize_;
   }
 
-  public static final int RESPONSECODE_FIELD_NUMBER = 5;
+  public static final int RESPONSECODE_FIELD_NUMBER = 4;
   private int responseCode_;
   /**
-   * <code>int32 responseCode = 5;</code>
+   * <code>int32 responseCode = 4;</code>
    */
   public int getResponseCode() {
     return responseCode_;
   }
 
-  public static final int RESPONSEMESSAGE_FIELD_NUMBER = 6;
+  public static final int RESPONSEMESSAGE_FIELD_NUMBER = 5;
   private volatile Object responseMessage_;
   /**
-   * <code>string responseMessage = 6;</code>
+   * <code>string responseMessage = 5;</code>
    */
   public String getResponseMessage() {
     Object ref = responseMessage_;
@@ -204,7 +163,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string responseMessage = 6;</code>
+   * <code>string responseMessage = 5;</code>
    */
   public com.google.protobuf.ByteString
       getResponseMessageBytes() {
@@ -237,20 +196,17 @@ private static final long serialVersionUID = 0L;
     if (nodeId_ != 0) {
       output.writeInt32(1, nodeId_);
     }
-    if (!getNodeIpAddressBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, nodeIpAddress_);
-    }
     if (isHealthy_ != false) {
-      output.writeBool(3, isHealthy_);
+      output.writeBool(2, isHealthy_);
     }
     if (mapSize_ != 0) {
-      output.writeInt32(4, mapSize_);
+      output.writeInt32(3, mapSize_);
     }
     if (responseCode_ != 0) {
-      output.writeInt32(5, responseCode_);
+      output.writeInt32(4, responseCode_);
     }
     if (!getResponseMessageBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 6, responseMessage_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 5, responseMessage_);
     }
     unknownFields.writeTo(output);
   }
@@ -265,23 +221,20 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeInt32Size(1, nodeId_);
     }
-    if (!getNodeIpAddressBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, nodeIpAddress_);
-    }
     if (isHealthy_ != false) {
       size += com.google.protobuf.CodedOutputStream
-        .computeBoolSize(3, isHealthy_);
+        .computeBoolSize(2, isHealthy_);
     }
     if (mapSize_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(4, mapSize_);
+        .computeInt32Size(3, mapSize_);
     }
     if (responseCode_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(5, responseCode_);
+        .computeInt32Size(4, responseCode_);
     }
     if (!getResponseMessageBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, responseMessage_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, responseMessage_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -301,8 +254,6 @@ private static final long serialVersionUID = 0L;
     boolean result = true;
     result = result && (getNodeId()
         == other.getNodeId());
-    result = result && getNodeIpAddress()
-        .equals(other.getNodeIpAddress());
     result = result && (getIsHealthy()
         == other.getIsHealthy());
     result = result && (getMapSize()
@@ -324,8 +275,6 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + NODEID_FIELD_NUMBER;
     hash = (53 * hash) + getNodeId();
-    hash = (37 * hash) + NODEIPADDRESS_FIELD_NUMBER;
-    hash = (53 * hash) + getNodeIpAddress().hashCode();
     hash = (37 * hash) + ISHEALTHY_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
         getIsHealthy());
@@ -474,8 +423,6 @@ private static final long serialVersionUID = 0L;
       super.clear();
       nodeId_ = 0;
 
-      nodeIpAddress_ = "";
-
       isHealthy_ = false;
 
       mapSize_ = 0;
@@ -511,7 +458,6 @@ private static final long serialVersionUID = 0L;
     public NodeInfoResponse buildPartial() {
       NodeInfoResponse result = new NodeInfoResponse(this);
       result.nodeId_ = nodeId_;
-      result.nodeIpAddress_ = nodeIpAddress_;
       result.isHealthy_ = isHealthy_;
       result.mapSize_ = mapSize_;
       result.responseCode_ = responseCode_;
@@ -566,10 +512,6 @@ private static final long serialVersionUID = 0L;
       if (other == NodeInfoResponse.getDefaultInstance()) return this;
       if (other.getNodeId() != 0) {
         setNodeId(other.getNodeId());
-      }
-      if (!other.getNodeIpAddress().isEmpty()) {
-        nodeIpAddress_ = other.nodeIpAddress_;
-        onChanged();
       }
       if (other.getIsHealthy() != false) {
         setIsHealthy(other.getIsHealthy());
@@ -639,84 +581,15 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private Object nodeIpAddress_ = "";
-    /**
-     * <code>string nodeIpAddress = 2;</code>
-     */
-    public String getNodeIpAddress() {
-      Object ref = nodeIpAddress_;
-      if (!(ref instanceof String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        nodeIpAddress_ = s;
-        return s;
-      } else {
-        return (String) ref;
-      }
-    }
-    /**
-     * <code>string nodeIpAddress = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getNodeIpAddressBytes() {
-      Object ref = nodeIpAddress_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
-        nodeIpAddress_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string nodeIpAddress = 2;</code>
-     */
-    public Builder setNodeIpAddress(
-        String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      nodeIpAddress_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string nodeIpAddress = 2;</code>
-     */
-    public Builder clearNodeIpAddress() {
-      
-      nodeIpAddress_ = getDefaultInstance().getNodeIpAddress();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string nodeIpAddress = 2;</code>
-     */
-    public Builder setNodeIpAddressBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      nodeIpAddress_ = value;
-      onChanged();
-      return this;
-    }
-
     private boolean isHealthy_ ;
     /**
-     * <code>bool isHealthy = 3;</code>
+     * <code>bool isHealthy = 2;</code>
      */
     public boolean getIsHealthy() {
       return isHealthy_;
     }
     /**
-     * <code>bool isHealthy = 3;</code>
+     * <code>bool isHealthy = 2;</code>
      */
     public Builder setIsHealthy(boolean value) {
       
@@ -725,7 +598,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>bool isHealthy = 3;</code>
+     * <code>bool isHealthy = 2;</code>
      */
     public Builder clearIsHealthy() {
       
@@ -736,13 +609,13 @@ private static final long serialVersionUID = 0L;
 
     private int mapSize_ ;
     /**
-     * <code>int32 mapSize = 4;</code>
+     * <code>int32 mapSize = 3;</code>
      */
     public int getMapSize() {
       return mapSize_;
     }
     /**
-     * <code>int32 mapSize = 4;</code>
+     * <code>int32 mapSize = 3;</code>
      */
     public Builder setMapSize(int value) {
       
@@ -751,7 +624,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>int32 mapSize = 4;</code>
+     * <code>int32 mapSize = 3;</code>
      */
     public Builder clearMapSize() {
       
@@ -762,13 +635,13 @@ private static final long serialVersionUID = 0L;
 
     private int responseCode_ ;
     /**
-     * <code>int32 responseCode = 5;</code>
+     * <code>int32 responseCode = 4;</code>
      */
     public int getResponseCode() {
       return responseCode_;
     }
     /**
-     * <code>int32 responseCode = 5;</code>
+     * <code>int32 responseCode = 4;</code>
      */
     public Builder setResponseCode(int value) {
       
@@ -777,7 +650,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>int32 responseCode = 5;</code>
+     * <code>int32 responseCode = 4;</code>
      */
     public Builder clearResponseCode() {
       
@@ -788,7 +661,7 @@ private static final long serialVersionUID = 0L;
 
     private Object responseMessage_ = "";
     /**
-     * <code>string responseMessage = 6;</code>
+     * <code>string responseMessage = 5;</code>
      */
     public String getResponseMessage() {
       Object ref = responseMessage_;
@@ -803,7 +676,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string responseMessage = 6;</code>
+     * <code>string responseMessage = 5;</code>
      */
     public com.google.protobuf.ByteString
         getResponseMessageBytes() {
@@ -819,7 +692,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string responseMessage = 6;</code>
+     * <code>string responseMessage = 5;</code>
      */
     public Builder setResponseMessage(
         String value) {
@@ -832,7 +705,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string responseMessage = 6;</code>
+     * <code>string responseMessage = 5;</code>
      */
     public Builder clearResponseMessage() {
       
@@ -841,7 +714,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string responseMessage = 6;</code>
+     * <code>string responseMessage = 5;</code>
      */
     public Builder setResponseMessageBytes(
         com.google.protobuf.ByteString value) {

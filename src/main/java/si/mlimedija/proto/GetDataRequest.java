@@ -20,7 +20,6 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private GetDataRequest() {
-    nodeId_ = 0;
     key_ = "";
   }
 
@@ -48,12 +47,7 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 8: {
-
-            nodeId_ = input.readInt32();
-            break;
-          }
-          case 18: {
+          case 10: {
             java.lang.String s = input.readStringRequireUtf8();
 
             key_ = s;
@@ -91,19 +85,10 @@ private static final long serialVersionUID = 0L;
             si.mlimedija.proto.GetDataRequest.class, si.mlimedija.proto.GetDataRequest.Builder.class);
   }
 
-  public static final int NODEID_FIELD_NUMBER = 1;
-  private int nodeId_;
-  /**
-   * <code>int32 nodeId = 1;</code>
-   */
-  public int getNodeId() {
-    return nodeId_;
-  }
-
-  public static final int KEY_FIELD_NUMBER = 2;
+  public static final int KEY_FIELD_NUMBER = 1;
   private volatile java.lang.Object key_;
   /**
-   * <code>string key = 2;</code>
+   * <code>string key = 1;</code>
    */
   public java.lang.String getKey() {
     java.lang.Object ref = key_;
@@ -118,7 +103,7 @@ private static final long serialVersionUID = 0L;
     }
   }
   /**
-   * <code>string key = 2;</code>
+   * <code>string key = 1;</code>
    */
   public com.google.protobuf.ByteString
       getKeyBytes() {
@@ -148,11 +133,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (nodeId_ != 0) {
-      output.writeInt32(1, nodeId_);
-    }
     if (!getKeyBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, key_);
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, key_);
     }
     unknownFields.writeTo(output);
   }
@@ -163,12 +145,8 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (nodeId_ != 0) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(1, nodeId_);
-    }
     if (!getKeyBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, key_);
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, key_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -186,8 +164,6 @@ private static final long serialVersionUID = 0L;
     si.mlimedija.proto.GetDataRequest other = (si.mlimedija.proto.GetDataRequest) obj;
 
     boolean result = true;
-    result = result && (getNodeId()
-        == other.getNodeId());
     result = result && getKey()
         .equals(other.getKey());
     result = result && unknownFields.equals(other.unknownFields);
@@ -201,8 +177,6 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + NODEID_FIELD_NUMBER;
-    hash = (53 * hash) + getNodeId();
     hash = (37 * hash) + KEY_FIELD_NUMBER;
     hash = (53 * hash) + getKey().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
@@ -342,8 +316,6 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      nodeId_ = 0;
-
       key_ = "";
 
       return this;
@@ -372,7 +344,6 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public si.mlimedija.proto.GetDataRequest buildPartial() {
       si.mlimedija.proto.GetDataRequest result = new si.mlimedija.proto.GetDataRequest(this);
-      result.nodeId_ = nodeId_;
       result.key_ = key_;
       onBuilt();
       return result;
@@ -422,9 +393,6 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(si.mlimedija.proto.GetDataRequest other) {
       if (other == si.mlimedija.proto.GetDataRequest.getDefaultInstance()) return this;
-      if (other.getNodeId() != 0) {
-        setNodeId(other.getNodeId());
-      }
       if (!other.getKey().isEmpty()) {
         key_ = other.key_;
         onChanged();
@@ -458,35 +426,9 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private int nodeId_ ;
-    /**
-     * <code>int32 nodeId = 1;</code>
-     */
-    public int getNodeId() {
-      return nodeId_;
-    }
-    /**
-     * <code>int32 nodeId = 1;</code>
-     */
-    public Builder setNodeId(int value) {
-      
-      nodeId_ = value;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>int32 nodeId = 1;</code>
-     */
-    public Builder clearNodeId() {
-      
-      nodeId_ = 0;
-      onChanged();
-      return this;
-    }
-
     private java.lang.Object key_ = "";
     /**
-     * <code>string key = 2;</code>
+     * <code>string key = 1;</code>
      */
     public java.lang.String getKey() {
       java.lang.Object ref = key_;
@@ -501,7 +443,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string key = 2;</code>
+     * <code>string key = 1;</code>
      */
     public com.google.protobuf.ByteString
         getKeyBytes() {
@@ -517,7 +459,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>string key = 2;</code>
+     * <code>string key = 1;</code>
      */
     public Builder setKey(
         java.lang.String value) {
@@ -530,7 +472,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string key = 2;</code>
+     * <code>string key = 1;</code>
      */
     public Builder clearKey() {
       
@@ -539,7 +481,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>string key = 2;</code>
+     * <code>string key = 1;</code>
      */
     public Builder setKeyBytes(
         com.google.protobuf.ByteString value) {

@@ -22,6 +22,7 @@ private static final long serialVersionUID = 0L;
   private NodeInfoRequest() {
     nodeId_ = 0;
     nodeIpAddress_ = "";
+    nodePort_ = 0;
   }
 
   @Override
@@ -57,6 +58,11 @@ private static final long serialVersionUID = 0L;
             String s = input.readStringRequireUtf8();
 
             nodeIpAddress_ = s;
+            break;
+          }
+          case 24: {
+
+            nodePort_ = input.readInt32();
             break;
           }
           default: {
@@ -134,6 +140,15 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int NODEPORT_FIELD_NUMBER = 3;
+  private int nodePort_;
+  /**
+   * <code>int32 nodePort = 3;</code>
+   */
+  public int getNodePort() {
+    return nodePort_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @Override
   public final boolean isInitialized() {
@@ -154,6 +169,9 @@ private static final long serialVersionUID = 0L;
     if (!getNodeIpAddressBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 2, nodeIpAddress_);
     }
+    if (nodePort_ != 0) {
+      output.writeInt32(3, nodePort_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -169,6 +187,10 @@ private static final long serialVersionUID = 0L;
     }
     if (!getNodeIpAddressBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, nodeIpAddress_);
+    }
+    if (nodePort_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(3, nodePort_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -190,6 +212,8 @@ private static final long serialVersionUID = 0L;
         == other.getNodeId());
     result = result && getNodeIpAddress()
         .equals(other.getNodeIpAddress());
+    result = result && (getNodePort()
+        == other.getNodePort());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -205,6 +229,8 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getNodeId();
     hash = (37 * hash) + NODEIPADDRESS_FIELD_NUMBER;
     hash = (53 * hash) + getNodeIpAddress().hashCode();
+    hash = (37 * hash) + NODEPORT_FIELD_NUMBER;
+    hash = (53 * hash) + getNodePort();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -346,6 +372,8 @@ private static final long serialVersionUID = 0L;
 
       nodeIpAddress_ = "";
 
+      nodePort_ = 0;
+
       return this;
     }
 
@@ -374,6 +402,7 @@ private static final long serialVersionUID = 0L;
       NodeInfoRequest result = new NodeInfoRequest(this);
       result.nodeId_ = nodeId_;
       result.nodeIpAddress_ = nodeIpAddress_;
+      result.nodePort_ = nodePort_;
       onBuilt();
       return result;
     }
@@ -428,6 +457,9 @@ private static final long serialVersionUID = 0L;
       if (!other.getNodeIpAddress().isEmpty()) {
         nodeIpAddress_ = other.nodeIpAddress_;
         onChanged();
+      }
+      if (other.getNodePort() != 0) {
+        setNodePort(other.getNodePort());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -549,6 +581,32 @@ private static final long serialVersionUID = 0L;
   checkByteStringIsUtf8(value);
       
       nodeIpAddress_ = value;
+      onChanged();
+      return this;
+    }
+
+    private int nodePort_ ;
+    /**
+     * <code>int32 nodePort = 3;</code>
+     */
+    public int getNodePort() {
+      return nodePort_;
+    }
+    /**
+     * <code>int32 nodePort = 3;</code>
+     */
+    public Builder setNodePort(int value) {
+      
+      nodePort_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 nodePort = 3;</code>
+     */
+    public Builder clearNodePort() {
+      
+      nodePort_ = 0;
       onChanged();
       return this;
     }

@@ -18,9 +18,8 @@ service master {
 
 // put data to cache => request
 message PutDataRequest {
-  int32 nodeId = 1;
-  string key = 2;
-  string value = 3;
+  string key = 1;
+  string value = 2;
 }
 
 // put data to cache => response
@@ -32,8 +31,7 @@ message PutDataResponse {
 
 // get data from cache => request
 message GetDataRequest {
-  int32 nodeId = 1;
-  string key = 2;
+  string key = 1;
 }
 
 // get data from cache => response

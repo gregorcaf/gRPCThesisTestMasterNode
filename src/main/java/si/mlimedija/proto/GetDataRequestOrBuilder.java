@@ -8,16 +8,11 @@ public interface GetDataRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>int32 nodeId = 1;</code>
-   */
-  int getNodeId();
-
-  /**
-   * <code>string key = 2;</code>
+   * <code>string key = 1;</code>
    */
   java.lang.String getKey();
   /**
-   * <code>string key = 2;</code>
+   * <code>string key = 1;</code>
    */
   com.google.protobuf.ByteString
       getKeyBytes();

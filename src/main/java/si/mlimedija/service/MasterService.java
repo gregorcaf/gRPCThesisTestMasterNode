@@ -24,71 +24,74 @@ public class MasterService extends masterGrpc.masterImplBase {
     public void putData(PutDataRequest clientRequest, StreamObserver<PutDataResponse> responseObserver) {
 
         // extract client request
-        int nodeId = clientRequest.getNodeId();
         String key = clientRequest.getKey();
         String value = clientRequest.getValue();
 
+        // TODO => first check if key already exists and then update it at the same node
+
         // TODO => data placement logic based on key (get info from StorageNodeInfo class)
+        int nodeId = storageNodeRegistry.dataPlacement(key); // => TODO modify dataPlacement(key) method -> currently returns constant number 1
+        storageNodeRegistry.getNodeInfo(nodeId).putKey(key);
+        String nodeIpAddress = storageNodeRegistry.getNodeInfo(nodeId).getNodeIpAddress();
+        int nodePort = storageNodeRegistry.getNodeInfo(nodeId).getNodePort();
 
-        storageNodeRegistry.getNodeInfo(1).putKey(key);
-
-
-        logger.info("PUT_DATA request: nodeId=" + nodeId + "|key=" + key + "|value=" + value);
+        logger.info("PUT_DATA request: key=" + key + "|value=" + value + "|nodeId=" + nodeId + "|ipAddress=" + nodeIpAddress + "|port=" + nodePort);
 
         // gRPC call to storage node
-        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 9070).usePlaintext().build();
-        storageGrpc.storageBlockingStub storageStub = storageGrpc.newBlockingStub(channel);
+        ManagedChannel channel = ManagedChannelBuilder.forAddress(nodeIpAddress, nodePort).usePlaintext().build();
 
-        // package data for node request
-        PutDataNodeRequest nodeRequest = PutDataNodeRequest.newBuilder().setNodeId(nodeId).setKey(key).setValue(value).build();
+        try {
+            storageGrpc.storageBlockingStub storageStub = storageGrpc.newBlockingStub(channel);
 
-        // // retrieve response from node response from node
-        PutDataNodeResponse nodeResponse = storageStub.putDataNode(nodeRequest);
+            // package data for node request
+            PutDataNodeRequest nodeRequest = PutDataNodeRequest.newBuilder().setNodeId(nodeId).setKey(key).setValue(value).build();
 
-        // package response for client
-        PutDataResponse.Builder clientResponse = PutDataResponse.newBuilder();
-        clientResponse.setKey(nodeResponse.getKey());
-        clientResponse.setResponseCode(nodeResponse.getResponseCode());
-        clientResponse.setResponseMessage(nodeResponse.getResponseMessage());
+            // retrieve response from node
+            // TODO => handle request timeouts & unsuccessful data puts on the node (code 200 or 400)
+            PutDataNodeResponse nodeResponse = storageStub.putDataNode(nodeRequest);
 
-        responseObserver.onNext(clientResponse.build());
-        responseObserver.onCompleted();
+            // package response for client
+            PutDataResponse.Builder clientResponse = PutDataResponse.newBuilder();
+            clientResponse.setKey(nodeResponse.getKey());
+            clientResponse.setResponseCode(nodeResponse.getResponseCode());
+            clientResponse.setResponseMessage(nodeResponse.getResponseMessage());
+
+            responseObserver.onNext(clientResponse.build());
+            responseObserver.onCompleted();
+        } finally {
+            // shutdown the channel when done
+            channel.shutdown();
+        }
+
+
     }
 
     @Override
     public void getData(GetDataRequest clientRequest, StreamObserver<GetDataResponse> responseObserver) {
 
         // extract client request
-        int nodeId = clientRequest.getNodeId();
         String key = clientRequest.getKey();
 
-        // for storing node information
+        int nodeId = storageNodeRegistry.findKey(key);
         String nodeIpAddress;
         int nodePort;
 
-
-        // TODO => data retrieval logic based on key (get info from StorageNodeInfo class)
-        int storageNodeId = storageNodeRegistry.findKey(key);
-
-        logger.info("GET_DATA request: nodeId=" + nodeId + "|key=" + key);
-
-
         // key is stored on one of the nodes
-        if (storageNodeId != -1) {
-            nodeIpAddress = storageNodeRegistry.getNodeInfo(storageNodeId).getNodeIpAddress();
-            nodePort = storageNodeRegistry.getNodeInfo(storageNodeId).getNodePort();
+        if (nodeId != -1) {
+            nodeIpAddress = storageNodeRegistry.getNodeInfo(nodeId).getNodeIpAddress();
+            nodePort = storageNodeRegistry.getNodeInfo(nodeId).getNodePort();
 
-            logger.info("Key=" + key + " is stored on storageNodeId=" + storageNodeId);
+            logger.info("GET_DATA request: key=" + key  + "|nodeId=" + nodeId + "|ipAddress=" + nodeIpAddress + "|port=" + nodePort);
 
             // gRPC call to storage node
             ManagedChannel channel = ManagedChannelBuilder.forAddress(nodeIpAddress, nodePort).usePlaintext().build();
-//            ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 9070).usePlaintext().build();
             storageGrpc.storageBlockingStub storageStub = storageGrpc.newBlockingStub(channel);
 
             // package data for node request
             GetDataNodeRequest nodeRequest = GetDataNodeRequest.newBuilder().setNodeId(nodeId).setKey(key).build();
 
             // retrieve response from node
+            // TODO => handle request timeouts & unsuccessful data retrievals from the node (code 200 or 400)
             GetDataNodeResponse nodeResponse = storageStub.getDataNode(nodeRequest);
 
             // package response for client
@@ -103,7 +106,7 @@ public class MasterService extends masterGrpc.masterImplBase {
         }
         // key is not store on one of the nodes
         else {
-            logger.info("Key=" + key + " doesn't exists");
+            logger.warn("GET_DATA request: could not retrieve key=" + key + " from cache");
         }
     }
 }

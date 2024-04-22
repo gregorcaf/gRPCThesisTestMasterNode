@@ -21,4 +21,9 @@ public interface NodeInfoRequestOrBuilder extends
    */
   com.google.protobuf.ByteString
       getNodeIpAddressBytes();
+
+  /**
+   * <code>int32 nodePort = 3;</code>
+   */
+  int getNodePort();
 }
