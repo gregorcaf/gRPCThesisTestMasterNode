@@ -65,7 +65,7 @@ public class StorageNodeRegistry {
         logger.info("findKey method called");
         int nodeId;
 
-        // TODO => print is only for testing purposes
+        // for debug purposes
         printKeys();
 
         for (Map.Entry<Integer, StorageNodeInfo> entry : nodeInfoMap.entrySet()) {
@@ -83,12 +83,12 @@ public class StorageNodeRegistry {
     public void printKeys() {
         int nodeId;
         String keys;
-        logger.info("Print all keys:");
+        logger.debug("Print all keys:");
 
         for (Map.Entry<Integer, StorageNodeInfo> entry : nodeInfoMap.entrySet()) {
             nodeId = entry.getKey();
             keys = entry.getValue().getKeys().toString();
-            logger.info("nodeId=" + nodeId + "|keys=" + keys);
+            logger.debug("nodeId=" + nodeId + "|keys=" + keys);
         }
     }
 
@@ -136,7 +136,7 @@ public class StorageNodeRegistry {
     private static Map<String, Integer> readIpAddresses() {
         Map<String, Integer> ipAddresses = new HashMap<>();
         ipAddresses.put("192.168.1.248", 9070);
-        ipAddresses.put("localhost", 9071);
+//        ipAddresses.put("localhost", 9071);
         return ipAddresses;
     }
 }

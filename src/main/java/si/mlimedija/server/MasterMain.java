@@ -38,12 +38,12 @@ public class MasterMain {
 
         server.start();
 
-        logger.info("Server started at " + getIPAddress() + ":" + server.getPort());
+        logger.info("Server started at " + getIpAddress() + ":" + server.getPort());
 
         // iterates through IP addresses and initialized nodes in the list
         storageNodeRegistry.initStorageNodes();
 
-        // periodical health checks - every 5 seconds
+        // periodical health checks - 5 threads, every 5 seconds
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(5);
         executor.scheduleAtFixedRate(() -> {
             try {
@@ -56,7 +56,7 @@ public class MasterMain {
         server.awaitTermination();
     }
 
-    public static String getIPAddress() {
+    public static String getIpAddress() {
         try {
             InetAddress address = InetAddress.getLocalHost();
             return address.getHostAddress();
