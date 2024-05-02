@@ -45,9 +45,9 @@ jobs:
       - name: Login to Docker hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD}}
       - name: Build Container image
-        run: docker build -t ${{ secrets.DOCKER_REPO }}:storage .
+        run: docker build -t ${{ secrets.DOCKER_REPO }}:master .
       - name: Publish Docker image
-        run: docker push ${{ secrets.DOCKER_REPO }}:storage
+        run: docker push ${{ secrets.DOCKER_REPO }}:master
 
 #  publish-job:
 #    runs-on: ubuntu-latest
