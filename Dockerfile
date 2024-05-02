@@ -8,5 +8,5 @@ RUN mvn -B package --file pom.xml
 
 FROM openjdk:21-jdk-oracle
 WORKDIR /app
-COPY --from=build /workspace/target/*shaded.jar /app
+COPY --from=build /workspace/target/gRPCThesisTestMasterNode-1.0-SNAPSHOT.jar /app
 ENTRYPOINT ["java", "-jar", "/app/gRPCThesisTestMasterNode-1.0-SNAPSHOT.jar"]
