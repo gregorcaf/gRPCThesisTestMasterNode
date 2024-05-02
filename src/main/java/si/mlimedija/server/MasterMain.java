@@ -24,21 +24,20 @@ public class MasterMain {
     private static final Logger logger = LoggerFactory.getLogger(MasterMain.class.getSimpleName());
 
     public static void main(String[] args) throws IOException, InterruptedException {
-
-        // create instance of storageNodeRegistry and search for all storage nodes
         StorageNodeRegistry storageNodeRegistry = new StorageNodeRegistry();
-
         MasterService masterService = new MasterService(storageNodeRegistry);
-
         HealthChecker healthChecker = new HealthChecker(storageNodeRegistry);
 
-        Server server = ServerBuilder.forPort(9090).addService(masterService).build();
+        Server server = ServerBuilder.forPort(9090).
+                addService(masterService).
+                build();
 
         logger.info("Starting gRPC server");
 
         server.start();
 
-        logger.info("Server started at " + getIpAddress() + ":" + server.getPort());
+        String ipAddress = getIpAddress();
+        logger.info("Server started at " + ipAddress + ":" + server.getPort());
 
         // iterates through IP addresses and initialized nodes in the list
         storageNodeRegistry.initStorageNodes();
