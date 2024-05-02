@@ -2,9 +2,9 @@ package si.mlimedija.service;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
-import com.google.rpc.Code;
+//import com.google.gson.Gson;
+//import com.google.gson.stream.JsonReader;
+//import com.google.rpc.Code;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.Status;

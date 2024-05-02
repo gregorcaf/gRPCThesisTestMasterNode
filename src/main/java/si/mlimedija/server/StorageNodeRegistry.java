@@ -135,8 +135,8 @@ public class StorageNodeRegistry {
     // TODO => handle key duplication
     private static Map<String, Integer> readIpAddresses() {
         Map<String, Integer> ipAddresses = new HashMap<>();
-        ipAddresses.put("192.168.1.248", 9070);
-//        ipAddresses.put("localhost", 9071);
+//        ipAddresses.put("192.168.1.248", 9070);
+        ipAddresses.put("localhost", 9070);
         return ipAddresses;
     }
 }
