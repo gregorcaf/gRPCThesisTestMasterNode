@@ -4,7 +4,7 @@
 package si.mlimedija.proto;
 
 public interface GetDataRequestOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:GetDataRequest)
+    // @@protoc_insertion_point(interface_extends:Master.GetDataRequest)
     com.google.protobuf.MessageOrBuilder {
 
   /**

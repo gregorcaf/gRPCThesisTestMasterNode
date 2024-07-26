@@ -8,11 +8,11 @@ package si.mlimedija.proto;
  * get data from cache =&gt; request
  * </pre>
  *
- * Protobuf type {@code GetDataRequest}
+ * Protobuf type {@code Master.GetDataRequest}
  */
 public  final class GetDataRequest extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:GetDataRequest)
+    // @@protoc_insertion_point(message_implements:Master.GetDataRequest)
     GetDataRequestOrBuilder {
 private static final long serialVersionUID = 0L;
   // Use GetDataRequest.newBuilder() to construct.
@@ -74,13 +74,13 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return si.mlimedija.proto.Master.internal_static_GetDataRequest_descriptor;
+    return si.mlimedija.proto.Master.internal_static_Master_GetDataRequest_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return si.mlimedija.proto.Master.internal_static_GetDataRequest_fieldAccessorTable
+    return si.mlimedija.proto.Master.internal_static_Master_GetDataRequest_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             si.mlimedija.proto.GetDataRequest.class, si.mlimedija.proto.GetDataRequest.Builder.class);
   }
@@ -279,21 +279,21 @@ private static final long serialVersionUID = 0L;
    * get data from cache =&gt; request
    * </pre>
    *
-   * Protobuf type {@code GetDataRequest}
+   * Protobuf type {@code Master.GetDataRequest}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:GetDataRequest)
+      // @@protoc_insertion_point(builder_implements:Master.GetDataRequest)
       si.mlimedija.proto.GetDataRequestOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return si.mlimedija.proto.Master.internal_static_GetDataRequest_descriptor;
+      return si.mlimedija.proto.Master.internal_static_Master_GetDataRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return si.mlimedija.proto.Master.internal_static_GetDataRequest_fieldAccessorTable
+      return si.mlimedija.proto.Master.internal_static_Master_GetDataRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               si.mlimedija.proto.GetDataRequest.class, si.mlimedija.proto.GetDataRequest.Builder.class);
     }
@@ -324,7 +324,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return si.mlimedija.proto.Master.internal_static_GetDataRequest_descriptor;
+      return si.mlimedija.proto.Master.internal_static_Master_GetDataRequest_descriptor;
     }
 
     @java.lang.Override
@@ -507,10 +507,10 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:GetDataRequest)
+    // @@protoc_insertion_point(builder_scope:Master.GetDataRequest)
   }
 
-  // @@protoc_insertion_point(class_scope:GetDataRequest)
+  // @@protoc_insertion_point(class_scope:Master.GetDataRequest)
   private static final si.mlimedija.proto.GetDataRequest DEFAULT_INSTANCE;
   static {
     DEFAULT_INSTANCE = new si.mlimedija.proto.GetDataRequest();

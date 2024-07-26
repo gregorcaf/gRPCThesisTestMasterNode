@@ -24,7 +24,7 @@ public final class masterGrpc {
 
   private masterGrpc() {}
 
-  public static final String SERVICE_NAME = "master";
+  public static final String SERVICE_NAME = "Master.master";
 
   // Static method descriptors that strictly reflect the proto.
   private static volatile io.grpc.MethodDescriptor<si.mlimedija.proto.PutDataRequest,
@@ -45,7 +45,7 @@ public final class masterGrpc {
               io.grpc.MethodDescriptor.<si.mlimedija.proto.PutDataRequest, si.mlimedija.proto.PutDataResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
-                  "master", "putData"))
+                  "Master.master", "putData"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   si.mlimedija.proto.PutDataRequest.getDefaultInstance()))
@@ -77,7 +77,7 @@ public final class masterGrpc {
               io.grpc.MethodDescriptor.<si.mlimedija.proto.GetDataRequest, si.mlimedija.proto.GetDataResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
-                  "master", "getData"))
+                  "Master.master", "getData"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   si.mlimedija.proto.GetDataRequest.getDefaultInstance()))

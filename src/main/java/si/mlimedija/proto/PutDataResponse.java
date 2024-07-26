@@ -8,11 +8,11 @@ package si.mlimedija.proto;
  * put data to cache =&gt; response
  * </pre>
  *
- * Protobuf type {@code PutDataResponse}
+ * Protobuf type {@code Master.PutDataResponse}
  */
 public  final class PutDataResponse extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:PutDataResponse)
+    // @@protoc_insertion_point(message_implements:Master.PutDataResponse)
     PutDataResponseOrBuilder {
 private static final long serialVersionUID = 0L;
   // Use PutDataResponse.newBuilder() to construct.
@@ -87,13 +87,13 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return si.mlimedija.proto.Master.internal_static_PutDataResponse_descriptor;
+    return si.mlimedija.proto.Master.internal_static_Master_PutDataResponse_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return si.mlimedija.proto.Master.internal_static_PutDataResponse_fieldAccessorTable
+    return si.mlimedija.proto.Master.internal_static_Master_PutDataResponse_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             si.mlimedija.proto.PutDataResponse.class, si.mlimedija.proto.PutDataResponse.Builder.class);
   }
@@ -356,21 +356,21 @@ private static final long serialVersionUID = 0L;
    * put data to cache =&gt; response
    * </pre>
    *
-   * Protobuf type {@code PutDataResponse}
+   * Protobuf type {@code Master.PutDataResponse}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:PutDataResponse)
+      // @@protoc_insertion_point(builder_implements:Master.PutDataResponse)
       si.mlimedija.proto.PutDataResponseOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return si.mlimedija.proto.Master.internal_static_PutDataResponse_descriptor;
+      return si.mlimedija.proto.Master.internal_static_Master_PutDataResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return si.mlimedija.proto.Master.internal_static_PutDataResponse_fieldAccessorTable
+      return si.mlimedija.proto.Master.internal_static_Master_PutDataResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               si.mlimedija.proto.PutDataResponse.class, si.mlimedija.proto.PutDataResponse.Builder.class);
     }
@@ -405,7 +405,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return si.mlimedija.proto.Master.internal_static_PutDataResponse_descriptor;
+      return si.mlimedija.proto.Master.internal_static_Master_PutDataResponse_descriptor;
     }
 
     @java.lang.Override
@@ -692,10 +692,10 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:PutDataResponse)
+    // @@protoc_insertion_point(builder_scope:Master.PutDataResponse)
   }
 
-  // @@protoc_insertion_point(class_scope:PutDataResponse)
+  // @@protoc_insertion_point(class_scope:Master.PutDataResponse)
   private static final si.mlimedija.proto.PutDataResponse DEFAULT_INSTANCE;
   static {
     DEFAULT_INSTANCE = new si.mlimedija.proto.PutDataResponse();

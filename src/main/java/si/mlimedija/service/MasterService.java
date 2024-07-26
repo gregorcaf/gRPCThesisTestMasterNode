@@ -41,6 +41,7 @@ public class MasterService extends masterGrpc.masterImplBase {
         initErrorCodes(); // initialize map with grpc status messages and corresponding http status codes
     }
 
+    // retry mechanism (exponential backoff)
     private void initStorageConfig() {
         this.storageServiceConfig.put("maxAttempts", 3D);
         this.storageServiceConfig.put("initialBackoff", "1s");
@@ -49,6 +50,7 @@ public class MasterService extends masterGrpc.masterImplBase {
         this.storageServiceConfig.put("retryableStatusCodes", Arrays.<Object>asList("UNAVAILABLE", "RESOURCE_EXHAUSTED", "INTERNAL", "DEADLINE_EXCEEDED"));
     }
 
+    // list of gRPC error codes
     private void initErrorCodes() {
         this.errorCodes.put("OK", 200);
         this.errorCodes.put("CANCELLED", 499);
@@ -70,7 +72,6 @@ public class MasterService extends masterGrpc.masterImplBase {
     }
 
 
-    // TODO => split putData method on smaller parts (methods)
     @Override
     public void putData(PutDataRequest clientRequest, StreamObserver<PutDataResponse> responseObserver) {
 
@@ -88,7 +89,8 @@ public class MasterService extends masterGrpc.masterImplBase {
         String nodeIpAddress = storageNodeRegistry.getNodeInfo(nodeId).getNodeIpAddress();
         int nodePort = storageNodeRegistry.getNodeInfo(nodeId).getNodePort();
 
-        logger.info("PUT_DATA request: key=" + key + "|value=" + value + "|nodeId=" + nodeId + "|ipAddress=" + nodeIpAddress + "|port=" + nodePort);
+//        logger.info("PUT_DATA request: key=" + key);
+//        logger.info("PUT_DATA request: key=" + key + "|value=" + value + "|nodeId=" + nodeId + "|ipAddress=" + nodeIpAddress + "|port=" + nodePort);
 
         // create channel to storage node
         ManagedChannel channel = ManagedChannelBuilder.
@@ -133,7 +135,7 @@ public class MasterService extends masterGrpc.masterImplBase {
 
         } catch (StatusRuntimeException e) {
             // handle the exception
-            logger.error("PUT_DATA_request timed out for key=" + key);
+            logger.error("PUT_DATA request timed out for key=" + key);
             Status status = Status.fromThrowable(e);
 
             if (status != null) {
@@ -228,7 +230,7 @@ public class MasterService extends masterGrpc.masterImplBase {
 
             } catch (StatusRuntimeException e) {
                 // handle the exception
-                logger.error("PUT_DATA_request timed out for key=" + key);
+                logger.error("PUT_DATA request timed out for key=" + key);
                 Status status = Status.fromThrowable(e);
 
                 if (status != null) {

@@ -3,8 +3,8 @@
 
 package si.mlimedija.proto;
 
-public final class Master {
-  private Master() {}
+public final class MasterOuterClass {
+  private MasterOuterClass() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
   }
@@ -15,25 +15,25 @@ public final class Master {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Master_PutDataRequest_descriptor;
+    internal_static_PutDataRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_Master_PutDataRequest_fieldAccessorTable;
+      internal_static_PutDataRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Master_PutDataResponse_descriptor;
+    internal_static_PutDataResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_Master_PutDataResponse_fieldAccessorTable;
+      internal_static_PutDataResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Master_GetDataRequest_descriptor;
+    internal_static_GetDataRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_Master_GetDataRequest_fieldAccessorTable;
+      internal_static_GetDataRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Master_GetDataResponse_descriptor;
+    internal_static_GetDataResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_Master_GetDataResponse_fieldAccessorTable;
+      internal_static_GetDataResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -43,17 +43,16 @@ public final class Master {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014master.proto\022\006Master\",\n\016PutDataRequest" +
-      "\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t\"M\n\017PutDataR" +
-      "esponse\022\013\n\003key\030\001 \001(\t\022\024\n\014responseCode\030\002 \001" +
-      "(\005\022\027\n\017responseMessage\030\003 \001(\t\"\035\n\016GetDataRe" +
-      "quest\022\013\n\003key\030\001 \001(\t\"\\\n\017GetDataResponse\022\013\n" +
-      "\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t\022\024\n\014responseCod" +
-      "e\030\003 \001(\005\022\027\n\017responseMessage\030\004 \001(\t2\200\001\n\006mas" +
-      "ter\022:\n\007putData\022\026.Master.PutDataRequest\032\027" +
-      ".Master.PutDataResponse\022:\n\007getData\022\026.Mas" +
-      "ter.GetDataRequest\032\027.Master.GetDataRespo" +
-      "nseB\026\n\022si.mlimedija.protoP\001b\006proto3"
+      "\n\014master.proto\",\n\016PutDataRequest\022\013\n\003key\030" +
+      "\001 \001(\t\022\r\n\005value\030\002 \001(\t\"M\n\017PutDataResponse\022" +
+      "\013\n\003key\030\001 \001(\t\022\024\n\014responseCode\030\002 \001(\005\022\027\n\017re" +
+      "sponseMessage\030\003 \001(\t\"\035\n\016GetDataRequest\022\013\n" +
+      "\003key\030\001 \001(\t\"\\\n\017GetDataResponse\022\013\n\003key\030\001 \001" +
+      "(\t\022\r\n\005value\030\002 \001(\t\022\024\n\014responseCode\030\003 \001(\005\022" +
+      "\027\n\017responseMessage\030\004 \001(\t2d\n\006Master\022,\n\007pu" +
+      "tData\022\017.PutDataRequest\032\020.PutDataResponse" +
+      "\022,\n\007getData\022\017.GetDataRequest\032\020.GetDataRe" +
+      "sponseB\026\n\022si.mlimedija.protoP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -67,29 +66,29 @@ public final class Master {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_Master_PutDataRequest_descriptor =
+    internal_static_PutDataRequest_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_Master_PutDataRequest_fieldAccessorTable = new
+    internal_static_PutDataRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_Master_PutDataRequest_descriptor,
+        internal_static_PutDataRequest_descriptor,
         new java.lang.String[] { "Key", "Value", });
-    internal_static_Master_PutDataResponse_descriptor =
+    internal_static_PutDataResponse_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_Master_PutDataResponse_fieldAccessorTable = new
+    internal_static_PutDataResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_Master_PutDataResponse_descriptor,
+        internal_static_PutDataResponse_descriptor,
         new java.lang.String[] { "Key", "ResponseCode", "ResponseMessage", });
-    internal_static_Master_GetDataRequest_descriptor =
+    internal_static_GetDataRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_Master_GetDataRequest_fieldAccessorTable = new
+    internal_static_GetDataRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_Master_GetDataRequest_descriptor,
+        internal_static_GetDataRequest_descriptor,
         new java.lang.String[] { "Key", });
-    internal_static_Master_GetDataResponse_descriptor =
+    internal_static_GetDataResponse_descriptor =
       getDescriptor().getMessageTypes().get(3);
-    internal_static_Master_GetDataResponse_fieldAccessorTable = new
+    internal_static_GetDataResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_Master_GetDataResponse_descriptor,
+        internal_static_GetDataResponse_descriptor,
         new java.lang.String[] { "Key", "Value", "ResponseCode", "ResponseMessage", });
   }
 

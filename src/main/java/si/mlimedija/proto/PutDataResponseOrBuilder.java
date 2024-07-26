@@ -4,7 +4,7 @@
 package si.mlimedija.proto;
 
 public interface PutDataResponseOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:PutDataResponse)
+    // @@protoc_insertion_point(interface_extends:Master.PutDataResponse)
     com.google.protobuf.MessageOrBuilder {
 
   /**

@@ -62,11 +62,11 @@ public class StorageNodeRegistry {
 
     // iterates through nodes and checks which node stores given key, returns nodeId, otherwise -1
     public int findKey(String key) {
-        logger.info("findKey method called");
+//        logger.info("findKey method called");
         int nodeId;
 
         // for debug purposes
-        printKeys();
+//        printKeys();
 
         for (Map.Entry<Integer, StorageNodeInfo> entry : nodeInfoMap.entrySet()) {
             nodeId = entry.getKey();
@@ -104,16 +104,34 @@ public class StorageNodeRegistry {
 
     // initializes the node instances and puts them to StorageNodeInfo
     public void initStorageNodes() {
-        Map<String, Integer> nodeIpAddresses = readIpAddresses();
+        Map<Integer, String> nodeIpAddresses = readIpAddresses();
+//        Map<String, Integer> nodeIpAddresses = readIpAddresses();
         int nodeCount = 0;
 
         logger.info("Started searching for storage nodes");
 
-        // iterate through the map of ip addresses, create node instances, and put them to the StorageNodeInfo map
-        for (Map.Entry<String, Integer> entry : nodeIpAddresses.entrySet()) {
+// commented for testing purposes - duplication of IP addresses
+// iterate through the map of ip addresses, create node instances, and put them to the StorageNodeInfo map
+//        for (Map.Entry<String, Integer> entry : nodeIpAddresses.entrySet()) {
+//            nodeCount++;
+//            String nodeIpAddress = entry.getKey();
+//            int nodePort = entry.getValue();
+//            HashSet<String> keys = new HashSet<>();
+//            Boolean isHealthy = true;
+//            int mapSize = 0;
+//            int cpuUtilization = 0;
+//
+//            StorageNodeInfo node = new StorageNodeInfo(nodeCount, nodeIpAddress, nodePort, keys, isHealthy, mapSize, cpuUtilization);
+//            addOrUpdateNodeInfo(nodeCount, node);
+//
+//            logger.info("Found new storage node");
+//            logger.info("nodeId=" + nodeCount + "|nodeIpAddress=" + nodeIpAddress + "|nodePort=" + nodePort);
+//        }
+
+        for (Map.Entry<Integer, String> entry : nodeIpAddresses.entrySet()) {
             nodeCount++;
-            String nodeIpAddress = entry.getKey();
-            int nodePort = entry.getValue();
+            String nodeIpAddress = entry.getValue();
+            int nodePort = entry.getKey();
             HashSet<String> keys = new HashSet<>();
             Boolean isHealthy = true;
             int mapSize = 0;
@@ -130,13 +148,20 @@ public class StorageNodeRegistry {
     }
 
 
-    // reads IP addresses when booting up
-    // TODO => read from external storage (S3, DynamoDB)
-    // TODO => handle key duplication
-    private static Map<String, Integer> readIpAddresses() {
-        Map<String, Integer> ipAddresses = new HashMap<>();
-        ipAddresses.put("192.168.1.248", 9070);
-//        ipAddresses.put("localhost", 9070);
+// reads IP addresses when booting up
+// TODO => read from external storage (S3, DynamoDB)
+    private static Map<Integer, String> readIpAddresses() {
+        Map<Integer, String> ipAddresses = new HashMap<>();
+        ipAddresses.put(9070, "127.0.0.1");
+//        ipAddresses.put(9080, "127.0.0.1");
         return ipAddresses;
     }
+
+// commented for testing purposes - duplication of IP addresses
+// key=String (IP address) and value=Integer (port)
+//    private static Map<String, Integer> readIpAddresses() {
+//        Map<String, Integer> ipAddresses = new HashMap<>();
+//        ipAddresses.put("192.168.1.248", 9070);
+//        return ipAddresses;
+//    }
 }
