@@ -35,25 +35,25 @@ public final class Master {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Master_GetDataResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Master_PutFileRequest_descriptor;
+    internal_static_Master_PutFileEndpointRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_Master_PutFileRequest_fieldAccessorTable;
+      internal_static_Master_PutFileEndpointRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Master_PutFileResponse_descriptor;
+    internal_static_Master_PutFileEndpointResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_Master_PutFileResponse_fieldAccessorTable;
+      internal_static_Master_PutFileEndpointResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Master_GetFileRequest_descriptor;
+    internal_static_Master_GetFileEndpointRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_Master_GetFileRequest_fieldAccessorTable;
+      internal_static_Master_GetFileEndpointRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Master_GetFileResponse_descriptor;
+    internal_static_Master_GetFileEndpointResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_Master_GetFileResponse_fieldAccessorTable;
+      internal_static_Master_GetFileEndpointResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -69,20 +69,21 @@ public final class Master {
       "(\005\022\027\n\017responseMessage\030\003 \001(\t\"\035\n\016GetDataRe" +
       "quest\022\013\n\003key\030\001 \001(\t\"\\\n\017GetDataResponse\022\013\n" +
       "\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t\022\024\n\014responseCod" +
-      "e\030\003 \001(\005\022\027\n\017responseMessage\030\004 \001(\t\"6\n\016PutF" +
-      "ileRequest\022\017\n\007content\030\001 \001(\014\022\023\n\013chunkNumb" +
-      "er\030\002 \001(\005\"@\n\017PutFileResponse\022\024\n\014responseC" +
-      "ode\030\001 \001(\005\022\027\n\017responseMessage\030\002 \001(\t\"\"\n\016Ge" +
-      "tFileRequest\022\020\n\010fileName\030\001 \001(\t\"7\n\017GetFil" +
-      "eResponse\022\017\n\007content\030\001 \001(\014\022\023\n\013chunkNumbe" +
-      "r\030\002 \001(\0052\374\001\n\006master\022:\n\007putData\022\026.Master.P" +
-      "utDataRequest\032\027.Master.PutDataResponse\022:" +
-      "\n\007getData\022\026.Master.GetDataRequest\032\027.Mast" +
-      "er.GetDataResponse\022<\n\007putFile\022\026.Master.P" +
-      "utFileRequest\032\027.Master.PutFileResponse(\001" +
-      "\022<\n\007getFile\022\026.Master.GetFileRequest\032\027.Ma" +
-      "ster.GetFileResponse0\001B\026\n\022si.mlimedija.p" +
-      "rotoP\001b\006proto3"
+      "e\030\003 \001(\005\022\027\n\017responseMessage\030\004 \001(\t\"*\n\026PutF" +
+      "ileEndpointRequest\022\020\n\010fileName\030\001 \001(\t\"B\n\027" +
+      "PutFileEndpointResponse\022\025\n\rnodeIpAddress" +
+      "\030\001 \001(\t\022\020\n\010nodePort\030\002 \001(\005\"*\n\026GetFileEndpo" +
+      "intRequest\022\020\n\010fileName\030\001 \001(\t\"B\n\027GetFileE" +
+      "ndpointResponse\022\025\n\rnodeIpAddress\030\001 \001(\t\022\020" +
+      "\n\010nodePort\030\002 \001(\0052\250\002\n\006master\022:\n\007putData\022\026" +
+      ".Master.PutDataRequest\032\027.Master.PutDataR" +
+      "esponse\022:\n\007getData\022\026.Master.GetDataReque" +
+      "st\032\027.Master.GetDataResponse\022R\n\017putFileEn" +
+      "dpoint\022\036.Master.PutFileEndpointRequest\032\037" +
+      ".Master.PutFileEndpointResponse\022R\n\017getFi" +
+      "leEndpoint\022\036.Master.GetFileEndpointReque" +
+      "st\032\037.Master.GetFileEndpointResponseB\026\n\022s" +
+      "i.mlimedija.protoP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -120,30 +121,30 @@ public final class Master {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Master_GetDataResponse_descriptor,
         new java.lang.String[] { "Key", "Value", "ResponseCode", "ResponseMessage", });
-    internal_static_Master_PutFileRequest_descriptor =
+    internal_static_Master_PutFileEndpointRequest_descriptor =
       getDescriptor().getMessageTypes().get(4);
-    internal_static_Master_PutFileRequest_fieldAccessorTable = new
+    internal_static_Master_PutFileEndpointRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_Master_PutFileRequest_descriptor,
-        new java.lang.String[] { "Content", "ChunkNumber", });
-    internal_static_Master_PutFileResponse_descriptor =
-      getDescriptor().getMessageTypes().get(5);
-    internal_static_Master_PutFileResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_Master_PutFileResponse_descriptor,
-        new java.lang.String[] { "ResponseCode", "ResponseMessage", });
-    internal_static_Master_GetFileRequest_descriptor =
-      getDescriptor().getMessageTypes().get(6);
-    internal_static_Master_GetFileRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_Master_GetFileRequest_descriptor,
+        internal_static_Master_PutFileEndpointRequest_descriptor,
         new java.lang.String[] { "FileName", });
-    internal_static_Master_GetFileResponse_descriptor =
-      getDescriptor().getMessageTypes().get(7);
-    internal_static_Master_GetFileResponse_fieldAccessorTable = new
+    internal_static_Master_PutFileEndpointResponse_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_Master_PutFileEndpointResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_Master_GetFileResponse_descriptor,
-        new java.lang.String[] { "Content", "ChunkNumber", });
+        internal_static_Master_PutFileEndpointResponse_descriptor,
+        new java.lang.String[] { "NodeIpAddress", "NodePort", });
+    internal_static_Master_GetFileEndpointRequest_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_Master_GetFileEndpointRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_Master_GetFileEndpointRequest_descriptor,
+        new java.lang.String[] { "FileName", });
+    internal_static_Master_GetFileEndpointResponse_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_Master_GetFileEndpointResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_Master_GetFileEndpointResponse_descriptor,
+        new java.lang.String[] { "NodeIpAddress", "NodePort", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

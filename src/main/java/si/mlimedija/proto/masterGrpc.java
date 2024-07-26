@@ -1,8 +1,5 @@
 package si.mlimedija.proto;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
 import static io.grpc.stub.ClientCalls.asyncClientStreamingCall;
@@ -94,68 +91,68 @@ public final class masterGrpc {
      return getGetDataMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<si.mlimedija.proto.PutFileRequest,
-      si.mlimedija.proto.PutFileResponse> getPutFileMethod;
+  private static volatile io.grpc.MethodDescriptor<si.mlimedija.proto.PutFileEndpointRequest,
+      si.mlimedija.proto.PutFileEndpointResponse> getPutFileEndpointMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "putFile",
-      requestType = si.mlimedija.proto.PutFileRequest.class,
-      responseType = si.mlimedija.proto.PutFileResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
-  public static io.grpc.MethodDescriptor<si.mlimedija.proto.PutFileRequest,
-      si.mlimedija.proto.PutFileResponse> getPutFileMethod() {
-    io.grpc.MethodDescriptor<si.mlimedija.proto.PutFileRequest, si.mlimedija.proto.PutFileResponse> getPutFileMethod;
-    if ((getPutFileMethod = masterGrpc.getPutFileMethod) == null) {
+      fullMethodName = SERVICE_NAME + '/' + "putFileEndpoint",
+      requestType = si.mlimedija.proto.PutFileEndpointRequest.class,
+      responseType = si.mlimedija.proto.PutFileEndpointResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<si.mlimedija.proto.PutFileEndpointRequest,
+      si.mlimedija.proto.PutFileEndpointResponse> getPutFileEndpointMethod() {
+    io.grpc.MethodDescriptor<si.mlimedija.proto.PutFileEndpointRequest, si.mlimedija.proto.PutFileEndpointResponse> getPutFileEndpointMethod;
+    if ((getPutFileEndpointMethod = masterGrpc.getPutFileEndpointMethod) == null) {
       synchronized (masterGrpc.class) {
-        if ((getPutFileMethod = masterGrpc.getPutFileMethod) == null) {
-          masterGrpc.getPutFileMethod = getPutFileMethod = 
-              io.grpc.MethodDescriptor.<si.mlimedija.proto.PutFileRequest, si.mlimedija.proto.PutFileResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
+        if ((getPutFileEndpointMethod = masterGrpc.getPutFileEndpointMethod) == null) {
+          masterGrpc.getPutFileEndpointMethod = getPutFileEndpointMethod = 
+              io.grpc.MethodDescriptor.<si.mlimedija.proto.PutFileEndpointRequest, si.mlimedija.proto.PutFileEndpointResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
-                  "Master.master", "putFile"))
+                  "Master.master", "putFileEndpoint"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  si.mlimedija.proto.PutFileRequest.getDefaultInstance()))
+                  si.mlimedija.proto.PutFileEndpointRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  si.mlimedija.proto.PutFileResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new masterMethodDescriptorSupplier("putFile"))
+                  si.mlimedija.proto.PutFileEndpointResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new masterMethodDescriptorSupplier("putFileEndpoint"))
                   .build();
           }
         }
      }
-     return getPutFileMethod;
+     return getPutFileEndpointMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<si.mlimedija.proto.GetFileRequest,
-      si.mlimedija.proto.GetFileResponse> getGetFileMethod;
+  private static volatile io.grpc.MethodDescriptor<si.mlimedija.proto.GetFileEndpointRequest,
+      si.mlimedija.proto.GetFileEndpointResponse> getGetFileEndpointMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
-      fullMethodName = SERVICE_NAME + '/' + "getFile",
-      requestType = si.mlimedija.proto.GetFileRequest.class,
-      responseType = si.mlimedija.proto.GetFileResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-  public static io.grpc.MethodDescriptor<si.mlimedija.proto.GetFileRequest,
-      si.mlimedija.proto.GetFileResponse> getGetFileMethod() {
-    io.grpc.MethodDescriptor<si.mlimedija.proto.GetFileRequest, si.mlimedija.proto.GetFileResponse> getGetFileMethod;
-    if ((getGetFileMethod = masterGrpc.getGetFileMethod) == null) {
+      fullMethodName = SERVICE_NAME + '/' + "getFileEndpoint",
+      requestType = si.mlimedija.proto.GetFileEndpointRequest.class,
+      responseType = si.mlimedija.proto.GetFileEndpointResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<si.mlimedija.proto.GetFileEndpointRequest,
+      si.mlimedija.proto.GetFileEndpointResponse> getGetFileEndpointMethod() {
+    io.grpc.MethodDescriptor<si.mlimedija.proto.GetFileEndpointRequest, si.mlimedija.proto.GetFileEndpointResponse> getGetFileEndpointMethod;
+    if ((getGetFileEndpointMethod = masterGrpc.getGetFileEndpointMethod) == null) {
       synchronized (masterGrpc.class) {
-        if ((getGetFileMethod = masterGrpc.getGetFileMethod) == null) {
-          masterGrpc.getGetFileMethod = getGetFileMethod = 
-              io.grpc.MethodDescriptor.<si.mlimedija.proto.GetFileRequest, si.mlimedija.proto.GetFileResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
+        if ((getGetFileEndpointMethod = masterGrpc.getGetFileEndpointMethod) == null) {
+          masterGrpc.getGetFileEndpointMethod = getGetFileEndpointMethod = 
+              io.grpc.MethodDescriptor.<si.mlimedija.proto.GetFileEndpointRequest, si.mlimedija.proto.GetFileEndpointResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
-                  "Master.master", "getFile"))
+                  "Master.master", "getFileEndpoint"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  si.mlimedija.proto.GetFileRequest.getDefaultInstance()))
+                  si.mlimedija.proto.GetFileEndpointRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  si.mlimedija.proto.GetFileResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new masterMethodDescriptorSupplier("getFile"))
+                  si.mlimedija.proto.GetFileEndpointResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new masterMethodDescriptorSupplier("getFileEndpoint"))
                   .build();
           }
         }
      }
-     return getGetFileMethod;
+     return getGetFileEndpointMethod;
   }
 
   /**
@@ -201,16 +198,16 @@ public final class masterGrpc {
 
     /**
      */
-    public io.grpc.stub.StreamObserver<si.mlimedija.proto.PutFileRequest> putFile(
-        io.grpc.stub.StreamObserver<si.mlimedija.proto.PutFileResponse> responseObserver) throws FileNotFoundException {
-      return asyncUnimplementedStreamingCall(getPutFileMethod(), responseObserver);
+    public void putFileEndpoint(si.mlimedija.proto.PutFileEndpointRequest request,
+        io.grpc.stub.StreamObserver<si.mlimedija.proto.PutFileEndpointResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getPutFileEndpointMethod(), responseObserver);
     }
 
     /**
      */
-    public void getFile(si.mlimedija.proto.GetFileRequest request,
-        io.grpc.stub.StreamObserver<si.mlimedija.proto.GetFileResponse> responseObserver) throws IOException {
-      asyncUnimplementedUnaryCall(getGetFileMethod(), responseObserver);
+    public void getFileEndpoint(si.mlimedija.proto.GetFileEndpointRequest request,
+        io.grpc.stub.StreamObserver<si.mlimedija.proto.GetFileEndpointResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getGetFileEndpointMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
@@ -230,19 +227,19 @@ public final class masterGrpc {
                 si.mlimedija.proto.GetDataResponse>(
                   this, METHODID_GET_DATA)))
           .addMethod(
-            getPutFileMethod(),
-            asyncClientStreamingCall(
+            getPutFileEndpointMethod(),
+            asyncUnaryCall(
               new MethodHandlers<
-                si.mlimedija.proto.PutFileRequest,
-                si.mlimedija.proto.PutFileResponse>(
-                  this, METHODID_PUT_FILE)))
+                si.mlimedija.proto.PutFileEndpointRequest,
+                si.mlimedija.proto.PutFileEndpointResponse>(
+                  this, METHODID_PUT_FILE_ENDPOINT)))
           .addMethod(
-            getGetFileMethod(),
-            asyncServerStreamingCall(
+            getGetFileEndpointMethod(),
+            asyncUnaryCall(
               new MethodHandlers<
-                si.mlimedija.proto.GetFileRequest,
-                si.mlimedija.proto.GetFileResponse>(
-                  this, METHODID_GET_FILE)))
+                si.mlimedija.proto.GetFileEndpointRequest,
+                si.mlimedija.proto.GetFileEndpointResponse>(
+                  this, METHODID_GET_FILE_ENDPOINT)))
           .build();
     }
   }
@@ -283,18 +280,18 @@ public final class masterGrpc {
 
     /**
      */
-    public io.grpc.stub.StreamObserver<si.mlimedija.proto.PutFileRequest> putFile(
-        io.grpc.stub.StreamObserver<si.mlimedija.proto.PutFileResponse> responseObserver) {
-      return asyncClientStreamingCall(
-          getChannel().newCall(getPutFileMethod(), getCallOptions()), responseObserver);
+    public void putFileEndpoint(si.mlimedija.proto.PutFileEndpointRequest request,
+        io.grpc.stub.StreamObserver<si.mlimedija.proto.PutFileEndpointResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getPutFileEndpointMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public void getFile(si.mlimedija.proto.GetFileRequest request,
-        io.grpc.stub.StreamObserver<si.mlimedija.proto.GetFileResponse> responseObserver) {
-      asyncServerStreamingCall(
-          getChannel().newCall(getGetFileMethod(), getCallOptions()), request, responseObserver);
+    public void getFileEndpoint(si.mlimedija.proto.GetFileEndpointRequest request,
+        io.grpc.stub.StreamObserver<si.mlimedija.proto.GetFileEndpointResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getGetFileEndpointMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -332,10 +329,16 @@ public final class masterGrpc {
 
     /**
      */
-    public java.util.Iterator<si.mlimedija.proto.GetFileResponse> getFile(
-        si.mlimedija.proto.GetFileRequest request) {
-      return blockingServerStreamingCall(
-          getChannel(), getGetFileMethod(), getCallOptions(), request);
+    public si.mlimedija.proto.PutFileEndpointResponse putFileEndpoint(si.mlimedija.proto.PutFileEndpointRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getPutFileEndpointMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public si.mlimedija.proto.GetFileEndpointResponse getFileEndpoint(si.mlimedija.proto.GetFileEndpointRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getGetFileEndpointMethod(), getCallOptions(), request);
     }
   }
 
@@ -372,12 +375,28 @@ public final class masterGrpc {
       return futureUnaryCall(
           getChannel().newCall(getGetDataMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<si.mlimedija.proto.PutFileEndpointResponse> putFileEndpoint(
+        si.mlimedija.proto.PutFileEndpointRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getPutFileEndpointMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<si.mlimedija.proto.GetFileEndpointResponse> getFileEndpoint(
+        si.mlimedija.proto.GetFileEndpointRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getGetFileEndpointMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_PUT_DATA = 0;
   private static final int METHODID_GET_DATA = 1;
-  private static final int METHODID_GET_FILE = 2;
-  private static final int METHODID_PUT_FILE = 3;
+  private static final int METHODID_PUT_FILE_ENDPOINT = 2;
+  private static final int METHODID_GET_FILE_ENDPOINT = 3;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -404,14 +423,14 @@ public final class masterGrpc {
           serviceImpl.getData((si.mlimedija.proto.GetDataRequest) request,
               (io.grpc.stub.StreamObserver<si.mlimedija.proto.GetDataResponse>) responseObserver);
           break;
-        case METHODID_GET_FILE:
-            try {
-                serviceImpl.getFile((GetFileRequest) request,
-                    (io.grpc.stub.StreamObserver<GetFileResponse>) responseObserver);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            break;
+        case METHODID_PUT_FILE_ENDPOINT:
+          serviceImpl.putFileEndpoint((si.mlimedija.proto.PutFileEndpointRequest) request,
+              (io.grpc.stub.StreamObserver<si.mlimedija.proto.PutFileEndpointResponse>) responseObserver);
+          break;
+        case METHODID_GET_FILE_ENDPOINT:
+          serviceImpl.getFileEndpoint((si.mlimedija.proto.GetFileEndpointRequest) request,
+              (io.grpc.stub.StreamObserver<si.mlimedija.proto.GetFileEndpointResponse>) responseObserver);
+          break;
         default:
           throw new AssertionError();
       }
@@ -422,14 +441,7 @@ public final class masterGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_PUT_FILE:
-            try {
-                return (io.grpc.stub.StreamObserver<Req>) serviceImpl.putFile(
-                    (io.grpc.stub.StreamObserver<PutFileResponse>) responseObserver);
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-          default:
+        default:
           throw new AssertionError();
       }
     }
@@ -482,8 +494,8 @@ public final class masterGrpc {
               .setSchemaDescriptor(new masterFileDescriptorSupplier())
               .addMethod(getPutDataMethod())
               .addMethod(getGetDataMethod())
-              .addMethod(getPutFileMethod())
-              .addMethod(getGetFileMethod())
+              .addMethod(getPutFileEndpointMethod())
+              .addMethod(getGetFileEndpointMethod())
               .build();
         }
       }

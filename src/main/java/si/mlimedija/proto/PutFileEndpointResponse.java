@@ -5,23 +5,23 @@ package si.mlimedija.proto;
 
 /**
  * <pre>
- * put stream file to cache =&gt; request
+ * initial response for put file
  * </pre>
  *
- * Protobuf type {@code Master.PutFileRequest}
+ * Protobuf type {@code Master.PutFileEndpointResponse}
  */
-public  final class PutFileRequest extends
+public  final class PutFileEndpointResponse extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:Master.PutFileRequest)
-    PutFileRequestOrBuilder {
+    // @@protoc_insertion_point(message_implements:Master.PutFileEndpointResponse)
+    PutFileEndpointResponseOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use PutFileRequest.newBuilder() to construct.
-  private PutFileRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use PutFileEndpointResponse.newBuilder() to construct.
+  private PutFileEndpointResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private PutFileRequest() {
-    content_ = com.google.protobuf.ByteString.EMPTY;
-    chunkNumber_ = 0;
+  private PutFileEndpointResponse() {
+    nodeIpAddress_ = "";
+    nodePort_ = 0;
   }
 
   @java.lang.Override
@@ -29,7 +29,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private PutFileRequest(
+  private PutFileEndpointResponse(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -49,13 +49,14 @@ private static final long serialVersionUID = 0L;
             done = true;
             break;
           case 10: {
+            java.lang.String s = input.readStringRequireUtf8();
 
-            content_ = input.readBytes();
+            nodeIpAddress_ = s;
             break;
           }
           case 16: {
 
-            chunkNumber_ = input.readInt32();
+            nodePort_ = input.readInt32();
             break;
           }
           default: {
@@ -79,33 +80,58 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return si.mlimedija.proto.Master.internal_static_Master_PutFileRequest_descriptor;
+    return si.mlimedija.proto.Master.internal_static_Master_PutFileEndpointResponse_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return si.mlimedija.proto.Master.internal_static_Master_PutFileRequest_fieldAccessorTable
+    return si.mlimedija.proto.Master.internal_static_Master_PutFileEndpointResponse_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            si.mlimedija.proto.PutFileRequest.class, si.mlimedija.proto.PutFileRequest.Builder.class);
+            si.mlimedija.proto.PutFileEndpointResponse.class, si.mlimedija.proto.PutFileEndpointResponse.Builder.class);
   }
 
-  public static final int CONTENT_FIELD_NUMBER = 1;
-  private com.google.protobuf.ByteString content_;
+  public static final int NODEIPADDRESS_FIELD_NUMBER = 1;
+  private volatile java.lang.Object nodeIpAddress_;
   /**
-   * <code>bytes content = 1;</code>
+   * <code>string nodeIpAddress = 1;</code>
    */
-  public com.google.protobuf.ByteString getContent() {
-    return content_;
+  public java.lang.String getNodeIpAddress() {
+    java.lang.Object ref = nodeIpAddress_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      nodeIpAddress_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string nodeIpAddress = 1;</code>
+   */
+  public com.google.protobuf.ByteString
+      getNodeIpAddressBytes() {
+    java.lang.Object ref = nodeIpAddress_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      nodeIpAddress_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
   }
 
-  public static final int CHUNKNUMBER_FIELD_NUMBER = 2;
-  private int chunkNumber_;
+  public static final int NODEPORT_FIELD_NUMBER = 2;
+  private int nodePort_;
   /**
-   * <code>int32 chunkNumber = 2;</code>
+   * <code>int32 nodePort = 2;</code>
    */
-  public int getChunkNumber() {
-    return chunkNumber_;
+  public int getNodePort() {
+    return nodePort_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -122,11 +148,11 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!content_.isEmpty()) {
-      output.writeBytes(1, content_);
+    if (!getNodeIpAddressBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, nodeIpAddress_);
     }
-    if (chunkNumber_ != 0) {
-      output.writeInt32(2, chunkNumber_);
+    if (nodePort_ != 0) {
+      output.writeInt32(2, nodePort_);
     }
     unknownFields.writeTo(output);
   }
@@ -137,13 +163,12 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!content_.isEmpty()) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeBytesSize(1, content_);
+    if (!getNodeIpAddressBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, nodeIpAddress_);
     }
-    if (chunkNumber_ != 0) {
+    if (nodePort_ != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(2, chunkNumber_);
+        .computeInt32Size(2, nodePort_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -155,16 +180,16 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof si.mlimedija.proto.PutFileRequest)) {
+    if (!(obj instanceof si.mlimedija.proto.PutFileEndpointResponse)) {
       return super.equals(obj);
     }
-    si.mlimedija.proto.PutFileRequest other = (si.mlimedija.proto.PutFileRequest) obj;
+    si.mlimedija.proto.PutFileEndpointResponse other = (si.mlimedija.proto.PutFileEndpointResponse) obj;
 
     boolean result = true;
-    result = result && getContent()
-        .equals(other.getContent());
-    result = result && (getChunkNumber()
-        == other.getChunkNumber());
+    result = result && getNodeIpAddress()
+        .equals(other.getNodeIpAddress());
+    result = result && (getNodePort()
+        == other.getNodePort());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -176,78 +201,78 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + CONTENT_FIELD_NUMBER;
-    hash = (53 * hash) + getContent().hashCode();
-    hash = (37 * hash) + CHUNKNUMBER_FIELD_NUMBER;
-    hash = (53 * hash) + getChunkNumber();
+    hash = (37 * hash) + NODEIPADDRESS_FIELD_NUMBER;
+    hash = (53 * hash) + getNodeIpAddress().hashCode();
+    hash = (37 * hash) + NODEPORT_FIELD_NUMBER;
+    hash = (53 * hash) + getNodePort();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static si.mlimedija.proto.PutFileRequest parseFrom(
+  public static si.mlimedija.proto.PutFileEndpointResponse parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static si.mlimedija.proto.PutFileRequest parseFrom(
+  public static si.mlimedija.proto.PutFileEndpointResponse parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static si.mlimedija.proto.PutFileRequest parseFrom(
+  public static si.mlimedija.proto.PutFileEndpointResponse parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static si.mlimedija.proto.PutFileRequest parseFrom(
+  public static si.mlimedija.proto.PutFileEndpointResponse parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static si.mlimedija.proto.PutFileRequest parseFrom(byte[] data)
+  public static si.mlimedija.proto.PutFileEndpointResponse parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static si.mlimedija.proto.PutFileRequest parseFrom(
+  public static si.mlimedija.proto.PutFileEndpointResponse parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static si.mlimedija.proto.PutFileRequest parseFrom(java.io.InputStream input)
+  public static si.mlimedija.proto.PutFileEndpointResponse parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static si.mlimedija.proto.PutFileRequest parseFrom(
+  public static si.mlimedija.proto.PutFileEndpointResponse parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static si.mlimedija.proto.PutFileRequest parseDelimitedFrom(java.io.InputStream input)
+  public static si.mlimedija.proto.PutFileEndpointResponse parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static si.mlimedija.proto.PutFileRequest parseDelimitedFrom(
+  public static si.mlimedija.proto.PutFileEndpointResponse parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static si.mlimedija.proto.PutFileRequest parseFrom(
+  public static si.mlimedija.proto.PutFileEndpointResponse parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static si.mlimedija.proto.PutFileRequest parseFrom(
+  public static si.mlimedija.proto.PutFileEndpointResponse parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -260,7 +285,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(si.mlimedija.proto.PutFileRequest prototype) {
+  public static Builder newBuilder(si.mlimedija.proto.PutFileEndpointResponse prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -277,29 +302,29 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * put stream file to cache =&gt; request
+   * initial response for put file
    * </pre>
    *
-   * Protobuf type {@code Master.PutFileRequest}
+   * Protobuf type {@code Master.PutFileEndpointResponse}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:Master.PutFileRequest)
-      si.mlimedija.proto.PutFileRequestOrBuilder {
+      // @@protoc_insertion_point(builder_implements:Master.PutFileEndpointResponse)
+      si.mlimedija.proto.PutFileEndpointResponseOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return si.mlimedija.proto.Master.internal_static_Master_PutFileRequest_descriptor;
+      return si.mlimedija.proto.Master.internal_static_Master_PutFileEndpointResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return si.mlimedija.proto.Master.internal_static_Master_PutFileRequest_fieldAccessorTable
+      return si.mlimedija.proto.Master.internal_static_Master_PutFileEndpointResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              si.mlimedija.proto.PutFileRequest.class, si.mlimedija.proto.PutFileRequest.Builder.class);
+              si.mlimedija.proto.PutFileEndpointResponse.class, si.mlimedija.proto.PutFileEndpointResponse.Builder.class);
     }
 
-    // Construct using si.mlimedija.proto.PutFileRequest.newBuilder()
+    // Construct using si.mlimedija.proto.PutFileEndpointResponse.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -317,9 +342,9 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      content_ = com.google.protobuf.ByteString.EMPTY;
+      nodeIpAddress_ = "";
 
-      chunkNumber_ = 0;
+      nodePort_ = 0;
 
       return this;
     }
@@ -327,17 +352,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return si.mlimedija.proto.Master.internal_static_Master_PutFileRequest_descriptor;
+      return si.mlimedija.proto.Master.internal_static_Master_PutFileEndpointResponse_descriptor;
     }
 
     @java.lang.Override
-    public si.mlimedija.proto.PutFileRequest getDefaultInstanceForType() {
-      return si.mlimedija.proto.PutFileRequest.getDefaultInstance();
+    public si.mlimedija.proto.PutFileEndpointResponse getDefaultInstanceForType() {
+      return si.mlimedija.proto.PutFileEndpointResponse.getDefaultInstance();
     }
 
     @java.lang.Override
-    public si.mlimedija.proto.PutFileRequest build() {
-      si.mlimedija.proto.PutFileRequest result = buildPartial();
+    public si.mlimedija.proto.PutFileEndpointResponse build() {
+      si.mlimedija.proto.PutFileEndpointResponse result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -345,10 +370,10 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public si.mlimedija.proto.PutFileRequest buildPartial() {
-      si.mlimedija.proto.PutFileRequest result = new si.mlimedija.proto.PutFileRequest(this);
-      result.content_ = content_;
-      result.chunkNumber_ = chunkNumber_;
+    public si.mlimedija.proto.PutFileEndpointResponse buildPartial() {
+      si.mlimedija.proto.PutFileEndpointResponse result = new si.mlimedija.proto.PutFileEndpointResponse(this);
+      result.nodeIpAddress_ = nodeIpAddress_;
+      result.nodePort_ = nodePort_;
       onBuilt();
       return result;
     }
@@ -387,21 +412,22 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof si.mlimedija.proto.PutFileRequest) {
-        return mergeFrom((si.mlimedija.proto.PutFileRequest)other);
+      if (other instanceof si.mlimedija.proto.PutFileEndpointResponse) {
+        return mergeFrom((si.mlimedija.proto.PutFileEndpointResponse)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(si.mlimedija.proto.PutFileRequest other) {
-      if (other == si.mlimedija.proto.PutFileRequest.getDefaultInstance()) return this;
-      if (other.getContent() != com.google.protobuf.ByteString.EMPTY) {
-        setContent(other.getContent());
+    public Builder mergeFrom(si.mlimedija.proto.PutFileEndpointResponse other) {
+      if (other == si.mlimedija.proto.PutFileEndpointResponse.getDefaultInstance()) return this;
+      if (!other.getNodeIpAddress().isEmpty()) {
+        nodeIpAddress_ = other.nodeIpAddress_;
+        onChanged();
       }
-      if (other.getChunkNumber() != 0) {
-        setChunkNumber(other.getChunkNumber());
+      if (other.getNodePort() != 0) {
+        setNodePort(other.getNodePort());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -418,11 +444,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      si.mlimedija.proto.PutFileRequest parsedMessage = null;
+      si.mlimedija.proto.PutFileEndpointResponse parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (si.mlimedija.proto.PutFileRequest) e.getUnfinishedMessage();
+        parsedMessage = (si.mlimedija.proto.PutFileEndpointResponse) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -432,57 +458,97 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private com.google.protobuf.ByteString content_ = com.google.protobuf.ByteString.EMPTY;
+    private java.lang.Object nodeIpAddress_ = "";
     /**
-     * <code>bytes content = 1;</code>
+     * <code>string nodeIpAddress = 1;</code>
      */
-    public com.google.protobuf.ByteString getContent() {
-      return content_;
+    public java.lang.String getNodeIpAddress() {
+      java.lang.Object ref = nodeIpAddress_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        nodeIpAddress_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
     }
     /**
-     * <code>bytes content = 1;</code>
+     * <code>string nodeIpAddress = 1;</code>
      */
-    public Builder setContent(com.google.protobuf.ByteString value) {
+    public com.google.protobuf.ByteString
+        getNodeIpAddressBytes() {
+      java.lang.Object ref = nodeIpAddress_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        nodeIpAddress_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string nodeIpAddress = 1;</code>
+     */
+    public Builder setNodeIpAddress(
+        java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      content_ = value;
+      nodeIpAddress_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>bytes content = 1;</code>
+     * <code>string nodeIpAddress = 1;</code>
      */
-    public Builder clearContent() {
+    public Builder clearNodeIpAddress() {
       
-      content_ = getDefaultInstance().getContent();
+      nodeIpAddress_ = getDefaultInstance().getNodeIpAddress();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string nodeIpAddress = 1;</code>
+     */
+    public Builder setNodeIpAddressBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      nodeIpAddress_ = value;
       onChanged();
       return this;
     }
 
-    private int chunkNumber_ ;
+    private int nodePort_ ;
     /**
-     * <code>int32 chunkNumber = 2;</code>
+     * <code>int32 nodePort = 2;</code>
      */
-    public int getChunkNumber() {
-      return chunkNumber_;
+    public int getNodePort() {
+      return nodePort_;
     }
     /**
-     * <code>int32 chunkNumber = 2;</code>
+     * <code>int32 nodePort = 2;</code>
      */
-    public Builder setChunkNumber(int value) {
+    public Builder setNodePort(int value) {
       
-      chunkNumber_ = value;
+      nodePort_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>int32 chunkNumber = 2;</code>
+     * <code>int32 nodePort = 2;</code>
      */
-    public Builder clearChunkNumber() {
+    public Builder clearNodePort() {
       
-      chunkNumber_ = 0;
+      nodePort_ = 0;
       onChanged();
       return this;
     }
@@ -499,41 +565,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:Master.PutFileRequest)
+    // @@protoc_insertion_point(builder_scope:Master.PutFileEndpointResponse)
   }
 
-  // @@protoc_insertion_point(class_scope:Master.PutFileRequest)
-  private static final si.mlimedija.proto.PutFileRequest DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:Master.PutFileEndpointResponse)
+  private static final si.mlimedija.proto.PutFileEndpointResponse DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new si.mlimedija.proto.PutFileRequest();
+    DEFAULT_INSTANCE = new si.mlimedija.proto.PutFileEndpointResponse();
   }
 
-  public static si.mlimedija.proto.PutFileRequest getDefaultInstance() {
+  public static si.mlimedija.proto.PutFileEndpointResponse getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<PutFileRequest>
-      PARSER = new com.google.protobuf.AbstractParser<PutFileRequest>() {
+  private static final com.google.protobuf.Parser<PutFileEndpointResponse>
+      PARSER = new com.google.protobuf.AbstractParser<PutFileEndpointResponse>() {
     @java.lang.Override
-    public PutFileRequest parsePartialFrom(
+    public PutFileEndpointResponse parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new PutFileRequest(input, extensionRegistry);
+      return new PutFileEndpointResponse(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<PutFileRequest> parser() {
+  public static com.google.protobuf.Parser<PutFileEndpointResponse> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<PutFileRequest> getParserForType() {
+  public com.google.protobuf.Parser<PutFileEndpointResponse> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public si.mlimedija.proto.PutFileRequest getDefaultInstanceForType() {
+  public si.mlimedija.proto.PutFileEndpointResponse getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

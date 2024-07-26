@@ -5,21 +5,21 @@ package si.mlimedija.proto;
 
 /**
  * <pre>
- * get stream file from cache =&gt; request
+ * initial request for put file
  * </pre>
  *
- * Protobuf type {@code Master.GetFileRequest}
+ * Protobuf type {@code Master.PutFileEndpointRequest}
  */
-public  final class GetFileRequest extends
+public  final class PutFileEndpointRequest extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:Master.GetFileRequest)
-    GetFileRequestOrBuilder {
+    // @@protoc_insertion_point(message_implements:Master.PutFileEndpointRequest)
+    PutFileEndpointRequestOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use GetFileRequest.newBuilder() to construct.
-  private GetFileRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use PutFileEndpointRequest.newBuilder() to construct.
+  private PutFileEndpointRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private GetFileRequest() {
+  private PutFileEndpointRequest() {
     fileName_ = "";
   }
 
@@ -28,7 +28,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private GetFileRequest(
+  private PutFileEndpointRequest(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -74,15 +74,15 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return si.mlimedija.proto.Master.internal_static_Master_GetFileRequest_descriptor;
+    return si.mlimedija.proto.Master.internal_static_Master_PutFileEndpointRequest_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return si.mlimedija.proto.Master.internal_static_Master_GetFileRequest_fieldAccessorTable
+    return si.mlimedija.proto.Master.internal_static_Master_PutFileEndpointRequest_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            si.mlimedija.proto.GetFileRequest.class, si.mlimedija.proto.GetFileRequest.Builder.class);
+            si.mlimedija.proto.PutFileEndpointRequest.class, si.mlimedija.proto.PutFileEndpointRequest.Builder.class);
   }
 
   public static final int FILENAME_FIELD_NUMBER = 1;
@@ -158,10 +158,10 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof si.mlimedija.proto.GetFileRequest)) {
+    if (!(obj instanceof si.mlimedija.proto.PutFileEndpointRequest)) {
       return super.equals(obj);
     }
-    si.mlimedija.proto.GetFileRequest other = (si.mlimedija.proto.GetFileRequest) obj;
+    si.mlimedija.proto.PutFileEndpointRequest other = (si.mlimedija.proto.PutFileEndpointRequest) obj;
 
     boolean result = true;
     result = result && getFileName()
@@ -184,69 +184,69 @@ private static final long serialVersionUID = 0L;
     return hash;
   }
 
-  public static si.mlimedija.proto.GetFileRequest parseFrom(
+  public static si.mlimedija.proto.PutFileEndpointRequest parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static si.mlimedija.proto.GetFileRequest parseFrom(
+  public static si.mlimedija.proto.PutFileEndpointRequest parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static si.mlimedija.proto.GetFileRequest parseFrom(
+  public static si.mlimedija.proto.PutFileEndpointRequest parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static si.mlimedija.proto.GetFileRequest parseFrom(
+  public static si.mlimedija.proto.PutFileEndpointRequest parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static si.mlimedija.proto.GetFileRequest parseFrom(byte[] data)
+  public static si.mlimedija.proto.PutFileEndpointRequest parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static si.mlimedija.proto.GetFileRequest parseFrom(
+  public static si.mlimedija.proto.PutFileEndpointRequest parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static si.mlimedija.proto.GetFileRequest parseFrom(java.io.InputStream input)
+  public static si.mlimedija.proto.PutFileEndpointRequest parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static si.mlimedija.proto.GetFileRequest parseFrom(
+  public static si.mlimedija.proto.PutFileEndpointRequest parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static si.mlimedija.proto.GetFileRequest parseDelimitedFrom(java.io.InputStream input)
+  public static si.mlimedija.proto.PutFileEndpointRequest parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static si.mlimedija.proto.GetFileRequest parseDelimitedFrom(
+  public static si.mlimedija.proto.PutFileEndpointRequest parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static si.mlimedija.proto.GetFileRequest parseFrom(
+  public static si.mlimedija.proto.PutFileEndpointRequest parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static si.mlimedija.proto.GetFileRequest parseFrom(
+  public static si.mlimedija.proto.PutFileEndpointRequest parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -259,7 +259,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(si.mlimedija.proto.GetFileRequest prototype) {
+  public static Builder newBuilder(si.mlimedija.proto.PutFileEndpointRequest prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -276,29 +276,29 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * get stream file from cache =&gt; request
+   * initial request for put file
    * </pre>
    *
-   * Protobuf type {@code Master.GetFileRequest}
+   * Protobuf type {@code Master.PutFileEndpointRequest}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:Master.GetFileRequest)
-      si.mlimedija.proto.GetFileRequestOrBuilder {
+      // @@protoc_insertion_point(builder_implements:Master.PutFileEndpointRequest)
+      si.mlimedija.proto.PutFileEndpointRequestOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return si.mlimedija.proto.Master.internal_static_Master_GetFileRequest_descriptor;
+      return si.mlimedija.proto.Master.internal_static_Master_PutFileEndpointRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return si.mlimedija.proto.Master.internal_static_Master_GetFileRequest_fieldAccessorTable
+      return si.mlimedija.proto.Master.internal_static_Master_PutFileEndpointRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              si.mlimedija.proto.GetFileRequest.class, si.mlimedija.proto.GetFileRequest.Builder.class);
+              si.mlimedija.proto.PutFileEndpointRequest.class, si.mlimedija.proto.PutFileEndpointRequest.Builder.class);
     }
 
-    // Construct using si.mlimedija.proto.GetFileRequest.newBuilder()
+    // Construct using si.mlimedija.proto.PutFileEndpointRequest.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -324,17 +324,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return si.mlimedija.proto.Master.internal_static_Master_GetFileRequest_descriptor;
+      return si.mlimedija.proto.Master.internal_static_Master_PutFileEndpointRequest_descriptor;
     }
 
     @java.lang.Override
-    public si.mlimedija.proto.GetFileRequest getDefaultInstanceForType() {
-      return si.mlimedija.proto.GetFileRequest.getDefaultInstance();
+    public si.mlimedija.proto.PutFileEndpointRequest getDefaultInstanceForType() {
+      return si.mlimedija.proto.PutFileEndpointRequest.getDefaultInstance();
     }
 
     @java.lang.Override
-    public si.mlimedija.proto.GetFileRequest build() {
-      si.mlimedija.proto.GetFileRequest result = buildPartial();
+    public si.mlimedija.proto.PutFileEndpointRequest build() {
+      si.mlimedija.proto.PutFileEndpointRequest result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -342,8 +342,8 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public si.mlimedija.proto.GetFileRequest buildPartial() {
-      si.mlimedija.proto.GetFileRequest result = new si.mlimedija.proto.GetFileRequest(this);
+    public si.mlimedija.proto.PutFileEndpointRequest buildPartial() {
+      si.mlimedija.proto.PutFileEndpointRequest result = new si.mlimedija.proto.PutFileEndpointRequest(this);
       result.fileName_ = fileName_;
       onBuilt();
       return result;
@@ -383,16 +383,16 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof si.mlimedija.proto.GetFileRequest) {
-        return mergeFrom((si.mlimedija.proto.GetFileRequest)other);
+      if (other instanceof si.mlimedija.proto.PutFileEndpointRequest) {
+        return mergeFrom((si.mlimedija.proto.PutFileEndpointRequest)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(si.mlimedija.proto.GetFileRequest other) {
-      if (other == si.mlimedija.proto.GetFileRequest.getDefaultInstance()) return this;
+    public Builder mergeFrom(si.mlimedija.proto.PutFileEndpointRequest other) {
+      if (other == si.mlimedija.proto.PutFileEndpointRequest.getDefaultInstance()) return this;
       if (!other.getFileName().isEmpty()) {
         fileName_ = other.fileName_;
         onChanged();
@@ -412,11 +412,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      si.mlimedija.proto.GetFileRequest parsedMessage = null;
+      si.mlimedija.proto.PutFileEndpointRequest parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (si.mlimedija.proto.GetFileRequest) e.getUnfinishedMessage();
+        parsedMessage = (si.mlimedija.proto.PutFileEndpointRequest) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -507,41 +507,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:Master.GetFileRequest)
+    // @@protoc_insertion_point(builder_scope:Master.PutFileEndpointRequest)
   }
 
-  // @@protoc_insertion_point(class_scope:Master.GetFileRequest)
-  private static final si.mlimedija.proto.GetFileRequest DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:Master.PutFileEndpointRequest)
+  private static final si.mlimedija.proto.PutFileEndpointRequest DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new si.mlimedija.proto.GetFileRequest();
+    DEFAULT_INSTANCE = new si.mlimedija.proto.PutFileEndpointRequest();
   }
 
-  public static si.mlimedija.proto.GetFileRequest getDefaultInstance() {
+  public static si.mlimedija.proto.PutFileEndpointRequest getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<GetFileRequest>
-      PARSER = new com.google.protobuf.AbstractParser<GetFileRequest>() {
+  private static final com.google.protobuf.Parser<PutFileEndpointRequest>
+      PARSER = new com.google.protobuf.AbstractParser<PutFileEndpointRequest>() {
     @java.lang.Override
-    public GetFileRequest parsePartialFrom(
+    public PutFileEndpointRequest parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new GetFileRequest(input, extensionRegistry);
+      return new PutFileEndpointRequest(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<GetFileRequest> parser() {
+  public static com.google.protobuf.Parser<PutFileEndpointRequest> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<GetFileRequest> getParserForType() {
+  public com.google.protobuf.Parser<PutFileEndpointRequest> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public si.mlimedija.proto.GetFileRequest getDefaultInstanceForType() {
+  public si.mlimedija.proto.PutFileEndpointRequest getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

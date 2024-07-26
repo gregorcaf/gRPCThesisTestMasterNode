@@ -3,8 +3,8 @@
 
 package si.mlimedija.proto;
 
-public interface GetFileRequestOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:Master.GetFileRequest)
+public interface GetFileEndpointRequestOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:Master.GetFileEndpointRequest)
     com.google.protobuf.MessageOrBuilder {
 
   /**
