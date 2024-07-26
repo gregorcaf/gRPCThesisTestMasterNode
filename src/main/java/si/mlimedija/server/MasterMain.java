@@ -28,9 +28,10 @@ public class MasterMain {
         MasterService masterService = new MasterService(storageNodeRegistry);
         HealthChecker healthChecker = new HealthChecker(storageNodeRegistry);
 
-        Server server = ServerBuilder.forPort(9090).
-                addService(masterService).
-                build();
+        Server server = ServerBuilder.forPort(9090)
+                .addService(masterService)
+                .maxInboundMessageSize(16 * 1024 * 1024) // set max inbound message size to 16 MB
+                .build();
 
         logger.info("Starting gRPC server");
 

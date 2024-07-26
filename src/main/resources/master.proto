@@ -3,7 +3,7 @@ syntax = "proto3";
 option java_multiple_files = true;
 option java_package = "si.mlimedija.proto";
 
-//import "google/protobuf/any.proto";
+package Master;
 
 service master {
 
@@ -11,9 +11,9 @@ service master {
 
   rpc getData(GetDataRequest) returns (GetDataResponse);
 
-//  rpc getHandshake(GetHandshakeRequest) returns (GetHandshakeResponse);
+  rpc putFile(stream PutFileRequest) returns (PutFileResponse);
 
-//  rpc initCache(InitCacheRequest) returns (InitCacheResponse);
+  rpc getFile(GetFileRequest) returns (stream GetFileResponse);
 }
 
 // put data to cache => request
@@ -42,24 +42,27 @@ message GetDataResponse {
   string responseMessage = 4;
 }
 
-//message GetHandshakeRequest {
-//
-//}
-//
-//message GetHandshakeResponse {
-//
-//}
+// put stream file to cache => request
+message PutFileRequest {
+  bytes content = 1;
+  int32 chunkNumber = 2;
+}
 
-//// initializes cache => request
-//message InitCacheRequest {
-//  string keyType = 1;
-//  string valueType = 2;
-//}
-//
-//// initializes cache => response
-//message InitCacheResponse {
-//  string keyType = 1;
-//  string valueType = 2;
-//  int32 responseCode = 3;
-//  string responseMessage = 4;
-//}
+// put stream file to cache => response
+message PutFileResponse {
+  int32 responseCode = 1;
+  string responseMessage = 2;
+}
+
+// get stream file from cache => request
+message GetFileRequest {
+  string fileName = 1;
+}
+
+// get stream file from cache => response
+message GetFileResponse {
+  bytes content = 1;
+  int32 chunkNumber = 2;
+}
+
+
