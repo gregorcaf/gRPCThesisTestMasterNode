@@ -9,7 +9,8 @@ public class StorageNodeRegistry {
 
     private static final Logger logger = LoggerFactory.getLogger(StorageNodeRegistry.class.getSimpleName());
 
-    private ConcurrentHashMap<Integer, StorageNodeInfo> nodeInfoMap;
+    private ConcurrentHashMap<Integer, StorageNodeInfo> ec2NodeInfoMap;
+    private ConcurrentHashMap<Integer, StorageNodeInfo> lambdaNodeInfoMap;
 
     // increases with every put call (round-robin data placement technique)
     private int iter;
@@ -19,29 +20,50 @@ public class StorageNodeRegistry {
     private int nodeCount;
 
     public StorageNodeRegistry() {
-        this.nodeInfoMap = new ConcurrentHashMap<>();
+        this.ec2NodeInfoMap = new ConcurrentHashMap<>();
+        this.lambdaNodeInfoMap = new ConcurrentHashMap<>();
         this.iter = 0;
         this.nodeCount = 0;
     }
 
-    // get map with information about all nodes
-    public Map<Integer, StorageNodeInfo> getAllNodeInfo() {
-        return nodeInfoMap;
+    // get map with information about all EC2 storage nodes
+    public Map<Integer, StorageNodeInfo> getAllEC2NodeInfo() {
+        return ec2NodeInfoMap;
     }
 
-    // add new node or update existing node
-    public void addOrUpdateNodeInfo(int nodeId, StorageNodeInfo storageNodeInfo) {
-        nodeInfoMap.put(nodeId, storageNodeInfo);
+    // get map with information about all Lambda storage nodes
+    public Map<Integer, StorageNodeInfo> getAllLambdaNodeInfo() {
+        return lambdaNodeInfoMap;
     }
 
-    // removes node for given nodeId from map
-    public void removeNode(int nodeId) {
-        nodeInfoMap.remove(nodeId);
+    // add new node or update existing EC2 storage node
+    public void addOrUpdateEC2NodeInfo(int nodeId, StorageNodeInfo storageNodeInfo) {
+        ec2NodeInfoMap.put(nodeId, storageNodeInfo);
     }
 
-    // returns node
-    public StorageNodeInfo getNodeInfo(int nodeId) {
-        return nodeInfoMap.get(nodeId);
+    // add new node or update existing Lambda storage node
+    public void addOrUpdateLambdaNodeInfo(int nodeId, StorageNodeInfo storageNodeInfo) {
+        lambdaNodeInfoMap.put(nodeId, storageNodeInfo);
+    }
+
+    // removes EC2 storage node for given nodeId from map
+    public void removeEC2Node(int nodeId) {
+        ec2NodeInfoMap.remove(nodeId);
+    }
+
+    // removes Lambda storage node for given nodeId from map
+    public void removeLambdaNode(int nodeId) {
+        lambdaNodeInfoMap.remove(nodeId);
+    }
+
+    // returns EC2 storage node
+    public StorageNodeInfo getEC2NodeInfo(int nodeId) {
+        return ec2NodeInfoMap.get(nodeId);
+    }
+
+    // returns Lambda storage node
+    public StorageNodeInfo getLambdaNodeInfo(int nodeId) {
+        return lambdaNodeInfoMap.get(nodeId);
     }
 
     public int getIter() {
@@ -60,15 +82,11 @@ public class StorageNodeRegistry {
         this.nodeCount = nodeCount;
     }
 
-    // iterates through nodes and checks which node stores given key, returns nodeId, otherwise -1
-    public int findKey(String key) {
-//        logger.info("findKey method called");
+    // iterates through EC2 storage nodes and checks which EC2 node stores given key, returns nodeId, otherwise -1
+    public int findEC2Key(String key) {
         int nodeId;
 
-        // for debug purposes
-//        printKeys();
-
-        for (Map.Entry<Integer, StorageNodeInfo> entry : nodeInfoMap.entrySet()) {
+        for (Map.Entry<Integer, StorageNodeInfo> entry : ec2NodeInfoMap.entrySet()) {
             nodeId = entry.getKey();
             HashSet<String> storedKeys = entry.getValue().getKeys();
 
@@ -79,19 +97,49 @@ public class StorageNodeRegistry {
         return -1;
     }
 
-    // prints all keys for each storage node
-    public void printKeys() {
+    // TODO -> modify so we can search also by ctr+f approach
+    // iterates through Lambda storage nodes and checks which Lambda node stores given key, returns nodeId, otherwise -1
+    public int findLambdaKey(String key) {
+        int nodeId;
+
+        for (Map.Entry<Integer, StorageNodeInfo> entry : lambdaNodeInfoMap.entrySet()) {
+            nodeId = entry.getKey();
+            HashSet<String> storedKeys = entry.getValue().getKeys();
+
+            if (storedKeys.contains(key)) {
+                return nodeId;
+            }
+        }
+        return -1;
+    }
+
+    // prints all keys for each EC2 storage node
+    public void printEC2Keys() {
         int nodeId;
         String keys;
-        logger.debug("Print all keys:");
+        logger.debug("EC2 Print all keys:");
 
-        for (Map.Entry<Integer, StorageNodeInfo> entry : nodeInfoMap.entrySet()) {
+        for (Map.Entry<Integer, StorageNodeInfo> entry : ec2NodeInfoMap.entrySet()) {
             nodeId = entry.getKey();
             keys = entry.getValue().getKeys().toString();
             logger.debug("nodeId=" + nodeId + "|keys=" + keys);
         }
     }
 
+    // prints all keys for each EC2 storage node
+    public void printLambdaKeys() {
+        int nodeId;
+        String keys;
+        logger.debug("Lambda Print all keys:");
+
+        for (Map.Entry<Integer, StorageNodeInfo> entry : lambdaNodeInfoMap.entrySet()) {
+            nodeId = entry.getKey();
+            keys = entry.getValue().getKeys().toString();
+            logger.debug("nodeId=" + nodeId + "|keys=" + keys);
+        }
+    }
+
+    // TODO -> modify for different use cases (Lambda vs EC2)
     // TODO -> for distributed use case (more than 1 storage node)
     // performs analysis of all storage nodes and determines on which node would it be the best to store new <key,value> pair
     // returns id of storage node to which we put data
@@ -102,15 +150,15 @@ public class StorageNodeRegistry {
         return ((getIter() % getNodeCount()) + 1);
     }
 
-    // initializes the node instances and puts them to StorageNodeInfo
-    public void initStorageNodes() {
-        Map<Integer, String> nodeIpAddresses = readIpAddresses();
+    // initializes the EC2 storage node instances and puts them to StorageNodeInfo
+    public void initStorageNodesEC2() {
+        Map<Integer, String> nodeIpAddressesEC2 = readIpAddressesEC2();
 //        Map<String, Integer> nodeIpAddresses = readIpAddresses();
         int nodeCount = 0;
 
-        logger.info("Started searching for storage nodes");
+        logger.info("Started searching for EC2 storage nodes");
 
-// commented for testing purposes - duplication of IP addresses
+// TODO -> commented for testing purposes - duplication of IP addresses
 // iterate through the map of ip addresses, create node instances, and put them to the StorageNodeInfo map
 //        for (Map.Entry<String, Integer> entry : nodeIpAddresses.entrySet()) {
 //            nodeCount++;
@@ -128,7 +176,7 @@ public class StorageNodeRegistry {
 //            logger.info("nodeId=" + nodeCount + "|nodeIpAddress=" + nodeIpAddress + "|nodePort=" + nodePort);
 //        }
 
-        for (Map.Entry<Integer, String> entry : nodeIpAddresses.entrySet()) {
+        for (Map.Entry<Integer, String> entry : nodeIpAddressesEC2.entrySet()) {
             nodeCount++;
             String nodeIpAddress = entry.getValue();
             int nodePort = entry.getKey();
@@ -138,21 +186,73 @@ public class StorageNodeRegistry {
             int cpuUtilization = 0;
 
             StorageNodeInfo node = new StorageNodeInfo(nodeCount, nodeIpAddress, nodePort, keys, isHealthy, mapSize, cpuUtilization);
-            addOrUpdateNodeInfo(nodeCount, node);
+            addOrUpdateEC2NodeInfo(nodeCount, node);
 
-            logger.info("Found new storage node");
+            logger.info("Found new EC2 storage node");
             logger.info("nodeId=" + nodeCount + "|nodeIpAddress=" + nodeIpAddress + "|nodePort=" + nodePort);
         }
         setNodeCount(nodeCount);
-        logger.info("Initialized " + nodeIpAddresses.size() + " storage nodes");
+        logger.info("Initialized " + nodeIpAddressesEC2.size() + " EC2 storage nodes");
+    }
+
+    // initializes the Lambda storage node instances and puts them to StorageNodeInfo
+    public void initStorageNodesLambda() {
+        Map<Integer, String> nodeIpAddressesLambda = readIpAddressesLambda();
+//        Map<String, Integer> nodeIpAddresses = readIpAddresses();
+        int nodeCount = 0;
+
+        logger.info("Started searching for EC2 storage nodes");
+
+// TODO -> commented for testing purposes - duplication of IP addresses
+// iterate through the map of ip addresses, create node instances, and put them to the StorageNodeInfo map
+//        for (Map.Entry<String, Integer> entry : nodeIpAddresses.entrySet()) {
+//            nodeCount++;
+//            String nodeIpAddress = entry.getKey();
+//            int nodePort = entry.getValue();
+//            HashSet<String> keys = new HashSet<>();
+//            Boolean isHealthy = true;
+//            int mapSize = 0;
+//            int cpuUtilization = 0;
+//
+//            StorageNodeInfo node = new StorageNodeInfo(nodeCount, nodeIpAddress, nodePort, keys, isHealthy, mapSize, cpuUtilization);
+//            addOrUpdateNodeInfo(nodeCount, node);
+//
+//            logger.info("Found new storage node");
+//            logger.info("nodeId=" + nodeCount + "|nodeIpAddress=" + nodeIpAddress + "|nodePort=" + nodePort);
+//        }
+
+        for (Map.Entry<Integer, String> entry : nodeIpAddressesLambda.entrySet()) {
+            nodeCount++;
+            String nodeIpAddress = entry.getValue();
+            int nodePort = entry.getKey();
+            HashSet<String> keys = new HashSet<>();
+            Boolean isHealthy = true;
+            int mapSize = 0;
+            int cpuUtilization = 0;
+
+            StorageNodeInfo node = new StorageNodeInfo(nodeCount, nodeIpAddress, nodePort, keys, isHealthy, mapSize, cpuUtilization);
+            addOrUpdateEC2NodeInfo(nodeCount, node);
+
+            logger.info("Found new Lambda storage node");
+            logger.info("nodeId=" + nodeCount + "|nodeIpAddress=" + nodeIpAddress + "|nodePort=" + nodePort);
+        }
+        setNodeCount(nodeCount);
+        logger.info("Initialized " + nodeIpAddressesLambda.size() + " Lambda storage nodes");
     }
 
 
 // reads IP addresses when booting up
 // TODO => read from external storage (S3, DynamoDB)
-    private static Map<Integer, String> readIpAddresses() {
+    private static Map<Integer, String> readIpAddressesEC2() {
         Map<Integer, String> ipAddresses = new HashMap<>();
-        ipAddresses.put(9070, "127.0.0.1");
+//        ipAddresses.put(9070, "127.0.0.1");
+//        ipAddresses.put(9080, "127.0.0.1");
+        return ipAddresses;
+    }
+
+    private static Map<Integer, String> readIpAddressesLambda() {
+        Map<Integer, String> ipAddresses = new HashMap<>();
+        ipAddresses.put(9080, "127.0.0.1");
 //        ipAddresses.put(9080, "127.0.0.1");
         return ipAddresses;
     }

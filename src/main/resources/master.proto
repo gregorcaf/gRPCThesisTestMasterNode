@@ -11,9 +11,9 @@ service master {
 
   rpc getData(GetDataRequest) returns (GetDataResponse);
 
-  rpc putFile(stream PutFileRequest) returns (PutFileResponse);
+  rpc putFileEndpoint(PutFileEndpointRequest) returns (PutFileEndpointResponse);
 
-  rpc getFile(GetFileRequest) returns (stream GetFileResponse);
+  rpc getFileEndpoint(GetFileEndpointRequest) returns (GetFileEndpointResponse);
 }
 
 // put data to cache => request
@@ -42,27 +42,26 @@ message GetDataResponse {
   string responseMessage = 4;
 }
 
-// put stream file to cache => request
-message PutFileRequest {
-  bytes content = 1;
-  int32 chunkNumber = 2;
-}
-
-// put stream file to cache => response
-message PutFileResponse {
-  int32 responseCode = 1;
-  string responseMessage = 2;
-}
-
-// get stream file from cache => request
-message GetFileRequest {
+// initial request for put file
+message PutFileEndpointRequest {
   string fileName = 1;
 }
 
-// get stream file from cache => response
-message GetFileResponse {
-  bytes content = 1;
-  int32 chunkNumber = 2;
+// initial response for put file
+message PutFileEndpointResponse {
+  string nodeIpAddress = 1;
+  int32 nodePort = 2;
+}
+
+// initial request for get file
+message GetFileEndpointRequest {
+  string fileName = 1;
+}
+
+// initial response for get file
+message GetFileEndpointResponse {
+  string nodeIpAddress = 1;
+  int32 nodePort = 2;
 }
 
 

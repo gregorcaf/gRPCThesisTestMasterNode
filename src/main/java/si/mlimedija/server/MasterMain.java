@@ -24,9 +24,12 @@ public class MasterMain {
     private static final Logger logger = LoggerFactory.getLogger(MasterMain.class.getSimpleName());
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        StorageNodeRegistry storageNodeRegistry = new StorageNodeRegistry();
-        MasterService masterService = new MasterService(storageNodeRegistry);
-        HealthChecker healthChecker = new HealthChecker(storageNodeRegistry);
+        // create storage registry for EC2 and Lambda
+        EC2NodeRegistry ec2NodeRegistry = new EC2NodeRegistry();
+        LambdaNodeRegistry lambdaNodeRegistry = new LambdaNodeRegistry();
+
+        MasterService masterService = new MasterService(ec2NodeRegistry, lambdaNodeRegistry);
+        HealthChecker healthChecker = new HealthChecker(ec2NodeRegistry, lambdaNodeRegistry);
 
         Server server = ServerBuilder.forPort(9090)
                 .addService(masterService)
@@ -40,8 +43,9 @@ public class MasterMain {
         String ipAddress = getIpAddress();
         logger.info("Server started at " + ipAddress + ":" + server.getPort());
 
-        // iterates through IP addresses and initialized nodes in the list
-        storageNodeRegistry.initStorageNodes();
+        // initializes EC2 and Lambda storage nodes
+        ec2NodeRegistry.initStorageNodes();
+        lambdaNodeRegistry.initStorageNodes();
 
         // periodical health checks - 5 threads, every 5 seconds
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(5);
@@ -51,11 +55,12 @@ public class MasterMain {
             } catch (Exception e) {
                 logger.error("Error during health check: " + e.getMessage());
             }
-        }, 0, 5, TimeUnit.SECONDS);
+        }, 0, 10, TimeUnit.SECONDS);
 
         server.awaitTermination();
     }
 
+    // retrieves the IP address of the running server instance
     public static String getIpAddress() {
         try {
             InetAddress address = InetAddress.getLocalHost();

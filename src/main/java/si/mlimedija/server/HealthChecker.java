@@ -13,33 +13,49 @@ public class HealthChecker {
 
     private static final Logger logger = LoggerFactory.getLogger(HealthChecker.class.getSimpleName());
 
-    private StorageNodeRegistry storageNodeRegistry;
+    private EC2NodeRegistry ec2NodeRegistry;
+    private LambdaNodeRegistry lambdaNodeRegistry;
 
-    public HealthChecker(StorageNodeRegistry storageNodeRegistry) {
-        this.storageNodeRegistry = storageNodeRegistry;
+    public HealthChecker(EC2NodeRegistry ec2NodeRegistry, LambdaNodeRegistry lambdaNodeRegistry) {
+        this.ec2NodeRegistry = ec2NodeRegistry;
+        this.lambdaNodeRegistry = lambdaNodeRegistry;
     }
 
     public void updateAllNodeInfo() {
-        // iterates through all nodes in the storageNodeRegistry, makes async gRPC calls, and updates their info
-        for (Map.Entry<Integer, StorageNodeInfo> entry : storageNodeRegistry.getAllNodeInfo().entrySet()) {
+        updateNodeInfo(ec2NodeRegistry);
+        updateNodeInfo(lambdaNodeRegistry);
+    }
+
+    private void updateNodeInfo(Object registry) {
+        Map<Integer, StorageNodeInfo> allNodeInfo;
+
+        if (registry instanceof EC2NodeRegistry) {
+            allNodeInfo = ((EC2NodeRegistry) registry).getAllNodeInfo();
+        } else {
+            allNodeInfo = ((LambdaNodeRegistry) registry).getAllNodeInfo();
+        }
+
+        for (Map.Entry<Integer, StorageNodeInfo> entry : allNodeInfo.entrySet()) {
             StorageNodeInfo nodeInfo = entry.getValue();
             int nodeId = nodeInfo.getNodeId();
             String nodeIpAddress = nodeInfo.getNodeIpAddress();
             int nodePort = nodeInfo.getNodePort();
-
-            // call updateNodeInfoAsync for each node
-            updateNodeInfoAsync(nodeId, nodeIpAddress, nodePort);
+            updateNodeInfoAsync(registry, nodeId, nodeIpAddress, nodePort); // call updateNodeInfoAsync for each node
         }
     }
 
     // TODO => remove node if unhealthy
-    // TODO => detect that node disconnected (request timeout)
-    private CompletableFuture<Void> updateNodeInfoAsync(int nodeId, String nodeIpAddress, int nodePort) {
+    // TODO => detect that node has disconnected (request timeout)
+    private CompletableFuture<Void> updateNodeInfoAsync(Object registry, int nodeId, String nodeIpAddress, int nodePort) {
         return CompletableFuture.runAsync(() -> {
 
-            logger.info("GET_NODE_INFO request: nodeId=" + nodeId + "|nodeIpAddress=" + nodeIpAddress + "|nodePort=" + nodePort);
+            if (registry instanceof EC2NodeRegistry) {
+                logger.info("GET_EC2_NODE_INFO request: nodeId=" + nodeId + "|nodeIpAddress=" + nodeIpAddress + "|nodePort=" + nodePort);
+            } else {
+                logger.info("GET_LAMBDA_NODE_INFO request: nodeId=" + nodeId + "|nodeIpAddress=" + nodeIpAddress + "|nodePort=" + nodePort);
+            }
 
-            // gPRC call to storage node
+            // gPRC call to corresponding storage node
             ManagedChannel channel = ManagedChannelBuilder.forAddress(nodeIpAddress, nodePort).usePlaintext().build();
 
             try {
@@ -53,10 +69,17 @@ public class HealthChecker {
 
                 // TODO => remove node from map if it is unhealthy
 
-                // update node health status and cache size
-                storageNodeRegistry.getNodeInfo(nodeId).setHealthy(response.getIsHealthy());
-                storageNodeRegistry.getNodeInfo(nodeId).setMapSize(response.getMapSize());
-                logger.info("GET_NODE_INFO response: nodeId=" + nodeId + "|nodeIpAddress=" + nodeIpAddress + "|nodePort=" + nodePort + "|isHealthy=" + response.getIsHealthy() + "|mapSize=" + response.getMapSize());
+                if (registry instanceof EC2NodeRegistry) {
+                    // update EC2 storage node's health status and cache size
+                    ((EC2NodeRegistry) registry).getNodeInfo(nodeId).setHealthy(response.getIsHealthy());
+                    ((EC2NodeRegistry) registry).getNodeInfo(nodeId).setMapSize(response.getMapSize());
+                    logger.info("GET_EC2NODE_INFO response: nodeId=" + nodeId + "|nodeIpAddress=" + nodeIpAddress + "|nodePort=" + nodePort + "|isHealthy=" + response.getIsHealthy() + "|mapSize=" + response.getMapSize());
+                } else {
+                    // update Lambda storage node's health status and cache size
+                    ((LambdaNodeRegistry) registry).getNodeInfo(nodeId).setHealthy(response.getIsHealthy());
+                    ((LambdaNodeRegistry) registry).getNodeInfo(nodeId).setMapSize(response.getMapSize());
+                    logger.info("GET_LAMBDA_INFO response: nodeId=" + nodeId + "|nodeIpAddress=" + nodeIpAddress + "|nodePort=" + nodePort + "|isHealthy=" + response.getIsHealthy() + "|mapSize=" + response.getMapSize());
+                }
             } finally {
                 // shutdown the channel when done
                 channel.shutdown();

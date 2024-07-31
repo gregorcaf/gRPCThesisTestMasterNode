@@ -1,11 +1,8 @@
 package si.mlimedija.service;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 //import com.google.gson.Gson;
 //import com.google.gson.stream.JsonReader;
 //import com.google.rpc.Code;
-import com.google.protobuf.ByteString;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.Status;
@@ -14,16 +11,12 @@ import io.grpc.stub.StreamObserver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import si.mlimedija.proto.*;
-import si.mlimedija.server.StorageNodeRegistry;
+import si.mlimedija.server.EC2NodeRegistry;
+import si.mlimedija.server.LambdaNodeRegistry;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 
@@ -32,15 +25,15 @@ public class MasterService extends masterGrpc.masterImplBase {
 
     private static final Logger logger = LoggerFactory.getLogger(MasterService.class.getSimpleName());
 
-    private StorageNodeRegistry storageNodeRegistry;
+    private EC2NodeRegistry ec2NodeRegistry;
+    private LambdaNodeRegistry lambdaNodeRegistry;
 
-    // stores grpc service_config.json
-    private Map<String, Object> storageServiceConfig = new HashMap<>();
+    private Map<String, Object> storageServiceConfig = new HashMap<>(); // stores grpc service_config.json
+    private Map<String, Integer> errorCodes = new HashMap<>(); // stores grpc error codes
 
-    private Map<String, Integer> errorCodes = new HashMap<>();
-
-    public MasterService(StorageNodeRegistry storageNodeRegistry) {
-        this.storageNodeRegistry = storageNodeRegistry;
+    public MasterService(EC2NodeRegistry ec2NodeRegistry, LambdaNodeRegistry lambdaNodeRegistry) {
+        this.ec2NodeRegistry = ec2NodeRegistry;
+        this.lambdaNodeRegistry = lambdaNodeRegistry;
         initStorageConfig(); // initialize map with values
         initErrorCodes(); // initialize map with grpc status messages and corresponding http status codes
     }
@@ -76,6 +69,7 @@ public class MasterService extends masterGrpc.masterImplBase {
     }
 
 
+    // puts the data to EC2 storage node for the given key-value pair
     @Override
     public void putData(PutDataRequest clientRequest, StreamObserver<PutDataResponse> responseObserver) {
 
@@ -84,14 +78,14 @@ public class MasterService extends masterGrpc.masterImplBase {
         String value = clientRequest.getValue();
 
         // checks if key already exists in cache, otherwise calls dataPlacement method
-        int nodeId = storageNodeRegistry.findKey(key);
+        int nodeId = ec2NodeRegistry.findKey(key);
         if (nodeId == -1) {
-            nodeId = storageNodeRegistry.dataPlacement(key);
+            nodeId = ec2NodeRegistry.dataPlacement(key);
         }
 
         // extract ipAddress and nodePort for node
-        String nodeIpAddress = storageNodeRegistry.getNodeInfo(nodeId).getNodeIpAddress();
-        int nodePort = storageNodeRegistry.getNodeInfo(nodeId).getNodePort();
+        String nodeIpAddress = ec2NodeRegistry.getNodeInfo(nodeId).getNodeIpAddress();
+        int nodePort = ec2NodeRegistry.getNodeInfo(nodeId).getNodePort();
 
 //        logger.info("PUT_DATA request: key=" + key);
 //        logger.info("PUT_DATA request: key=" + key + "|value=" + value + "|nodeId=" + nodeId + "|ipAddress=" + nodeIpAddress + "|port=" + nodePort);
@@ -120,7 +114,7 @@ public class MasterService extends masterGrpc.masterImplBase {
             // TODO => ?? might delete this ??
             if (nodeResponse.getResponseCode() == 200) {
                 // store key to metadata in case request to storage node was successful
-                storageNodeRegistry.getNodeInfo(nodeId).putKey(key);
+                ec2NodeRegistry.getNodeInfo(nodeId).putKey(key);
                 logger.info("PUT_DATA SUCCESS: key=" + key);
             } else if (nodeResponse.getResponseCode() == 400) {
                 // TODO => handle unsuccessful data puts
@@ -182,20 +176,21 @@ public class MasterService extends masterGrpc.masterImplBase {
         }
     }
 
+    // retrieve the data from EC2 storage node for the given key
     @Override
     public void getData(GetDataRequest clientRequest, StreamObserver<GetDataResponse> responseObserver) {
 
         // extract client request
         String key = clientRequest.getKey();
 
-        int nodeId = storageNodeRegistry.findKey(key);
+        int nodeId = ec2NodeRegistry.findKey(key);
         String nodeIpAddress;
         int nodePort;
 
         // key is stored on one of the nodes
         if (nodeId != -1) {
-            nodeIpAddress = storageNodeRegistry.getNodeInfo(nodeId).getNodeIpAddress();
-            nodePort = storageNodeRegistry.getNodeInfo(nodeId).getNodePort();
+            nodeIpAddress = ec2NodeRegistry.getNodeInfo(nodeId).getNodeIpAddress();
+            nodePort = ec2NodeRegistry.getNodeInfo(nodeId).getNodePort();
 
             logger.info("GET_DATA request: key=" + key + "|nodeId=" + nodeId + "|ipAddress=" + nodeIpAddress + "|port=" + nodePort);
 
