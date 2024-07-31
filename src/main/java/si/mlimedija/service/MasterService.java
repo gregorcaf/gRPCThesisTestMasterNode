@@ -3,6 +3,7 @@ package si.mlimedija.service;
 //import com.google.gson.Gson;
 //import com.google.gson.stream.JsonReader;
 //import com.google.rpc.Code;
+
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.Status;
@@ -114,7 +115,7 @@ public class MasterService extends masterGrpc.masterImplBase {
             // TODO => ?? might delete this ??
             if (nodeResponse.getResponseCode() == 200) {
                 // store key to metadata in case request to storage node was successful
-                ec2NodeRegistry.getNodeInfo(nodeId).putKey(key);
+                ec2NodeRegistry.getNodeInfo(nodeId).putKey(key, 0);
                 logger.info("PUT_DATA SUCCESS: key=" + key);
             } else if (nodeResponse.getResponseCode() == 400) {
                 // TODO => handle unsuccessful data puts
@@ -268,8 +269,7 @@ public class MasterService extends masterGrpc.masterImplBase {
                 // shutdown the channel when done
                 channel.shutdown();
             }
-        }
-        else {
+        } else {
             // key is not store on one of the nodes
             logger.warn("GET_DATA request: could not retrieve key=" + key + " from cache");
 
@@ -285,5 +285,41 @@ public class MasterService extends masterGrpc.masterImplBase {
             responseObserver.onNext(clientResponse.build());
             responseObserver.onCompleted();
         }
+    }
+
+
+    // checks where to store the file and send to the client the IP address and port number of corresponding node
+    public void putFileEndpoint(PutFileEndpointRequest clientRequest, StreamObserver<PutFileEndpointResponse> responseObserver) {
+
+        // extract client request
+        String fileName = clientRequest.getFileName();
+        int fileSizeMb = clientRequest.getFileSizeMb();
+
+        // select the node for storing file chunks
+        // TODO -> improve & modify data placement technique
+        int nodeId = lambdaNodeRegistry.dataPlacement(fileName, fileSizeMb);
+
+        // extract ipAddress and nodePort for node
+        String nodeIpAddress = lambdaNodeRegistry.getNodeInfo(nodeId).getNodeIpAddress();
+        int nodePort = lambdaNodeRegistry.getNodeInfo(nodeId).getNodePort();
+
+        logger.info("PUT_FILE_ENDPOINT request: fileName=" + fileName + "|fileSizeMb=" + fileSizeMb + "|ipAddress=" + nodeIpAddress + "|port=" + nodePort);
+
+        // package data for client response
+        PutFileEndpointResponse.Builder clientResponse = PutFileEndpointResponse.
+                newBuilder().
+                setNodeIpAddress(nodeIpAddress).
+                setNodePort(nodePort);
+
+        // send response to the client
+        responseObserver.onNext(clientResponse.build());
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void getFileEndpoint(GetFileEndpointRequest request, StreamObserver<GetFileEndpointResponse> responseObserver) {
+        // TODO -> check what nodes store the file chunks
+        // TODO -> return an array of node IP addresses, node ports, and chunk numbers
+        // TODO -> order by chunk number (because it may happen that not all chunks are stored on a single node)
     }
 }

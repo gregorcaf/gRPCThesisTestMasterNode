@@ -61,9 +61,9 @@ public class LambdaNodeRegistry {
 
         for (Map.Entry<Integer, StorageNodeInfo> entry : lambdaNodeInfoMap.entrySet()) {
             nodeId = entry.getKey();
-            HashSet<String> storedKeys = entry.getValue().getKeys();
+            HashMap<String, Integer> storedKeys = entry.getValue().getKeys();
 
-            if (storedKeys.contains(key)) {
+            if (storedKeys.containsKey(key)) {
                 return nodeId;
             }
         }
@@ -85,8 +85,9 @@ public class LambdaNodeRegistry {
 
     // TODO -> for distributed use case (more than 1 storage node)
     // returns id of storage node to which we put data
-    public int dataPlacement(String key) {
+    public int dataPlacement(String fileName, int fileSizeMb) {
 
+        // TODO -> check if the size of file would fit to the node
         // round-robin
         addIter(1);
         return ((getIter() % getNodeCount()) + 1);
@@ -122,7 +123,7 @@ public class LambdaNodeRegistry {
             nodeCount++;
             String nodeIpAddress = entry.getValue();
             int nodePort = entry.getKey();
-            HashSet<String> keys = new HashSet<>();
+            HashMap<String, Integer> keys = new HashMap<>();
             Boolean isHealthy = true;
             int mapSize = 0;
             int cpuUtilization = 0;

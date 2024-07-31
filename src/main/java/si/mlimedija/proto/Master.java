@@ -69,21 +69,22 @@ public final class Master {
       "(\005\022\027\n\017responseMessage\030\003 \001(\t\"\035\n\016GetDataRe" +
       "quest\022\013\n\003key\030\001 \001(\t\"\\\n\017GetDataResponse\022\013\n" +
       "\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t\022\024\n\014responseCod" +
-      "e\030\003 \001(\005\022\027\n\017responseMessage\030\004 \001(\t\"*\n\026PutF" +
-      "ileEndpointRequest\022\020\n\010fileName\030\001 \001(\t\"B\n\027" +
-      "PutFileEndpointResponse\022\025\n\rnodeIpAddress" +
-      "\030\001 \001(\t\022\020\n\010nodePort\030\002 \001(\005\"*\n\026GetFileEndpo" +
-      "intRequest\022\020\n\010fileName\030\001 \001(\t\"B\n\027GetFileE" +
-      "ndpointResponse\022\025\n\rnodeIpAddress\030\001 \001(\t\022\020" +
-      "\n\010nodePort\030\002 \001(\0052\250\002\n\006master\022:\n\007putData\022\026" +
-      ".Master.PutDataRequest\032\027.Master.PutDataR" +
-      "esponse\022:\n\007getData\022\026.Master.GetDataReque" +
-      "st\032\027.Master.GetDataResponse\022R\n\017putFileEn" +
-      "dpoint\022\036.Master.PutFileEndpointRequest\032\037" +
-      ".Master.PutFileEndpointResponse\022R\n\017getFi" +
-      "leEndpoint\022\036.Master.GetFileEndpointReque" +
-      "st\032\037.Master.GetFileEndpointResponseB\026\n\022s" +
-      "i.mlimedija.protoP\001b\006proto3"
+      "e\030\003 \001(\005\022\027\n\017responseMessage\030\004 \001(\t\">\n\026PutF" +
+      "ileEndpointRequest\022\020\n\010fileName\030\001 \001(\t\022\022\n\n" +
+      "fileSizeMb\030\002 \001(\005\"B\n\027PutFileEndpointRespo" +
+      "nse\022\025\n\rnodeIpAddress\030\001 \001(\t\022\020\n\010nodePort\030\002" +
+      " \001(\005\"*\n\026GetFileEndpointRequest\022\020\n\010fileNa" +
+      "me\030\001 \001(\t\"B\n\027GetFileEndpointResponse\022\025\n\rn" +
+      "odeIpAddress\030\001 \001(\t\022\020\n\010nodePort\030\002 \001(\0052\250\002\n" +
+      "\006master\022:\n\007putData\022\026.Master.PutDataReque" +
+      "st\032\027.Master.PutDataResponse\022:\n\007getData\022\026" +
+      ".Master.GetDataRequest\032\027.Master.GetDataR" +
+      "esponse\022R\n\017putFileEndpoint\022\036.Master.PutF" +
+      "ileEndpointRequest\032\037.Master.PutFileEndpo" +
+      "intResponse\022R\n\017getFileEndpoint\022\036.Master." +
+      "GetFileEndpointRequest\032\037.Master.GetFileE" +
+      "ndpointResponseB\026\n\022si.mlimedija.protoP\001b" +
+      "\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -126,7 +127,7 @@ public final class Master {
     internal_static_Master_PutFileEndpointRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Master_PutFileEndpointRequest_descriptor,
-        new java.lang.String[] { "FileName", });
+        new java.lang.String[] { "FileName", "FileSizeMb", });
     internal_static_Master_PutFileEndpointResponse_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_Master_PutFileEndpointResponse_fieldAccessorTable = new

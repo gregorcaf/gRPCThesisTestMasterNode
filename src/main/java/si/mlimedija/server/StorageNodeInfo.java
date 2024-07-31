@@ -1,5 +1,6 @@
 package si.mlimedija.server;
 
+import java.util.HashMap;
 import java.util.HashSet;
 
 // this class is used to hold information about individual node
@@ -7,12 +8,12 @@ public class StorageNodeInfo {
     private int nodeId;
     private String nodeIpAddress;
     private int nodePort;
-    private HashSet<String> keys;
+    private HashMap<String, Integer> keys;
     private boolean isHealthy;
     private int mapSize;
     private int cpuUtilization;
 
-    public StorageNodeInfo(int nodeId, String nodeIpAddress, int nodePort, HashSet<String> keys, boolean isHealthy, int mapSize, int cpuUtilization) {
+    public StorageNodeInfo(int nodeId, String nodeIpAddress, int nodePort, HashMap<String, Integer> keys, boolean isHealthy, int mapSize, int cpuUtilization) {
         this.nodeId = nodeId;
         this.nodeIpAddress = nodeIpAddress;
         this.nodePort = nodePort;
@@ -46,16 +47,16 @@ public class StorageNodeInfo {
         this.nodePort = nodePort;
     }
 
-    public HashSet<String> getKeys() {
+    public HashMap<String, Integer> getKeys() {
         return keys;
     }
 
-    public void setKeys(HashSet<String> keys) {
+    public void setKeys(HashMap<String, Integer> keys) {
         this.keys = keys;
     }
 
-    public void putKey(String key) {
-        this.keys.add(key);
+    public void putKey(String key, Integer chunkNumber) {
+        this.keys.put(key, chunkNumber);
     }
 
     @Override

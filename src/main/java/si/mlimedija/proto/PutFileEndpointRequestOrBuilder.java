@@ -16,4 +16,9 @@ public interface PutFileEndpointRequestOrBuilder extends
    */
   com.google.protobuf.ByteString
       getFileNameBytes();
+
+  /**
+   * <code>int32 fileSizeMb = 2;</code>
+   */
+  int getFileSizeMb();
 }

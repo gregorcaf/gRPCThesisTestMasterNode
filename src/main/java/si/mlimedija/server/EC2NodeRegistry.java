@@ -61,9 +61,9 @@ public class EC2NodeRegistry {
 
         for (Map.Entry<Integer, StorageNodeInfo> entry : ec2NodeInfoMap.entrySet()) {
             nodeId = entry.getKey();
-            HashSet<String> storedKeys = entry.getValue().getKeys();
+            HashMap<String, Integer> storedKeys = entry.getValue().getKeys();
 
-            if (storedKeys.contains(key)) {
+            if (storedKeys.containsKey(key)) {
                 return nodeId;
             }
         }
@@ -122,7 +122,7 @@ public class EC2NodeRegistry {
             nodeCount++;
             String nodeIpAddress = entry.getValue();
             int nodePort = entry.getKey();
-            HashSet<String> keys = new HashSet<>();
+            HashMap<String, Integer> keys = new HashMap<>();
             Boolean isHealthy = true;
             int mapSize = 0;
             int cpuUtilization = 0;
@@ -147,7 +147,7 @@ public class EC2NodeRegistry {
     // TODO => read from external storage (S3, DynamoDB)
     private static Map<Integer, String> readIpAddresses() {
         Map<Integer, String> ipAddresses = new HashMap<>();
-//        ipAddresses.put(9070, "127.0.0.1");
+//        ipAddresses.put(9070, "localhost");
 //        ipAddresses.put(9071, "127.0.0.1");
 //        ipAddresses.put(9072, "127.0.0.1");
         return ipAddresses;

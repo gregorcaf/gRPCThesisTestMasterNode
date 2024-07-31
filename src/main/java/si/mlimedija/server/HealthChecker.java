@@ -73,7 +73,7 @@ public class HealthChecker {
                     // update EC2 storage node's health status and cache size
                     ((EC2NodeRegistry) registry).getNodeInfo(nodeId).setHealthy(response.getIsHealthy());
                     ((EC2NodeRegistry) registry).getNodeInfo(nodeId).setMapSize(response.getMapSize());
-                    logger.info("GET_EC2NODE_INFO response: nodeId=" + nodeId + "|nodeIpAddress=" + nodeIpAddress + "|nodePort=" + nodePort + "|isHealthy=" + response.getIsHealthy() + "|mapSize=" + response.getMapSize());
+                    logger.info("GET_EC2NODE_INFO response: nodeId=" + nodeId + "|nodeIpAddress=" + nodeIpAddress + "|nodePort=" + nodePort + "|isHealthy=" + response.getIsHealthy() + "|mapSizeMb=" + response.getMapSize());
                 } else {
                     // update Lambda storage node's health status and cache size
                     ((LambdaNodeRegistry) registry).getNodeInfo(nodeId).setHealthy(response.getIsHealthy());
