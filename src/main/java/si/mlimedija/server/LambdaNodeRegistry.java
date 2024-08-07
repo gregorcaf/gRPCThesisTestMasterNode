@@ -47,7 +47,8 @@ public class LambdaNodeRegistry {
     }
 
     public int getNodeCount() {
-        return nodeCount;
+//        return nodeCount;
+        return lambdaNodeInfoMap.size();
     }
 
     public void setNodeCount(int nodeCount) {
@@ -74,12 +75,12 @@ public class LambdaNodeRegistry {
     public void printKeys() {
         int nodeId;
         String keys;
-        logger.debug("Print all Lambda keys:");
+        logger.info("Print all Lambda keys:");
 
         for (Map.Entry<Integer, StorageNodeInfo> entry : lambdaNodeInfoMap.entrySet()) {
             nodeId = entry.getKey();
             keys = entry.getValue().getKeys().toString();
-            logger.debug("nodeId=" + nodeId + "|keys=" + keys);
+            logger.info("nodeId=" + nodeId + "|keys=" + keys);
         }
     }
 
@@ -93,63 +94,26 @@ public class LambdaNodeRegistry {
         return ((getIter() % getNodeCount()) + 1);
     }
 
-    // initializes the Lambda storage node instances and puts them to StorageNodeInfo
-    public void initStorageNodes() {
-        Map<Integer, String> nodeIpAddresses = readIpAddresses();
-//        Map<String, Integer> nodeIpAddresses = readIpAddresses();
-        int nodeCount = 0;
 
-        logger.info("Started searching for Lambda storage nodes");
+    // initializes Lambda storage node
+    public int initStorageNode(String nodeIpAddress, int nodePort) {
+        // extract information for node init
+        HashMap<String, Integer> keys = new HashMap<>();
+        Boolean isHealthy = true;
+        int mapSize = 0;
+        int cpuUtilization = 0;
+        int nodeId = getNodeCount();
 
-// TODO -> commented for testing purposes - duplication of IP addresses
-// iterate through the map of ip addresses, create node instances, and put them to the StorageNodeInfo map
-//        for (Map.Entry<String, Integer> entry : nodeIpAddresses.entrySet()) {
-//            nodeCount++;
-//            String nodeIpAddress = entry.getKey();
-//            int nodePort = entry.getValue();
-//            HashSet<String> keys = new HashSet<>();
-//            Boolean isHealthy = true;
-//            int mapSize = 0;
-//            int cpuUtilization = 0;
-//
-//            StorageNodeInfo node = new StorageNodeInfo(nodeCount, nodeIpAddress, nodePort, keys, isHealthy, mapSize, cpuUtilization);
-//            addOrUpdateNodeInfo(nodeCount, node);
-//
-//            logger.info("Found new storage node");
-//            logger.info("nodeId=" + nodeCount + "|nodeIpAddress=" + nodeIpAddress + "|nodePort=" + nodePort);
-//        }
+        // create a Lambda cache node
+        StorageNodeInfo node = new StorageNodeInfo(nodeId, nodeIpAddress, nodePort, keys, isHealthy, mapSize, cpuUtilization);
 
-        for (Map.Entry<Integer, String> entry : nodeIpAddresses.entrySet()) {
-            nodeCount++;
-            String nodeIpAddress = entry.getValue();
-            int nodePort = entry.getKey();
-            HashMap<String, Integer> keys = new HashMap<>();
-            Boolean isHealthy = true;
-            int mapSize = 0;
-            int cpuUtilization = 0;
+        // add Lambda cache node to Lambda registry
+        addOrUpdateNodeInfo(nodeId, node);
 
-            StorageNodeInfo node = new StorageNodeInfo(nodeCount, nodeIpAddress, nodePort, keys, isHealthy, mapSize, cpuUtilization);
-            addOrUpdateNodeInfo(nodeCount, node);
+        logger.info("Initialized new Lambda storage node");
+        logger.info("nodeId=" + nodeId + "|nodeIpAddress=" + nodeIpAddress + "|nodePort=" + nodePort);
 
-            logger.info("Found new Lambda storage node");
-            logger.info("nodeId=" + nodeCount + "|nodeIpAddress=" + nodeIpAddress + "|nodePort=" + nodePort);
-        }
-        setNodeCount(nodeCount);
-
-        if (nodeIpAddresses.isEmpty()) {
-            logger.info("Did not found any Lambda storage nodes to initialize");
-        } else {
-            logger.info("Initialized " + nodeIpAddresses.size() + " Lambda storage nodes");
-        }
-    }
-
-    // reads IP addresses of Lambda storage nodes when booting up
-    // TODO => read from external storage (S3, DynamoDB)
-    private static Map<Integer, String> readIpAddresses() {
-        Map<Integer, String> ipAddresses = new HashMap<>();
-        ipAddresses.put(9080, "localhost");
-//        ipAddresses.put(9081, "127.0.0.1");
-//        ipAddresses.put(9082, "127.0.0.1");
-        return ipAddresses;
+        // return node id
+        return nodeId;
     }
 }

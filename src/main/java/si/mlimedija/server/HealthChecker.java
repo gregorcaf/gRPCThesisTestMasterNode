@@ -78,7 +78,7 @@ public class HealthChecker {
                     // update Lambda storage node's health status and cache size
                     ((LambdaNodeRegistry) registry).getNodeInfo(nodeId).setHealthy(response.getIsHealthy());
                     ((LambdaNodeRegistry) registry).getNodeInfo(nodeId).setMapSize(response.getMapSize());
-                    logger.info("GET_LAMBDA_INFO response: nodeId=" + nodeId + "|nodeIpAddress=" + nodeIpAddress + "|nodePort=" + nodePort + "|isHealthy=" + response.getIsHealthy() + "|mapSize=" + response.getMapSize());
+                    logger.info("GET_LAMBDA_INFO response: nodeId=" + nodeId + "|nodeIpAddress=" + nodeIpAddress + "|nodePort=" + nodePort + "|isHealthy=" + response.getIsHealthy() + "|mapSizeMb=" + response.getMapSize() * 4);
                 }
             } finally {
                 // shutdown the channel when done

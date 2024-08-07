@@ -14,6 +14,13 @@ service master {
   rpc putFileEndpoint(PutFileEndpointRequest) returns (PutFileEndpointResponse);
 
   rpc getFileEndpoint(GetFileEndpointRequest) returns (GetFileEndpointResponse);
+
+  rpc putKeys(PutKeysRequest) returns (PutKeysResponse);
+
+  rpc deleteKeys(DeleteKeysRequest) returns (DeleteKeysResponse);
+
+  rpc nodeHandshake(NodeHandshakeRequest) returns (NodeHandshakeResponse);
+
 }
 
 // put data to cache => request
@@ -65,4 +72,38 @@ message GetFileEndpointResponse {
   int32 nodePort = 2;
 }
 
+message PutKeysRequest {
+  int32 nodeId = 1;
+  repeated string keys = 2;
+}
 
+message PutKeysResponse {
+  int32 responseCode = 1;
+  string responseMessage = 2;
+}
+
+// TODO -> Lambda cache notifies master what keys have been deleted
+message DeleteKeysRequest {
+  int32 nodeId = 1;
+  string keys = 2;
+}
+
+// TODO -> response from master
+message DeleteKeysResponse {
+  int32 responseCode = 1;
+  string responseMessage = 2;
+}
+
+// initial handshake request
+message NodeHandshakeRequest {
+  string nodeIpAddress = 1;
+  int32 nodePort = 2;
+  string nodeType = 3;
+}
+
+// initial handshake response
+message NodeHandshakeResponse {
+  int32 nodeId = 1;
+  int32 responseCode = 2;
+  string responseMessage = 3;
+}

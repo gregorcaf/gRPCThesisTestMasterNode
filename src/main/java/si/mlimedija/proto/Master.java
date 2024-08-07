@@ -54,6 +54,36 @@ public final class Master {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Master_GetFileEndpointResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_Master_PutKeysRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_Master_PutKeysRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_Master_PutKeysResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_Master_PutKeysResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_Master_DeleteKeysRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_Master_DeleteKeysRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_Master_DeleteKeysResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_Master_DeleteKeysResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_Master_NodeHandshakeRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_Master_NodeHandshakeRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_Master_NodeHandshakeResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_Master_NodeHandshakeResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -75,16 +105,31 @@ public final class Master {
       "nse\022\025\n\rnodeIpAddress\030\001 \001(\t\022\020\n\010nodePort\030\002" +
       " \001(\005\"*\n\026GetFileEndpointRequest\022\020\n\010fileNa" +
       "me\030\001 \001(\t\"B\n\027GetFileEndpointResponse\022\025\n\rn" +
-      "odeIpAddress\030\001 \001(\t\022\020\n\010nodePort\030\002 \001(\0052\250\002\n" +
-      "\006master\022:\n\007putData\022\026.Master.PutDataReque" +
-      "st\032\027.Master.PutDataResponse\022:\n\007getData\022\026" +
-      ".Master.GetDataRequest\032\027.Master.GetDataR" +
-      "esponse\022R\n\017putFileEndpoint\022\036.Master.PutF" +
-      "ileEndpointRequest\032\037.Master.PutFileEndpo" +
-      "intResponse\022R\n\017getFileEndpoint\022\036.Master." +
-      "GetFileEndpointRequest\032\037.Master.GetFileE" +
-      "ndpointResponseB\026\n\022si.mlimedija.protoP\001b" +
-      "\006proto3"
+      "odeIpAddress\030\001 \001(\t\022\020\n\010nodePort\030\002 \001(\005\".\n\016" +
+      "PutKeysRequest\022\016\n\006nodeId\030\001 \001(\005\022\014\n\004keys\030\002" +
+      " \003(\t\"@\n\017PutKeysResponse\022\024\n\014responseCode\030" +
+      "\001 \001(\005\022\027\n\017responseMessage\030\002 \001(\t\"1\n\021Delete" +
+      "KeysRequest\022\016\n\006nodeId\030\001 \001(\005\022\014\n\004keys\030\002 \001(" +
+      "\t\"C\n\022DeleteKeysResponse\022\024\n\014responseCode\030" +
+      "\001 \001(\005\022\027\n\017responseMessage\030\002 \001(\t\"Q\n\024NodeHa" +
+      "ndshakeRequest\022\025\n\rnodeIpAddress\030\001 \001(\t\022\020\n" +
+      "\010nodePort\030\002 \001(\005\022\020\n\010nodeType\030\003 \001(\t\"V\n\025Nod" +
+      "eHandshakeResponse\022\016\n\006nodeId\030\001 \001(\005\022\024\n\014re" +
+      "sponseCode\030\002 \001(\005\022\027\n\017responseMessage\030\003 \001(" +
+      "\t2\367\003\n\006master\022:\n\007putData\022\026.Master.PutData" +
+      "Request\032\027.Master.PutDataResponse\022:\n\007getD" +
+      "ata\022\026.Master.GetDataRequest\032\027.Master.Get" +
+      "DataResponse\022R\n\017putFileEndpoint\022\036.Master" +
+      ".PutFileEndpointRequest\032\037.Master.PutFile" +
+      "EndpointResponse\022R\n\017getFileEndpoint\022\036.Ma" +
+      "ster.GetFileEndpointRequest\032\037.Master.Get" +
+      "FileEndpointResponse\022:\n\007putKeys\022\026.Master" +
+      ".PutKeysRequest\032\027.Master.PutKeysResponse" +
+      "\022C\n\ndeleteKeys\022\031.Master.DeleteKeysReques" +
+      "t\032\032.Master.DeleteKeysResponse\022L\n\rnodeHan" +
+      "dshake\022\034.Master.NodeHandshakeRequest\032\035.M" +
+      "aster.NodeHandshakeResponseB\026\n\022si.mlimed" +
+      "ija.protoP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -146,6 +191,42 @@ public final class Master {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Master_GetFileEndpointResponse_descriptor,
         new java.lang.String[] { "NodeIpAddress", "NodePort", });
+    internal_static_Master_PutKeysRequest_descriptor =
+      getDescriptor().getMessageTypes().get(8);
+    internal_static_Master_PutKeysRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_Master_PutKeysRequest_descriptor,
+        new java.lang.String[] { "NodeId", "Keys", });
+    internal_static_Master_PutKeysResponse_descriptor =
+      getDescriptor().getMessageTypes().get(9);
+    internal_static_Master_PutKeysResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_Master_PutKeysResponse_descriptor,
+        new java.lang.String[] { "ResponseCode", "ResponseMessage", });
+    internal_static_Master_DeleteKeysRequest_descriptor =
+      getDescriptor().getMessageTypes().get(10);
+    internal_static_Master_DeleteKeysRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_Master_DeleteKeysRequest_descriptor,
+        new java.lang.String[] { "NodeId", "Keys", });
+    internal_static_Master_DeleteKeysResponse_descriptor =
+      getDescriptor().getMessageTypes().get(11);
+    internal_static_Master_DeleteKeysResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_Master_DeleteKeysResponse_descriptor,
+        new java.lang.String[] { "ResponseCode", "ResponseMessage", });
+    internal_static_Master_NodeHandshakeRequest_descriptor =
+      getDescriptor().getMessageTypes().get(12);
+    internal_static_Master_NodeHandshakeRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_Master_NodeHandshakeRequest_descriptor,
+        new java.lang.String[] { "NodeIpAddress", "NodePort", "NodeType", });
+    internal_static_Master_NodeHandshakeResponse_descriptor =
+      getDescriptor().getMessageTypes().get(13);
+    internal_static_Master_NodeHandshakeResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_Master_NodeHandshakeResponse_descriptor,
+        new java.lang.String[] { "NodeId", "ResponseCode", "ResponseMessage", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

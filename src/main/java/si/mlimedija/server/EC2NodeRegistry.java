@@ -48,7 +48,8 @@ public class EC2NodeRegistry {
     }
 
     public int getNodeCount() {
-        return nodeCount;
+//        return nodeCount;
+        return ec2NodeInfoMap.size();
     }
 
     public void setNodeCount(int nodeCount) {
@@ -92,66 +93,26 @@ public class EC2NodeRegistry {
         return ((getIter() % getNodeCount()) + 1);
     }
 
-    // initializes the EC2 storage node instances and puts them to StorageNodeInfo
-    public void initStorageNodes() {
-        Map<Integer, String> nodeIpAddresses = readIpAddresses();
-//        Map<String, Integer> nodeIpAddresses = readIpAddresses();
-        int nodeCount = 0;
 
-        logger.info("Started searching for EC2 storage nodes");
+    // initializes EC2 storage node
+    public int initStorageNode(String nodeIpAddress, int nodePort) {
+        // extract information for node init
+        HashMap<String, Integer> keys = new HashMap<>();
+        Boolean isHealthy = true;
+        int mapSize = 0;
+        int cpuUtilization = 0;
+        int nodeId = getNodeCount();
 
-// TODO -> commented for testing purposes - duplication of IP addresses
-// iterate through the map of ip addresses, create node instances, and put them to the StorageNodeInfo map
-//        for (Map.Entry<String, Integer> entry : nodeIpAddresses.entrySet()) {
-//            nodeCount++;
-//            String nodeIpAddress = entry.getKey();
-//            int nodePort = entry.getValue();
-//            HashSet<String> keys = new HashSet<>();
-//            Boolean isHealthy = true;
-//            int mapSize = 0;
-//            int cpuUtilization = 0;
-//
-//            StorageNodeInfo node = new StorageNodeInfo(nodeCount, nodeIpAddress, nodePort, keys, isHealthy, mapSize, cpuUtilization);
-//            addOrUpdateNodeInfo(nodeCount, node);
-//
-//            logger.info("Found new storage node");
-//            logger.info("nodeId=" + nodeCount + "|nodeIpAddress=" + nodeIpAddress + "|nodePort=" + nodePort);
-//        }
+        // create a Lambda cache node
+        StorageNodeInfo node = new StorageNodeInfo(nodeId, nodeIpAddress, nodePort, keys, isHealthy, mapSize, cpuUtilization);
 
-        for (Map.Entry<Integer, String> entry : nodeIpAddresses.entrySet()) {
-            nodeCount++;
-            String nodeIpAddress = entry.getValue();
-            int nodePort = entry.getKey();
-            HashMap<String, Integer> keys = new HashMap<>();
-            Boolean isHealthy = true;
-            int mapSize = 0;
-            int cpuUtilization = 0;
+        // add Lambda cache node to Lambda registry
+        addOrUpdateNodeInfo(nodeId, node);
 
-            StorageNodeInfo node = new StorageNodeInfo(nodeCount, nodeIpAddress, nodePort, keys, isHealthy, mapSize, cpuUtilization);
-            addOrUpdateNodeInfo(nodeCount, node);
+        logger.info("Initialized new EC2 storage node");
+        logger.info("nodeId=" + nodeId + "|nodeIpAddress=" + nodeIpAddress + "|nodePort=" + nodePort);
 
-            logger.info("Found new EC2 storage node");
-            logger.info("nodeId=" + nodeCount + "|nodeIpAddress=" + nodeIpAddress + "|nodePort=" + nodePort);
-        }
-        setNodeCount(nodeCount);
-
-        if (nodeIpAddresses.isEmpty()) {
-            logger.info("Did not found any EC2 storage nodes to initialize");
-        } else {
-            logger.info("Initialized " + nodeIpAddresses.size() + " EC2 storage nodes");
-        }
+        // return node id
+        return nodeId;
     }
-
-
-    // reads IP addresses of EC2 storage nodes when booting up
-    // TODO => read from external storage (S3, DynamoDB)
-    private static Map<Integer, String> readIpAddresses() {
-        Map<Integer, String> ipAddresses = new HashMap<>();
-//        ipAddresses.put(9070, "localhost");
-//        ipAddresses.put(9071, "127.0.0.1");
-//        ipAddresses.put(9072, "127.0.0.1");
-        return ipAddresses;
-    }
-
-
 }

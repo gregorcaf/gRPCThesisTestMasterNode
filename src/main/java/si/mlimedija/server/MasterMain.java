@@ -43,9 +43,9 @@ public class MasterMain {
         String ipAddress = getIpAddress();
         logger.info("Server started at " + ipAddress + ":" + server.getPort());
 
-        // initializes EC2 and Lambda storage nodes
-        ec2NodeRegistry.initStorageNodes();
-        lambdaNodeRegistry.initStorageNodes();
+//        // initializes EC2 and Lambda storage nodes
+//        ec2NodeRegistry.initStorageNodes();
+//        lambdaNodeRegistry.initStorageNodes();
 
         // periodical health checks - 5 threads, every 5 seconds
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(5);

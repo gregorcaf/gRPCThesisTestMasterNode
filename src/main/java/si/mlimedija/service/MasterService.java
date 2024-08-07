@@ -15,9 +15,7 @@ import si.mlimedija.proto.*;
 import si.mlimedija.server.EC2NodeRegistry;
 import si.mlimedija.server.LambdaNodeRegistry;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 
@@ -177,6 +175,7 @@ public class MasterService extends masterGrpc.masterImplBase {
         }
     }
 
+
     // retrieve the data from EC2 storage node for the given key
     @Override
     public void getData(GetDataRequest clientRequest, StreamObserver<GetDataResponse> responseObserver) {
@@ -316,10 +315,91 @@ public class MasterService extends masterGrpc.masterImplBase {
         responseObserver.onCompleted();
     }
 
+
     @Override
     public void getFileEndpoint(GetFileEndpointRequest request, StreamObserver<GetFileEndpointResponse> responseObserver) {
         // TODO -> check what nodes store the file chunks
         // TODO -> return an array of node IP addresses, node ports, and chunk numbers
         // TODO -> order by chunk number (because it may happen that not all chunks are stored on a single node)
+    }
+
+
+    @Override
+    public void putKeys(PutKeysRequest request, StreamObserver<PutKeysResponse> responseObserver) {
+        // extract request information from lambda cache node
+        int nodeId = request.getNodeId();
+        Set<String> keys = new HashSet<>(request.getKeysList());
+
+        // TODO -> handle chunk numbers (MAYBE DELETE CHUNK NUMBER AS IT IS NOT NECESSARY ???)
+        // store filenames to lambda registry
+        for (String key : keys) {
+            lambdaNodeRegistry.getNodeInfo(nodeId).putKey(key, 0); // TODO -> chunk number is not needed ??
+        }
+
+        // TODO -> DEBUG (print all keys)
+        lambdaNodeRegistry.printKeys();
+
+        // package response
+        PutKeysResponse response = PutKeysResponse
+                .newBuilder()
+                .setResponseCode(200)
+                .setResponseMessage("Keys successfully registered with master node.")
+                .build();
+
+        // send response back to Lambda cache node
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+
+    @Override
+    public void deleteKeys(DeleteKeysRequest request, StreamObserver<DeleteKeysResponse> responseObserver) {
+        // TODO -> delete keys from Lambda registry
+    }
+
+
+    // handles initial handshake from each node and initializes the node
+    @Override
+    public void nodeHandshake(NodeHandshakeRequest request, StreamObserver<NodeHandshakeResponse> responseObserver) {
+        // extract request information from node
+        String nodeIpAddress = request.getNodeIpAddress();
+        int nodePort = request.getNodePort();
+        String nodeType = request.getNodeType();
+
+        // prepared for response
+        int nodeId = 0;
+        int responseCode = 400;
+        String responseMessage = "Failed to initialize new node - unrecognized instance type";
+
+        // init EC2 cache node
+        if (nodeType.equalsIgnoreCase("EC2")) {
+            logger.info("Handshake EC2 request");
+            nodeId = ec2NodeRegistry.initStorageNode(nodeIpAddress, nodePort);
+            responseCode = 200;
+            responseMessage = "Successfully initialized new EC2 cache node";
+        }
+        // init Lambda cache node
+        else if (nodeType.equalsIgnoreCase("Lambda")) {
+            logger.info("Handshake Lambda request");
+            nodeId = lambdaNodeRegistry.initStorageNode(nodeIpAddress, nodePort);
+            responseCode = 200;
+            responseMessage = "Successfully initialized new Lambda cache node";
+        }
+        // failed to initialize cache node
+        else {
+            logger.info("Handshake request - not recognized instance type");
+        }
+
+        // package response
+        NodeHandshakeResponse response = NodeHandshakeResponse
+                .newBuilder()
+                .setNodeId(nodeId)
+                .setResponseCode(responseCode)
+                .setResponseMessage(responseMessage)
+                .build();
+
+        // send response back to the node
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 }
