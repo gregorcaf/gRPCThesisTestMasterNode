@@ -5,7 +5,7 @@ package si.mlimedija.proto;
 
 /**
  * <pre>
- * TODO -&gt; Lambda cache notifies master what keys have been deleted
+ * request for deleting keys from registry (Lambda cache)
  * </pre>
  *
  * Protobuf type {@code Master.DeleteKeysRequest}
@@ -21,7 +21,7 @@ private static final long serialVersionUID = 0L;
   }
   private DeleteKeysRequest() {
     nodeId_ = 0;
-    keys_ = "";
+    keys_ = com.google.protobuf.LazyStringArrayList.EMPTY;
   }
 
   @java.lang.Override
@@ -55,8 +55,11 @@ private static final long serialVersionUID = 0L;
           }
           case 18: {
             java.lang.String s = input.readStringRequireUtf8();
-
-            keys_ = s;
+            if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+              keys_ = new com.google.protobuf.LazyStringArrayList();
+              mutable_bitField0_ |= 0x00000002;
+            }
+            keys_.add(s);
             break;
           }
           default: {
@@ -74,6 +77,9 @@ private static final long serialVersionUID = 0L;
       throw new com.google.protobuf.InvalidProtocolBufferException(
           e).setUnfinishedMessage(this);
     } finally {
+      if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+        keys_ = keys_.getUnmodifiableView();
+      }
       this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
     }
@@ -91,6 +97,7 @@ private static final long serialVersionUID = 0L;
             si.mlimedija.proto.DeleteKeysRequest.class, si.mlimedija.proto.DeleteKeysRequest.Builder.class);
   }
 
+  private int bitField0_;
   public static final int NODEID_FIELD_NUMBER = 1;
   private int nodeId_;
   /**
@@ -101,37 +108,32 @@ private static final long serialVersionUID = 0L;
   }
 
   public static final int KEYS_FIELD_NUMBER = 2;
-  private volatile java.lang.Object keys_;
+  private com.google.protobuf.LazyStringList keys_;
   /**
-   * <code>string keys = 2;</code>
+   * <code>repeated string keys = 2;</code>
    */
-  public java.lang.String getKeys() {
-    java.lang.Object ref = keys_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      keys_ = s;
-      return s;
-    }
+  public com.google.protobuf.ProtocolStringList
+      getKeysList() {
+    return keys_;
   }
   /**
-   * <code>string keys = 2;</code>
+   * <code>repeated string keys = 2;</code>
+   */
+  public int getKeysCount() {
+    return keys_.size();
+  }
+  /**
+   * <code>repeated string keys = 2;</code>
+   */
+  public java.lang.String getKeys(int index) {
+    return keys_.get(index);
+  }
+  /**
+   * <code>repeated string keys = 2;</code>
    */
   public com.google.protobuf.ByteString
-      getKeysBytes() {
-    java.lang.Object ref = keys_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      keys_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+      getKeysBytes(int index) {
+    return keys_.getByteString(index);
   }
 
   private byte memoizedIsInitialized = -1;
@@ -151,8 +153,8 @@ private static final long serialVersionUID = 0L;
     if (nodeId_ != 0) {
       output.writeInt32(1, nodeId_);
     }
-    if (!getKeysBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, keys_);
+    for (int i = 0; i < keys_.size(); i++) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, keys_.getRaw(i));
     }
     unknownFields.writeTo(output);
   }
@@ -167,8 +169,13 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeInt32Size(1, nodeId_);
     }
-    if (!getKeysBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, keys_);
+    {
+      int dataSize = 0;
+      for (int i = 0; i < keys_.size(); i++) {
+        dataSize += computeStringSizeNoTag(keys_.getRaw(i));
+      }
+      size += dataSize;
+      size += 1 * getKeysList().size();
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -188,8 +195,8 @@ private static final long serialVersionUID = 0L;
     boolean result = true;
     result = result && (getNodeId()
         == other.getNodeId());
-    result = result && getKeys()
-        .equals(other.getKeys());
+    result = result && getKeysList()
+        .equals(other.getKeysList());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -203,8 +210,10 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + NODEID_FIELD_NUMBER;
     hash = (53 * hash) + getNodeId();
-    hash = (37 * hash) + KEYS_FIELD_NUMBER;
-    hash = (53 * hash) + getKeys().hashCode();
+    if (getKeysCount() > 0) {
+      hash = (37 * hash) + KEYS_FIELD_NUMBER;
+      hash = (53 * hash) + getKeysList().hashCode();
+    }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -302,7 +311,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * TODO -&gt; Lambda cache notifies master what keys have been deleted
+   * request for deleting keys from registry (Lambda cache)
    * </pre>
    *
    * Protobuf type {@code Master.DeleteKeysRequest}
@@ -344,8 +353,8 @@ private static final long serialVersionUID = 0L;
       super.clear();
       nodeId_ = 0;
 
-      keys_ = "";
-
+      keys_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      bitField0_ = (bitField0_ & ~0x00000002);
       return this;
     }
 
@@ -372,8 +381,15 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public si.mlimedija.proto.DeleteKeysRequest buildPartial() {
       si.mlimedija.proto.DeleteKeysRequest result = new si.mlimedija.proto.DeleteKeysRequest(this);
+      int from_bitField0_ = bitField0_;
+      int to_bitField0_ = 0;
       result.nodeId_ = nodeId_;
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        keys_ = keys_.getUnmodifiableView();
+        bitField0_ = (bitField0_ & ~0x00000002);
+      }
       result.keys_ = keys_;
+      result.bitField0_ = to_bitField0_;
       onBuilt();
       return result;
     }
@@ -425,8 +441,14 @@ private static final long serialVersionUID = 0L;
       if (other.getNodeId() != 0) {
         setNodeId(other.getNodeId());
       }
-      if (!other.getKeys().isEmpty()) {
-        keys_ = other.keys_;
+      if (!other.keys_.isEmpty()) {
+        if (keys_.isEmpty()) {
+          keys_ = other.keys_;
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          ensureKeysIsMutable();
+          keys_.addAll(other.keys_);
+        }
         onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
@@ -457,6 +479,7 @@ private static final long serialVersionUID = 0L;
       }
       return this;
     }
+    private int bitField0_;
 
     private int nodeId_ ;
     /**
@@ -484,71 +507,96 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object keys_ = "";
-    /**
-     * <code>string keys = 2;</code>
-     */
-    public java.lang.String getKeys() {
-      java.lang.Object ref = keys_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        keys_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
+    private com.google.protobuf.LazyStringList keys_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    private void ensureKeysIsMutable() {
+      if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+        keys_ = new com.google.protobuf.LazyStringArrayList(keys_);
+        bitField0_ |= 0x00000002;
+       }
     }
     /**
-     * <code>string keys = 2;</code>
+     * <code>repeated string keys = 2;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getKeysList() {
+      return keys_.getUnmodifiableView();
+    }
+    /**
+     * <code>repeated string keys = 2;</code>
+     */
+    public int getKeysCount() {
+      return keys_.size();
+    }
+    /**
+     * <code>repeated string keys = 2;</code>
+     */
+    public java.lang.String getKeys(int index) {
+      return keys_.get(index);
+    }
+    /**
+     * <code>repeated string keys = 2;</code>
      */
     public com.google.protobuf.ByteString
-        getKeysBytes() {
-      java.lang.Object ref = keys_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        keys_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+        getKeysBytes(int index) {
+      return keys_.getByteString(index);
     }
     /**
-     * <code>string keys = 2;</code>
+     * <code>repeated string keys = 2;</code>
      */
     public Builder setKeys(
+        int index, java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureKeysIsMutable();
+      keys_.set(index, value);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string keys = 2;</code>
+     */
+    public Builder addKeys(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
-  
-      keys_ = value;
+  ensureKeysIsMutable();
+      keys_.add(value);
       onChanged();
       return this;
     }
     /**
-     * <code>string keys = 2;</code>
+     * <code>repeated string keys = 2;</code>
+     */
+    public Builder addAllKeys(
+        java.lang.Iterable<java.lang.String> values) {
+      ensureKeysIsMutable();
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, keys_);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string keys = 2;</code>
      */
     public Builder clearKeys() {
-      
-      keys_ = getDefaultInstance().getKeys();
+      keys_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      bitField0_ = (bitField0_ & ~0x00000002);
       onChanged();
       return this;
     }
     /**
-     * <code>string keys = 2;</code>
+     * <code>repeated string keys = 2;</code>
      */
-    public Builder setKeysBytes(
+    public Builder addKeysBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
-      
-      keys_ = value;
+      ensureKeysIsMutable();
+      keys_.add(value);
       onChanged();
       return this;
     }

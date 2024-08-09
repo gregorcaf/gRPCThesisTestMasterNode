@@ -109,7 +109,7 @@ public final class Master {
       "PutKeysRequest\022\016\n\006nodeId\030\001 \001(\005\022\014\n\004keys\030\002" +
       " \003(\t\"@\n\017PutKeysResponse\022\024\n\014responseCode\030" +
       "\001 \001(\005\022\027\n\017responseMessage\030\002 \001(\t\"1\n\021Delete" +
-      "KeysRequest\022\016\n\006nodeId\030\001 \001(\005\022\014\n\004keys\030\002 \001(" +
+      "KeysRequest\022\016\n\006nodeId\030\001 \001(\005\022\014\n\004keys\030\002 \003(" +
       "\t\"C\n\022DeleteKeysResponse\022\024\n\014responseCode\030" +
       "\001 \001(\005\022\027\n\017responseMessage\030\002 \001(\t\"Q\n\024NodeHa" +
       "ndshakeRequest\022\025\n\rnodeIpAddress\030\001 \001(\t\022\020\n" +

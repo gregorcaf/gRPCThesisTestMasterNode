@@ -4,6 +4,10 @@
 package si.mlimedija.proto;
 
 /**
+ * <pre>
+ * request for adding keys to registry (Lambda cache)
+ * </pre>
+ *
  * Protobuf type {@code Master.PutKeysRequest}
  */
 public  final class PutKeysRequest extends
@@ -306,6 +310,10 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
+   * <pre>
+   * request for adding keys to registry (Lambda cache)
+   * </pre>
+   *
    * Protobuf type {@code Master.PutKeysRequest}
    */
   public static final class Builder extends

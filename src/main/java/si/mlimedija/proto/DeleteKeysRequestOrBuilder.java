@@ -13,12 +13,21 @@ public interface DeleteKeysRequestOrBuilder extends
   int getNodeId();
 
   /**
-   * <code>string keys = 2;</code>
+   * <code>repeated string keys = 2;</code>
    */
-  java.lang.String getKeys();
+  java.util.List<java.lang.String>
+      getKeysList();
   /**
-   * <code>string keys = 2;</code>
+   * <code>repeated string keys = 2;</code>
+   */
+  int getKeysCount();
+  /**
+   * <code>repeated string keys = 2;</code>
+   */
+  java.lang.String getKeys(int index);
+  /**
+   * <code>repeated string keys = 2;</code>
    */
   com.google.protobuf.ByteString
-      getKeysBytes();
+      getKeysBytes(int index);
 }

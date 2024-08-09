@@ -5,7 +5,7 @@ package si.mlimedija.proto;
 
 /**
  * <pre>
- * TODO -&gt; response from master
+ * response for deleting keys from registry (Lambda cache)
  * </pre>
  *
  * Protobuf type {@code Master.DeleteKeysResponse}
@@ -302,7 +302,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * TODO -&gt; response from master
+   * response for deleting keys from registry (Lambda cache)
    * </pre>
    *
    * Protobuf type {@code Master.DeleteKeysResponse}

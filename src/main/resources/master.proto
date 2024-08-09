@@ -72,23 +72,25 @@ message GetFileEndpointResponse {
   int32 nodePort = 2;
 }
 
+// request for adding keys to registry (Lambda cache)
 message PutKeysRequest {
   int32 nodeId = 1;
   repeated string keys = 2;
 }
 
+// response for adding keys to registry (Lambda cache)
 message PutKeysResponse {
   int32 responseCode = 1;
   string responseMessage = 2;
 }
 
-// TODO -> Lambda cache notifies master what keys have been deleted
+// request for deleting keys from registry (Lambda cache)
 message DeleteKeysRequest {
   int32 nodeId = 1;
-  string keys = 2;
+  repeated string keys = 2;
 }
 
-// TODO -> response from master
+// response for deleting keys from registry (Lambda cache)
 message DeleteKeysResponse {
   int32 responseCode = 1;
   string responseMessage = 2;

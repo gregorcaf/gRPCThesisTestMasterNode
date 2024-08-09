@@ -59,6 +59,10 @@ public class StorageNodeInfo {
         this.keys.put(key, chunkNumber);
     }
 
+    public void deleteKey(String key) {
+        this.keys.remove(key);
+    }
+
     @Override
     public String toString() {
         return "keys=" + keys;

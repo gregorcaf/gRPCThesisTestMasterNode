@@ -324,9 +324,10 @@ public class MasterService extends masterGrpc.masterImplBase {
     }
 
 
+    // add keys stored to Lambda cache node to the Lambda node registry for corresponding node id
     @Override
     public void putKeys(PutKeysRequest request, StreamObserver<PutKeysResponse> responseObserver) {
-        // extract request information from lambda cache node
+        // extract request information from Lambda cache node
         int nodeId = request.getNodeId();
         Set<String> keys = new HashSet<>(request.getKeysList());
 
@@ -352,9 +353,32 @@ public class MasterService extends masterGrpc.masterImplBase {
     }
 
 
+    // delete keys deleted from Lambda cache node from Lambda node registry for corresponding node id
     @Override
     public void deleteKeys(DeleteKeysRequest request, StreamObserver<DeleteKeysResponse> responseObserver) {
-        // TODO -> delete keys from Lambda registry
+        // extract request information from Lambda cache node
+        int nodeId = request.getNodeId();
+        Set<String> keys = new HashSet<>(request.getKeysList());
+
+        // TODO -> handle chunk numbers (MAYBE DELETE CHUNK NUMBER AS IT IS NOT NECESSARY ???)
+        // delete filenames from lambda registry
+        for (String key : keys) {
+            lambdaNodeRegistry.getNodeInfo(nodeId).deleteKey(key);
+        }
+
+        // TODO -> DEBUG (print all keys)
+        lambdaNodeRegistry.printKeys();
+
+        // package response
+        DeleteKeysResponse response = DeleteKeysResponse
+                .newBuilder()
+                .setResponseCode(200)
+                .setResponseMessage("Keys successfully deleted from master node.")
+                .build();
+
+        // send response back to Lambda cache node
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
 
