@@ -68,8 +68,10 @@ message GetFileEndpointRequest {
 
 // initial response for get file
 message GetFileEndpointResponse {
-  string nodeIpAddress = 1;
-  int32 nodePort = 2;
+  repeated string nodeIpAddress = 1;
+  bool isStoredOnS3 = 2;
+  string s3BucketName = 3;
+  string s3ObjectKey = 4;
 }
 
 // request for adding keys to registry (Lambda cache)

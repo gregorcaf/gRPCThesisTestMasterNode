@@ -116,4 +116,37 @@ public class LambdaNodeRegistry {
         // return node id
         return nodeId;
     }
+
+    // performs search for nodes storing specific filenames
+    public Map<Integer, String> findOrderedFileLocations(String filename) {
+        String prefix = filename + ":";
+        Map<Integer, String> chunkIpMap = new TreeMap<>(); // treemap for automatically sorting by chunk number
+
+        // iterate over nodes in Lambda node registry
+        for (Map.Entry<Integer, StorageNodeInfo> entry : lambdaNodeInfoMap.entrySet()) {
+            StorageNodeInfo nodeInfo = entry.getValue();
+            HashMap<String, Integer> storedKeys = nodeInfo.getKeys();
+
+            // iterate over stored keys
+            for (Map.Entry<String, Integer> keyEntry : storedKeys.entrySet()) {
+                String key = keyEntry.getKey();
+                Integer chunkNumber = keyEntry.getValue();
+
+                // check if prefix matches
+                if (key.startsWith(prefix)) {
+                    // put chunk number and IP address to the hashmap
+                    chunkIpMap.put(chunkNumber, nodeInfo.getNodeIpAddress());
+                }
+            }
+        }
+        // return the map of chunk numbers and corresponding IP addresses
+        return chunkIpMap;
+    }
 }
+
+
+
+
+
+
+

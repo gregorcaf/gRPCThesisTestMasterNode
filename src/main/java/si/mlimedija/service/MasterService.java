@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import si.mlimedija.proto.*;
 import si.mlimedija.server.EC2NodeRegistry;
 import si.mlimedija.server.LambdaNodeRegistry;
+import si.mlimedija.server.StorageNodeInfo;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -316,11 +317,36 @@ public class MasterService extends masterGrpc.masterImplBase {
     }
 
 
+    // check nodes in Lambda node registry and sends the IP addresses on nodes (Lambda cache + S3) that store given files
     @Override
     public void getFileEndpoint(GetFileEndpointRequest request, StreamObserver<GetFileEndpointResponse> responseObserver) {
-        // TODO -> check what nodes store the file chunks
-        // TODO -> return an array of node IP addresses, node ports, and chunk numbers
-        // TODO -> order by chunk number (because it may happen that not all chunks are stored on a single node)
+        // extract request information from client
+        String filename = request.getFileName();
+        logger.info("Searched filename: " + filename);
+
+        // search for nodes storing specific filename
+        Map<Integer, String> chunkIpMap = lambdaNodeRegistry.findOrderedFileLocations(filename);
+        // TODO -> search in s3NodeRegistry
+
+        // prepare the response
+        GetFileEndpointResponse.Builder responseBuilder = GetFileEndpointResponse.newBuilder();
+
+        // iterate over all entries
+        for (Map.Entry<Integer, String> entry : chunkIpMap.entrySet()) {
+            String location = entry.getValue();
+            // if chunk is stored in S3
+            if (location.startsWith("s3-bucket-name")) {
+                responseBuilder.setIsStoredOnS3(true)
+                        .setS3BucketName(location.split(":")[0])
+                        .setS3ObjectKey(location.split(":")[1]);
+            } else {
+                responseBuilder.addNodeIpAddress(location);
+            }
+        }
+
+        // send the response to the client
+        responseObserver.onNext(responseBuilder.build());
+        responseObserver.onCompleted();
     }
 
 

@@ -104,32 +104,33 @@ public final class Master {
       "fileSizeMb\030\002 \001(\005\"B\n\027PutFileEndpointRespo" +
       "nse\022\025\n\rnodeIpAddress\030\001 \001(\t\022\020\n\010nodePort\030\002" +
       " \001(\005\"*\n\026GetFileEndpointRequest\022\020\n\010fileNa" +
-      "me\030\001 \001(\t\"B\n\027GetFileEndpointResponse\022\025\n\rn" +
-      "odeIpAddress\030\001 \001(\t\022\020\n\010nodePort\030\002 \001(\005\".\n\016" +
-      "PutKeysRequest\022\016\n\006nodeId\030\001 \001(\005\022\014\n\004keys\030\002" +
-      " \003(\t\"@\n\017PutKeysResponse\022\024\n\014responseCode\030" +
-      "\001 \001(\005\022\027\n\017responseMessage\030\002 \001(\t\"1\n\021Delete" +
-      "KeysRequest\022\016\n\006nodeId\030\001 \001(\005\022\014\n\004keys\030\002 \003(" +
-      "\t\"C\n\022DeleteKeysResponse\022\024\n\014responseCode\030" +
-      "\001 \001(\005\022\027\n\017responseMessage\030\002 \001(\t\"Q\n\024NodeHa" +
-      "ndshakeRequest\022\025\n\rnodeIpAddress\030\001 \001(\t\022\020\n" +
-      "\010nodePort\030\002 \001(\005\022\020\n\010nodeType\030\003 \001(\t\"V\n\025Nod" +
-      "eHandshakeResponse\022\016\n\006nodeId\030\001 \001(\005\022\024\n\014re" +
-      "sponseCode\030\002 \001(\005\022\027\n\017responseMessage\030\003 \001(" +
-      "\t2\367\003\n\006master\022:\n\007putData\022\026.Master.PutData" +
-      "Request\032\027.Master.PutDataResponse\022:\n\007getD" +
-      "ata\022\026.Master.GetDataRequest\032\027.Master.Get" +
-      "DataResponse\022R\n\017putFileEndpoint\022\036.Master" +
-      ".PutFileEndpointRequest\032\037.Master.PutFile" +
-      "EndpointResponse\022R\n\017getFileEndpoint\022\036.Ma" +
-      "ster.GetFileEndpointRequest\032\037.Master.Get" +
-      "FileEndpointResponse\022:\n\007putKeys\022\026.Master" +
-      ".PutKeysRequest\032\027.Master.PutKeysResponse" +
-      "\022C\n\ndeleteKeys\022\031.Master.DeleteKeysReques" +
-      "t\032\032.Master.DeleteKeysResponse\022L\n\rnodeHan" +
-      "dshake\022\034.Master.NodeHandshakeRequest\032\035.M" +
-      "aster.NodeHandshakeResponseB\026\n\022si.mlimed" +
-      "ija.protoP\001b\006proto3"
+      "me\030\001 \001(\t\"q\n\027GetFileEndpointResponse\022\025\n\rn" +
+      "odeIpAddress\030\001 \003(\t\022\024\n\014isStoredOnS3\030\002 \001(\010" +
+      "\022\024\n\014s3BucketName\030\003 \001(\t\022\023\n\013s3ObjectKey\030\004 " +
+      "\001(\t\".\n\016PutKeysRequest\022\016\n\006nodeId\030\001 \001(\005\022\014\n" +
+      "\004keys\030\002 \003(\t\"@\n\017PutKeysResponse\022\024\n\014respon" +
+      "seCode\030\001 \001(\005\022\027\n\017responseMessage\030\002 \001(\t\"1\n" +
+      "\021DeleteKeysRequest\022\016\n\006nodeId\030\001 \001(\005\022\014\n\004ke" +
+      "ys\030\002 \003(\t\"C\n\022DeleteKeysResponse\022\024\n\014respon" +
+      "seCode\030\001 \001(\005\022\027\n\017responseMessage\030\002 \001(\t\"Q\n" +
+      "\024NodeHandshakeRequest\022\025\n\rnodeIpAddress\030\001" +
+      " \001(\t\022\020\n\010nodePort\030\002 \001(\005\022\020\n\010nodeType\030\003 \001(\t" +
+      "\"V\n\025NodeHandshakeResponse\022\016\n\006nodeId\030\001 \001(" +
+      "\005\022\024\n\014responseCode\030\002 \001(\005\022\027\n\017responseMessa" +
+      "ge\030\003 \001(\t2\367\003\n\006master\022:\n\007putData\022\026.Master." +
+      "PutDataRequest\032\027.Master.PutDataResponse\022" +
+      ":\n\007getData\022\026.Master.GetDataRequest\032\027.Mas" +
+      "ter.GetDataResponse\022R\n\017putFileEndpoint\022\036" +
+      ".Master.PutFileEndpointRequest\032\037.Master." +
+      "PutFileEndpointResponse\022R\n\017getFileEndpoi" +
+      "nt\022\036.Master.GetFileEndpointRequest\032\037.Mas" +
+      "ter.GetFileEndpointResponse\022:\n\007putKeys\022\026" +
+      ".Master.PutKeysRequest\032\027.Master.PutKeysR" +
+      "esponse\022C\n\ndeleteKeys\022\031.Master.DeleteKey" +
+      "sRequest\032\032.Master.DeleteKeysResponse\022L\n\r" +
+      "nodeHandshake\022\034.Master.NodeHandshakeRequ" +
+      "est\032\035.Master.NodeHandshakeResponseB\026\n\022si" +
+      ".mlimedija.protoP\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -190,7 +191,7 @@ public final class Master {
     internal_static_Master_GetFileEndpointResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Master_GetFileEndpointResponse_descriptor,
-        new java.lang.String[] { "NodeIpAddress", "NodePort", });
+        new java.lang.String[] { "NodeIpAddress", "IsStoredOnS3", "S3BucketName", "S3ObjectKey", });
     internal_static_Master_PutKeysRequest_descriptor =
       getDescriptor().getMessageTypes().get(8);
     internal_static_Master_PutKeysRequest_fieldAccessorTable = new

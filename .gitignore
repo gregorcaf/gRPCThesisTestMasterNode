@@ -36,3 +36,11 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### META-INF
+META-INF/
+
+### generated artifacts
+../../../out/
+../../../dependency-reduced-pom.xml
+../../../.idea/.name

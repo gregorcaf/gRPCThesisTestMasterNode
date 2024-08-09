@@ -20,8 +20,10 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private GetFileEndpointResponse() {
-    nodeIpAddress_ = "";
-    nodePort_ = 0;
+    nodeIpAddress_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    isStoredOnS3_ = false;
+    s3BucketName_ = "";
+    s3ObjectKey_ = "";
   }
 
   @java.lang.Override
@@ -50,13 +52,28 @@ private static final long serialVersionUID = 0L;
             break;
           case 10: {
             java.lang.String s = input.readStringRequireUtf8();
-
-            nodeIpAddress_ = s;
+            if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+              nodeIpAddress_ = new com.google.protobuf.LazyStringArrayList();
+              mutable_bitField0_ |= 0x00000001;
+            }
+            nodeIpAddress_.add(s);
             break;
           }
           case 16: {
 
-            nodePort_ = input.readInt32();
+            isStoredOnS3_ = input.readBool();
+            break;
+          }
+          case 26: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            s3BucketName_ = s;
+            break;
+          }
+          case 34: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            s3ObjectKey_ = s;
             break;
           }
           default: {
@@ -74,6 +91,9 @@ private static final long serialVersionUID = 0L;
       throw new com.google.protobuf.InvalidProtocolBufferException(
           e).setUnfinishedMessage(this);
     } finally {
+      if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+        nodeIpAddress_ = nodeIpAddress_.getUnmodifiableView();
+      }
       this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
     }
@@ -91,47 +111,111 @@ private static final long serialVersionUID = 0L;
             si.mlimedija.proto.GetFileEndpointResponse.class, si.mlimedija.proto.GetFileEndpointResponse.Builder.class);
   }
 
+  private int bitField0_;
   public static final int NODEIPADDRESS_FIELD_NUMBER = 1;
-  private volatile java.lang.Object nodeIpAddress_;
+  private com.google.protobuf.LazyStringList nodeIpAddress_;
   /**
-   * <code>string nodeIpAddress = 1;</code>
+   * <code>repeated string nodeIpAddress = 1;</code>
    */
-  public java.lang.String getNodeIpAddress() {
-    java.lang.Object ref = nodeIpAddress_;
+  public com.google.protobuf.ProtocolStringList
+      getNodeIpAddressList() {
+    return nodeIpAddress_;
+  }
+  /**
+   * <code>repeated string nodeIpAddress = 1;</code>
+   */
+  public int getNodeIpAddressCount() {
+    return nodeIpAddress_.size();
+  }
+  /**
+   * <code>repeated string nodeIpAddress = 1;</code>
+   */
+  public java.lang.String getNodeIpAddress(int index) {
+    return nodeIpAddress_.get(index);
+  }
+  /**
+   * <code>repeated string nodeIpAddress = 1;</code>
+   */
+  public com.google.protobuf.ByteString
+      getNodeIpAddressBytes(int index) {
+    return nodeIpAddress_.getByteString(index);
+  }
+
+  public static final int ISSTOREDONS3_FIELD_NUMBER = 2;
+  private boolean isStoredOnS3_;
+  /**
+   * <code>bool isStoredOnS3 = 2;</code>
+   */
+  public boolean getIsStoredOnS3() {
+    return isStoredOnS3_;
+  }
+
+  public static final int S3BUCKETNAME_FIELD_NUMBER = 3;
+  private volatile java.lang.Object s3BucketName_;
+  /**
+   * <code>string s3BucketName = 3;</code>
+   */
+  public java.lang.String getS3BucketName() {
+    java.lang.Object ref = s3BucketName_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      nodeIpAddress_ = s;
+      s3BucketName_ = s;
       return s;
     }
   }
   /**
-   * <code>string nodeIpAddress = 1;</code>
+   * <code>string s3BucketName = 3;</code>
    */
   public com.google.protobuf.ByteString
-      getNodeIpAddressBytes() {
-    java.lang.Object ref = nodeIpAddress_;
+      getS3BucketNameBytes() {
+    java.lang.Object ref = s3BucketName_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      nodeIpAddress_ = b;
+      s3BucketName_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
     }
   }
 
-  public static final int NODEPORT_FIELD_NUMBER = 2;
-  private int nodePort_;
+  public static final int S3OBJECTKEY_FIELD_NUMBER = 4;
+  private volatile java.lang.Object s3ObjectKey_;
   /**
-   * <code>int32 nodePort = 2;</code>
+   * <code>string s3ObjectKey = 4;</code>
    */
-  public int getNodePort() {
-    return nodePort_;
+  public java.lang.String getS3ObjectKey() {
+    java.lang.Object ref = s3ObjectKey_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      s3ObjectKey_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string s3ObjectKey = 4;</code>
+   */
+  public com.google.protobuf.ByteString
+      getS3ObjectKeyBytes() {
+    java.lang.Object ref = s3ObjectKey_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      s3ObjectKey_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
   }
 
   private byte memoizedIsInitialized = -1;
@@ -148,11 +232,17 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!getNodeIpAddressBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, nodeIpAddress_);
+    for (int i = 0; i < nodeIpAddress_.size(); i++) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, nodeIpAddress_.getRaw(i));
     }
-    if (nodePort_ != 0) {
-      output.writeInt32(2, nodePort_);
+    if (isStoredOnS3_ != false) {
+      output.writeBool(2, isStoredOnS3_);
+    }
+    if (!getS3BucketNameBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, s3BucketName_);
+    }
+    if (!getS3ObjectKeyBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, s3ObjectKey_);
     }
     unknownFields.writeTo(output);
   }
@@ -163,12 +253,23 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!getNodeIpAddressBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, nodeIpAddress_);
+    {
+      int dataSize = 0;
+      for (int i = 0; i < nodeIpAddress_.size(); i++) {
+        dataSize += computeStringSizeNoTag(nodeIpAddress_.getRaw(i));
+      }
+      size += dataSize;
+      size += 1 * getNodeIpAddressList().size();
     }
-    if (nodePort_ != 0) {
+    if (isStoredOnS3_ != false) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(2, nodePort_);
+        .computeBoolSize(2, isStoredOnS3_);
+    }
+    if (!getS3BucketNameBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, s3BucketName_);
+    }
+    if (!getS3ObjectKeyBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, s3ObjectKey_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -186,10 +287,14 @@ private static final long serialVersionUID = 0L;
     si.mlimedija.proto.GetFileEndpointResponse other = (si.mlimedija.proto.GetFileEndpointResponse) obj;
 
     boolean result = true;
-    result = result && getNodeIpAddress()
-        .equals(other.getNodeIpAddress());
-    result = result && (getNodePort()
-        == other.getNodePort());
+    result = result && getNodeIpAddressList()
+        .equals(other.getNodeIpAddressList());
+    result = result && (getIsStoredOnS3()
+        == other.getIsStoredOnS3());
+    result = result && getS3BucketName()
+        .equals(other.getS3BucketName());
+    result = result && getS3ObjectKey()
+        .equals(other.getS3ObjectKey());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -201,10 +306,17 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + NODEIPADDRESS_FIELD_NUMBER;
-    hash = (53 * hash) + getNodeIpAddress().hashCode();
-    hash = (37 * hash) + NODEPORT_FIELD_NUMBER;
-    hash = (53 * hash) + getNodePort();
+    if (getNodeIpAddressCount() > 0) {
+      hash = (37 * hash) + NODEIPADDRESS_FIELD_NUMBER;
+      hash = (53 * hash) + getNodeIpAddressList().hashCode();
+    }
+    hash = (37 * hash) + ISSTOREDONS3_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+        getIsStoredOnS3());
+    hash = (37 * hash) + S3BUCKETNAME_FIELD_NUMBER;
+    hash = (53 * hash) + getS3BucketName().hashCode();
+    hash = (37 * hash) + S3OBJECTKEY_FIELD_NUMBER;
+    hash = (53 * hash) + getS3ObjectKey().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -342,9 +454,13 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      nodeIpAddress_ = "";
+      nodeIpAddress_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      bitField0_ = (bitField0_ & ~0x00000001);
+      isStoredOnS3_ = false;
 
-      nodePort_ = 0;
+      s3BucketName_ = "";
+
+      s3ObjectKey_ = "";
 
       return this;
     }
@@ -372,8 +488,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public si.mlimedija.proto.GetFileEndpointResponse buildPartial() {
       si.mlimedija.proto.GetFileEndpointResponse result = new si.mlimedija.proto.GetFileEndpointResponse(this);
+      int from_bitField0_ = bitField0_;
+      int to_bitField0_ = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        nodeIpAddress_ = nodeIpAddress_.getUnmodifiableView();
+        bitField0_ = (bitField0_ & ~0x00000001);
+      }
       result.nodeIpAddress_ = nodeIpAddress_;
-      result.nodePort_ = nodePort_;
+      result.isStoredOnS3_ = isStoredOnS3_;
+      result.s3BucketName_ = s3BucketName_;
+      result.s3ObjectKey_ = s3ObjectKey_;
+      result.bitField0_ = to_bitField0_;
       onBuilt();
       return result;
     }
@@ -422,12 +547,26 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(si.mlimedija.proto.GetFileEndpointResponse other) {
       if (other == si.mlimedija.proto.GetFileEndpointResponse.getDefaultInstance()) return this;
-      if (!other.getNodeIpAddress().isEmpty()) {
-        nodeIpAddress_ = other.nodeIpAddress_;
+      if (!other.nodeIpAddress_.isEmpty()) {
+        if (nodeIpAddress_.isEmpty()) {
+          nodeIpAddress_ = other.nodeIpAddress_;
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          ensureNodeIpAddressIsMutable();
+          nodeIpAddress_.addAll(other.nodeIpAddress_);
+        }
         onChanged();
       }
-      if (other.getNodePort() != 0) {
-        setNodePort(other.getNodePort());
+      if (other.getIsStoredOnS3() != false) {
+        setIsStoredOnS3(other.getIsStoredOnS3());
+      }
+      if (!other.getS3BucketName().isEmpty()) {
+        s3BucketName_ = other.s3BucketName_;
+        onChanged();
+      }
+      if (!other.getS3ObjectKey().isEmpty()) {
+        s3ObjectKey_ = other.s3ObjectKey_;
+        onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -457,98 +596,262 @@ private static final long serialVersionUID = 0L;
       }
       return this;
     }
+    private int bitField0_;
 
-    private java.lang.Object nodeIpAddress_ = "";
+    private com.google.protobuf.LazyStringList nodeIpAddress_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    private void ensureNodeIpAddressIsMutable() {
+      if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+        nodeIpAddress_ = new com.google.protobuf.LazyStringArrayList(nodeIpAddress_);
+        bitField0_ |= 0x00000001;
+       }
+    }
     /**
-     * <code>string nodeIpAddress = 1;</code>
+     * <code>repeated string nodeIpAddress = 1;</code>
      */
-    public java.lang.String getNodeIpAddress() {
-      java.lang.Object ref = nodeIpAddress_;
+    public com.google.protobuf.ProtocolStringList
+        getNodeIpAddressList() {
+      return nodeIpAddress_.getUnmodifiableView();
+    }
+    /**
+     * <code>repeated string nodeIpAddress = 1;</code>
+     */
+    public int getNodeIpAddressCount() {
+      return nodeIpAddress_.size();
+    }
+    /**
+     * <code>repeated string nodeIpAddress = 1;</code>
+     */
+    public java.lang.String getNodeIpAddress(int index) {
+      return nodeIpAddress_.get(index);
+    }
+    /**
+     * <code>repeated string nodeIpAddress = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNodeIpAddressBytes(int index) {
+      return nodeIpAddress_.getByteString(index);
+    }
+    /**
+     * <code>repeated string nodeIpAddress = 1;</code>
+     */
+    public Builder setNodeIpAddress(
+        int index, java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureNodeIpAddressIsMutable();
+      nodeIpAddress_.set(index, value);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string nodeIpAddress = 1;</code>
+     */
+    public Builder addNodeIpAddress(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureNodeIpAddressIsMutable();
+      nodeIpAddress_.add(value);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string nodeIpAddress = 1;</code>
+     */
+    public Builder addAllNodeIpAddress(
+        java.lang.Iterable<java.lang.String> values) {
+      ensureNodeIpAddressIsMutable();
+      com.google.protobuf.AbstractMessageLite.Builder.addAll(
+          values, nodeIpAddress_);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string nodeIpAddress = 1;</code>
+     */
+    public Builder clearNodeIpAddress() {
+      nodeIpAddress_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      bitField0_ = (bitField0_ & ~0x00000001);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>repeated string nodeIpAddress = 1;</code>
+     */
+    public Builder addNodeIpAddressBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      ensureNodeIpAddressIsMutable();
+      nodeIpAddress_.add(value);
+      onChanged();
+      return this;
+    }
+
+    private boolean isStoredOnS3_ ;
+    /**
+     * <code>bool isStoredOnS3 = 2;</code>
+     */
+    public boolean getIsStoredOnS3() {
+      return isStoredOnS3_;
+    }
+    /**
+     * <code>bool isStoredOnS3 = 2;</code>
+     */
+    public Builder setIsStoredOnS3(boolean value) {
+      
+      isStoredOnS3_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>bool isStoredOnS3 = 2;</code>
+     */
+    public Builder clearIsStoredOnS3() {
+      
+      isStoredOnS3_ = false;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object s3BucketName_ = "";
+    /**
+     * <code>string s3BucketName = 3;</code>
+     */
+    public java.lang.String getS3BucketName() {
+      java.lang.Object ref = s3BucketName_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        nodeIpAddress_ = s;
+        s3BucketName_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string nodeIpAddress = 1;</code>
+     * <code>string s3BucketName = 3;</code>
      */
     public com.google.protobuf.ByteString
-        getNodeIpAddressBytes() {
-      java.lang.Object ref = nodeIpAddress_;
+        getS3BucketNameBytes() {
+      java.lang.Object ref = s3BucketName_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        nodeIpAddress_ = b;
+        s3BucketName_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string nodeIpAddress = 1;</code>
+     * <code>string s3BucketName = 3;</code>
      */
-    public Builder setNodeIpAddress(
+    public Builder setS3BucketName(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      nodeIpAddress_ = value;
+      s3BucketName_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string nodeIpAddress = 1;</code>
+     * <code>string s3BucketName = 3;</code>
      */
-    public Builder clearNodeIpAddress() {
+    public Builder clearS3BucketName() {
       
-      nodeIpAddress_ = getDefaultInstance().getNodeIpAddress();
+      s3BucketName_ = getDefaultInstance().getS3BucketName();
       onChanged();
       return this;
     }
     /**
-     * <code>string nodeIpAddress = 1;</code>
+     * <code>string s3BucketName = 3;</code>
      */
-    public Builder setNodeIpAddressBytes(
+    public Builder setS3BucketNameBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      nodeIpAddress_ = value;
+      s3BucketName_ = value;
       onChanged();
       return this;
     }
 
-    private int nodePort_ ;
+    private java.lang.Object s3ObjectKey_ = "";
     /**
-     * <code>int32 nodePort = 2;</code>
+     * <code>string s3ObjectKey = 4;</code>
      */
-    public int getNodePort() {
-      return nodePort_;
+    public java.lang.String getS3ObjectKey() {
+      java.lang.Object ref = s3ObjectKey_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        s3ObjectKey_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
     }
     /**
-     * <code>int32 nodePort = 2;</code>
+     * <code>string s3ObjectKey = 4;</code>
      */
-    public Builder setNodePort(int value) {
-      
-      nodePort_ = value;
+    public com.google.protobuf.ByteString
+        getS3ObjectKeyBytes() {
+      java.lang.Object ref = s3ObjectKey_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        s3ObjectKey_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string s3ObjectKey = 4;</code>
+     */
+    public Builder setS3ObjectKey(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      s3ObjectKey_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>int32 nodePort = 2;</code>
+     * <code>string s3ObjectKey = 4;</code>
      */
-    public Builder clearNodePort() {
+    public Builder clearS3ObjectKey() {
       
-      nodePort_ = 0;
+      s3ObjectKey_ = getDefaultInstance().getS3ObjectKey();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string s3ObjectKey = 4;</code>
+     */
+    public Builder setS3ObjectKeyBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      s3ObjectKey_ = value;
       onChanged();
       return this;
     }

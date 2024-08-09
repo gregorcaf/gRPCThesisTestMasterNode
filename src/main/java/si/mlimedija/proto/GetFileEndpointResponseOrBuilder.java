@@ -8,17 +8,46 @@ public interface GetFileEndpointResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string nodeIpAddress = 1;</code>
+   * <code>repeated string nodeIpAddress = 1;</code>
    */
-  java.lang.String getNodeIpAddress();
+  java.util.List<java.lang.String>
+      getNodeIpAddressList();
   /**
-   * <code>string nodeIpAddress = 1;</code>
+   * <code>repeated string nodeIpAddress = 1;</code>
+   */
+  int getNodeIpAddressCount();
+  /**
+   * <code>repeated string nodeIpAddress = 1;</code>
+   */
+  java.lang.String getNodeIpAddress(int index);
+  /**
+   * <code>repeated string nodeIpAddress = 1;</code>
    */
   com.google.protobuf.ByteString
-      getNodeIpAddressBytes();
+      getNodeIpAddressBytes(int index);
 
   /**
-   * <code>int32 nodePort = 2;</code>
+   * <code>bool isStoredOnS3 = 2;</code>
    */
-  int getNodePort();
+  boolean getIsStoredOnS3();
+
+  /**
+   * <code>string s3BucketName = 3;</code>
+   */
+  java.lang.String getS3BucketName();
+  /**
+   * <code>string s3BucketName = 3;</code>
+   */
+  com.google.protobuf.ByteString
+      getS3BucketNameBytes();
+
+  /**
+   * <code>string s3ObjectKey = 4;</code>
+   */
+  java.lang.String getS3ObjectKey();
+  /**
+   * <code>string s3ObjectKey = 4;</code>
+   */
+  com.google.protobuf.ByteString
+      getS3ObjectKeyBytes();
 }
